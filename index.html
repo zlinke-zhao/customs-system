@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报关系统需求分析 - 越南/泰国/菲律宾多国版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #f5f5f5;
+            color: #262626;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .flags {
+            margin-top: 20px;
+            font-size: 36px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .card h2 {
+            color: #1890ff;
+            font-size: 20px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e6f7ff;
+        }
+        
+        .card h3 {
+            color: #262626;
+            font-size: 16px;
+            margin: 20px 0 12px;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f6ffed 0%, #d9f7be 100%);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border-left: 4px solid #52c41a;
+        }
+        
+        .stat-card.blue {
+            background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
+            border-left-color: #1890ff;
+        }
+        
+        .stat-card.orange {
+            background: linear-gradient(135deg, #fff7e6 0%, #ffe7ba 100%);
+            border-left-color: #faad14;
+        }
+        
+        .stat-card.red {
+            background: linear-gradient(135deg, #fff1f0 0%, #ffccc7 100%);
+            border-left-color: #f5222d;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #262626;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #595959;
+            margin-top: 4px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        th {
+            background: #fafafa;
+            font-weight: 600;
+            color: #262626;
+        }
+        
+        tr:hover {
+            background: #fafafa;
+        }
+        
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        
+        .module-card {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #e8e8e8;
+        }
+        
+        .module-card h4 {
+            color: #1890ff;
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .module-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .module-card li {
+            padding: 6px 0;
+            color: #595959;
+            font-size: 14px;
+            padding-left: 16px;
+            position: relative;
+        }
+        
+        .module-card li::before {
+            content: "•";
+            color: #1890ff;
+            position: absolute;
+            left: 0;
+        }
+        
+        .flow-chart {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            overflow-x: auto;
+            white-space: pre;
+            color: #262626;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .tag-p0 {
+            background: #fff1f0;
+            color: #cf1322;
+        }
+        
+        .tag-p1 {
+            background: #fff7e6;
+            color: #d46b08;
+        }
+        
+        .tag-p2 {
+            background: #f6ffed;
+            color: #389e0d;
+        }
+        
+        .country-card {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: #fafafa;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .country-flag {
+            font-size: 40px;
+        }
+        
+        .country-info h4 {
+            color: #262626;
+            margin-bottom: 8px;
+        }
+        
+        .country-info p {
+            color: #595959;
+            font-size: 14px;
+            margin: 4px 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e8e8e8;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #1890ff;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #1890ff;
+        }
+        
+        .timeline-item.completed::before {
+            background: #52c41a;
+            box-shadow: 0 0 0 2px #52c41a;
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            color: #262626;
+        }
+        
+        .timeline-desc {
+            color: #8c8c8c;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #1890ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .btn:hover {
+            background: #40a9ff;
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #262626;
+        }
+        
+        .btn-secondary:hover {
+            background: #e8e8e8;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8c8c8c;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .overview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .module-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .country-card {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🚢 报关系统需求分析</h1>
+        <p>越南 / 泰国 / 菲律宾 多国分公司统一报关管理平台</p>
+        <div class="flags">🇻🇳 🇹🇭 🇵🇭</div>
+    </header>
+
+    <div class="container">
+        <!-- 项目概览 -->
+        <div class="card">
+            <h2>📋 项目概览</h2>
+            <div class="overview-grid">
+                <div class="stat-card blue">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">核心业务模块</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">支持语言</div>
+                </div>
+                <div class="stat-card orange">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">支持币种</div>
+                </div>
+                <div class="stat-card red">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">覆盖国家</div>
+                </div>
+            </div>
+            
+            <h3>项目目标</h3>
+            <p style="color: #595959; margin-bottom: 16px;">
+                建立统一的跨境报关管理平台，支持越南、泰国、菲律宾三国分公司的报关业务，
+                实现多语言、多币种、多法规合规的集中化管理，提升报关效率，降低合规风险。
+            </p>
+            
+            <div style="margin-top: 20px;">
+                <a href="#modules" class="btn">查看功能模块</a>
+                <a href="#countries" class="btn btn-secondary">国家特殊要求</a>
+                <a href="#timeline" class="btn btn-secondary">实施路线图</a>
+            </div>
+        </div>
+
+        <!-- 业务模块 -->
+        <div class="card" id="modules">
+            <h2>📦 业务模块清单</h2>
+            
+            <h3>核心基础模块</h3>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>🌐 多语言管理</h4>
+                    <ul>
+                        <li>界面多语言切换</li>
+                        <li>单证多语言输出</li>
+                        <li>邮件/通知多语言模板</li>
+                        <li>法规文档多语言版本</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+                <div class="module-card">
+                    <h4>💱 多币种汇率</h4>
+                    <ul>
+                        <li>CNY/USD/VND/THB/PHP</li>
+                        <li>实时汇率自动更新</li>
+                        <li>历史汇率记录</li>
+                        <li>汇率波动预警</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+                <div class="module-card">
+                    <h4>🏢 组织架构</h4>
+                    <ul>
+                        <li>多公司主体管理</li>
+                        <li>RBAC权限控制</li>
+                        <li>地区配置管理</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+            </div>
+
+            <h3>主数据模块</h3>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>🔖 HS Code管理</h4>
+                    <ul>
+                        <li>HS编码库维护</li>
+                        <li>四国税率对照</li>
+                        <li>AI辅助归类</li>
+                        <li>归类历史记录</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+                <div class="module-card">
+                    <h4>📋 商品资料</h4>
+                    <ul>
+                        <li>商品档案管理</li>
+                        <li>规格型号维护</li>
+                        <li>申报要素配置</li>
+                        <li>监管条件管理</li>
+                    </ul>
+                    <span class="tag tag-p1">P1</span>
+                </div>
+                <div class="module-card">
+                    <h4>👥 供应商/客户</h4>
+                    <ul>
+                        <li>收发货人档案</li>
+                        <li>贸易国别管理</li>
+                        <li>信用等级评估</li>
+                    </ul>
+                    <span class="tag tag-p1">P1</span>
+                </div>
+            </div>
+
+            <h3>报关单证模块</h3>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>📄 报关单管理</h4>
+                    <ul>
+                        <li>进口/出口报关单</li>
+                        <li>申报/修改/撤销</li>
+                        <li>海关状态跟踪</li>
+                        <li>电子口岸对接</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+                <div class="module-card">
+                    <h4>📑 单证制作</h4>
+                    <ul>
+                        <li>发票/装箱单生成</li>
+                        <li>合同/提单管理</li>
+                        <li>随附单证上传</li>
+                        <li>电子签章</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+                <div class="module-card">
+                    <h4>⚠️ 报关单损耗</h4>
+                    <ul>
+                        <li>损耗登记</li>
+                        <li>合理/非合理分类</li>
+                        <li>损耗核销</li>
+                        <li>财务处理</li>
+                    </ul>
+                    <span class="tag tag-p1">P1</span>
+                </div>
+            </div>
+
+            <h3>保税管理模块</h3>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>📦 保税物料</h4>
+                    <ul>
+                        <li>料件入库/领用</li>
+                        <li>退库/盘点管理</li>
+                        <li>库存预警</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+                <div class="module-card">
+                    <h4>📊 进销存平衡</h4>
+                    <ul>
+                        <li>报关vs库存平衡</li>
+                        <li>差异分析</li>
+                        <li>盘盈盘亏处理</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+                <div class="module-card">
+                    <h4>🔄 核销管理</h4>
+                    <ul>
+                        <li>手册/账册核销</li>
+                        <li>进出口平衡校验</li>
+                        <li>余料处理方案</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+            </div>
+
+            <h3>物流跟踪模块</h3>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>🚛 运输管理</h4>
+                    <ul>
+                        <li>订舱/派车</li>
+                        <li>运输方式选择</li>
+                        <li>物流商对接</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+                <div class="module-card">
+                    <h4>🔒 封条管理</h4>
+                    <ul>
+                        <li>封条申请/发放</li>
+                        <li>施封/验封记录</li>
+                        <li>异常处理</li>
+                    </ul>
+                    <span class="tag tag-p1">P1</span>
+                </div>
+                <div class="module-card">
+                    <h4>📍 物流跟踪</h4>
+                    <ul>
+                        <li>货物轨迹跟踪</li>
+                        <li>节点状态更新</li>
+                        <li>异常预警</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+            </div>
+
+            <h3>费用结算模块</h3>
+            <div class="module-grid">
+                <div class="module-card">
+                    <h4>💰 税费计算</h4>
+                    <ul>
+                        <li>关税/增值税/消费税</li>
+                        <li>自动税率匹配</li>
+                        <li>完税价格计算</li>
+                    </ul>
+                    <span class="tag tag-p0">P0</span>
+                </div>
+                <div class="module-card">
+                    <h4>📝 费用登记</h4>
+                    <ul>
+                        <li>报关费/港杂费</li>
+                        <li>仓储费/查验费</li>
+                        <li>费用分摊</li>
+                    </ul>
+                    <span class="tag tag-p1">P1</span>
+                </div>
+                <div class="module-card">
+                    <h4>💳 付款管理</h4>
+                    <ul>
+                        <li>付款申请审批</li>
+                        <li>供应商对账</li>
+                        <li>退税管理</li>
+                    </ul>
+                    <span class="tag tag-p1">P1</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 各国特殊要求 -->
+        <div class="card" id="countries">
+            <h2>🌍 各国特殊要求</h2>
+            
+            <div class="country-card">
+                <div class="country-flag">🇻🇳</div>
+                <div class="country-info">
+                    <h4>越南 Vietnam</h4>
+                    <p><strong>语言：</strong>越南语 (Tiếng Việt) | <strong>货币：</strong>越南盾 (VND, ₫)</p>
+                    <p><strong>海关系统：</strong>VNACCS/VCIS (越南海关自动化系统)</p>
+                    <p><strong>特殊要求：</strong>进口需提前办理进口许可证，部分商品需质检报告，原产地证Form D（东盟自贸区）</p>
+                    <p><strong>⚠️ 注意事项：</strong>越南海关对价格审查较严，需准备价格证明材料</p>
+                </div>
+            </div>
+
+            <div class="country-card">
+                <div class="country-flag">🇹🇭</div>
+                <div class="country-info">
+                    <h4>泰国 Thailand</h4>
+                    <p><strong>语言：</strong>泰语 (ไทย) | <strong>货币：</strong>泰铢 (THB, ฿)</p>
+                    <p><strong>海关系统：</strong>Thai Customs Department e-Customs</p>
+                    <p><strong>特殊要求：</strong>进口许可证（部分商品），FDA认证（食品、药品、化妆品），TISI认证（工业产品）</p>
+                    <p><strong>⚠️ 注意事项：</strong>泰国对食品、药品监管严格，需提前准备认证文件</p>
+                </div>
+            </div>
+
+            <div class="country-card">
+                <div class="country-flag">🇵🇭</div>
+                <div class="country-info">
+                    <h4>菲律宾 Philippines</h4>
+                    <p><strong>语言：</strong>英语/菲律宾语 | <strong>货币：</strong>菲律宾比索 (PHP, ₱)</p>
+                    <p><strong>海关系统：</strong>Bureau of Customs (BOC) e-Customs</p>
+                    <p><strong>特殊要求：</strong>进口许可证（部分商品），FDA认证（食品、药品），BPS认证（标准产品）</p>
+                    <p><strong>⚠️ 注意事项：</strong>菲律宾海关效率相对较低，需预留充足时间</p>
+                </div>
+            </div>
+
+            <h3>税率对比示例</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>国家</th>
+                        <th>HS Code 8471.30 (笔记本电脑)</th>
+                        <th>关税税率</th>
+                        <th>增值税率</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🇨🇳 中国</td>
+                        <td>便携式自动数据处理设备</td>
+                        <td>0%</td>
+                        <td>13%</td>
+                    </tr>
+                    <tr>
+                        <td>🇻🇳 越南</td>
+                        <td>Portable automatic data processing</td>
+                        <td>0%</td>
+                        <td>10%</td>
+                    </tr>
+                    <tr>
+                        <td>🇹🇭 泰国</td>
+                        <td>เครื่องประมวลผลข้อมูลอัตโนมัติแบบพกพา</td>
+                        <td>0%</td>
+                        <td>7%</td>
+                    </tr>
+                    <tr>
+                        <td>🇵🇭 菲律宾</td>
+                        <td>Portable automatic data processing</td>
+                        <td>0%</td>
+                        <td>12%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 实施路线图 -->
+        <div class="card" id="timeline">
+            <h2>📅 实施路线图</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item completed">
+                    <div class="timeline-title">阶段一：基础版（MVP）- 2个月</div>
+                    <div class="timeline-desc">
+                        • 多语言/多币种/组织架构<br>
+                        • 基础单证模板（发票、装箱单）<br>
+                        • HS Code库、基础合规规则<br>
+                        • 越南海关申报对接
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">阶段二：扩展版 - 2个月</div>
+                    <div class="timeline-desc">
+                        • 全量单证模板（15+种）<br>
+                        • 泰国、菲律宾海关对接<br>
+                        • 物流跟踪、费用管理<br>
+                        • 保税物料、进销存平衡
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-title">阶段三：完善版 - 2个月</div>
+                    <div class="timeline-desc">
+                        • AI辅助归类、智能审核<br>
+                        • BI报表系统<br>
+                        • 移动端APP/小程序<br>
+                        • ERP/财务系统深度对接
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心业务流程 -->
+        <div class="card">
+            <h2>🔄 核心业务流程</h2>
+            
+            <h3>报关单业务流程</h3>
+            <div class="flow-chart">订单接收 → 商品归类 → 单证准备 → 报关申报 → 海关审核 → 查验/放行 → 物流跟踪 → 完结归档
+    │           │           │           │           │           │           │
+    ▼           ▼           ▼           ▼           ▼           ▼           ▼
+ 采购/销售   HS Code    发票/装箱单  电子口岸    审单/查验   提货/装货   轨迹跟踪   数据归档
+ 单判断      确定       合同/提单    发送申报    放行/扣货              异常预警
+</div>
+
+            <h3>保税物料管理流程</h3>
+            <div class="flow-chart">┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   入库流程   │     │   领用流程   │     │   盘点流程   │
+└──────┬──────┘     └──────┬──────┘     └──────┬──────┘
+       │                   │                   │
+       ▼                   ▼                   ▼
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│ 保税料件进口 │     │ 生产领用申请 │     │ 定期盘点    │
+│ 报关单放行  │     │ 填写领料单   │     │ 清点库存    │
+└──────┬──────┘     └──────┬──────┘     └──────┬──────┘
+       │                   │                   │
+       ▼                   ▼                   ▼
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│ 入库登记    │     │ 审批流程    │     │ 与账册核对  │
+│ 更新账册    │     │ 仓库发料    │     │ 差异处理    │
+└──────┬──────┘     └──────┬──────┘     └──────┬──────┘
+       │                   │                   │
+       ▼                   ▼                   ▼
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│ 平衡表更新  │     │ 更新保税账册 │     │ 生成盘点报告│
+│ 进口数量+   │     │ 耗用数量+   │     │             │
+└─────────────┘     └─────────────┘     └─────────────┘
+</div>
+
+            <h3>进销存报关平衡表</h3>
+            <div class="flow-chart">期初库存
+    │
+    ▼
+┌─────────────────────────────────────────┐
+│ 本期进口(+) │ 本期耗用(-) │ 退运(-) │ 报废(-) │
+└─────────────────────────────────────────┘
+    │
+    ▼
+理论期末库存 = 期初 + 进口 - 耗用 - 退运 - 报废
+    │
+    ▼
+实际库存盘点 ──→ 平衡校验 ──→ 差异处理
+                (理论vs实际)    (盘盈/盘亏)
+</div>
+        </div>
+
+        <!-- 技术架构 -->
+        <div class="card">
+            <h2>🛠️ 技术架构建议</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>层级</th>
+                        <th>推荐技术</th>
+                        <th>说明</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>前端</td>
+                        <td>Vue3 / React + i18n</td>
+                        <td>支持多语言国际化</td>
+                    </tr>
+                    <tr>
+                        <td>后端</td>
+                        <td>Spring Boot / Node.js</td>
+                        <td>微服务架构，便于扩展</td>
+                    </tr>
+                    <tr>
+                        <td>数据库</td>
+                        <td>MySQL / PostgreSQL + Redis</td>
+                        <td>关系型数据 + 缓存</td>
+                    </tr>
+                    <tr>
+                        <td>文件存储</td>
+                        <td>MinIO / OSS</td>
+                        <td>单证文件存储</td>
+                    </tr>
+                    <tr>
+                        <td>消息队列</td>
+                        <td>RabbitMQ / Kafka</td>
+                        <td>异步处理、状态同步</td>
+                    </tr>
+                    <tr>
+                        <td>搜索引擎</td>
+                        <td>Elasticsearch</td>
+                        <td>单证检索、日志分析</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 风险与对策 -->
+        <div class="card">
+            <h2>⚠️ 风险与对策</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>风险类型</th>
+                        <th>风险描述</th>
+                        <th>应对策略</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>法规变更</td>
+                        <td>各国海关法规频繁调整</td>
+                        <td>建立法规更新机制，订阅官方通知</td>
+                    </tr>
+                    <tr>
+                        <td>系统对接</td>
+                        <td>海关系统接口不稳定</td>
+                        <td>设计重试机制和降级方案</td>
+                    </tr>
+                    <tr>
+                        <td>数据安全</td>
+                        <td>跨境数据传输合规</td>
+                        <td>遵守各国数据保护法规，加密传输</td>
+                    </tr>
+                    <tr>
+                        <td>语言障碍</td>
+                        <td>小语种翻译质量</td>
+                        <td>聘请专业翻译，建立术语库</td>
+                    </tr>
+                    <tr>
+                        <td>汇率波动</td>
+                        <td>汇率大幅波动影响成本</td>
+                        <td>设置汇率预警，支持锁汇功能</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>报关系统需求分析文档 | 越南/泰国/菲律宾多国版</p>
+        <p>编制日期：2026-04-22</p>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 添加滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
