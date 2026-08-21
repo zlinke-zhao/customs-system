@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>运费项目明细设定模块 · 需求文档与交互原型 v1.1</title>
+<style>
+  :root{
+    --blue:#2F5496; --blue2:#4472C4; --blue3:#8FAADC; --ink:#1F3864;
+    --bg:#F4F6FA; --panel:#FFFFFF; --line:#E2E8F0; --txt:#222; --muted:#6B7280;
+    --green:#E2EFDA; --g1:#DDEBF7; --g2:#FCE4D6; --g3:#FFF2CC; --g4:#F2F2F2; --g5:#EDEDED;
+    --red:#C00000; --amber:#B7791F;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;}
+  .app{display:flex;min-height:100vh;}
+  .sidebar{width:236px;background:linear-gradient(180deg,#1F3864,#2F5496);color:#fff;position:fixed;height:100vh;overflow-y:auto;padding:18px 0;}
+  .sidebar h2{font-size:15px;margin:0 0 4px 18px;font-weight:700;letter-spacing:.5px;}
+  .sidebar .sub{font-size:11px;color:#B9C7E2;margin:0 0 16px 18px;}
+  .navitem{padding:10px 18px;cursor:pointer;font-size:13px;border-left:3px solid transparent;color:#DCE5F5;}
+  .navitem:hover{background:rgba(255,255,255,.08);}
+  .navitem.active{background:rgba(255,255,255,.16);border-left-color:#FFD966;color:#fff;font-weight:600;}
+  .navgroup{font-size:11px;color:#9FB2D8;margin:14px 18px 6px;letter-spacing:1px;}
+  .main{margin-left:236px;flex:1;padding:28px 36px 80px;max-width:1180px;}
+  .page{display:none;}
+  .page.active{display:block;}
+  h1.doc{font-size:24px;color:var(--ink);margin:0 0 6px;}
+  .doc-lead{color:var(--muted);margin:0 0 22px;font-size:13px;}
+  h2.sec{font-size:18px;color:var(--blue);border-left:4px solid var(--blue2);padding-left:10px;margin:30px 0 14px;}
+  h3.sec{font-size:15px;color:var(--ink);margin:20px 0 8px;}
+  p,li{line-height:1.7;color:#333;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0;}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:var(--blue);color:#fff;font-weight:600;white-space:nowrap;}
+  tr:nth-child(even) td{background:#FAFBFE;}
+  .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;}
+  .tag.y{background:var(--green);color:#2E5E1E;}
+  .tag.n{background:#FDE2E2;color:#9B1C1C;}
+  .tag.c{background:#E0ECFF;color:#1E40AF;}
+  .pill{display:inline-block;padding:2px 9px;border-radius:12px;font-size:11px;background:#EAEFF8;color:var(--blue);border:1px solid #D6DEF0;margin:2px 4px 2px 0;cursor:pointer;}
+  .kbd{background:#1F3864;color:#fff;border-radius:4px;padding:1px 7px;font-size:11px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+  .metric .v{font-size:24px;font-weight:700;color:var(--blue);}
+  .metric .l{font-size:12px;color:var(--muted);}
+  .er{display:flex;gap:18px;flex-wrap:wrap;align-items:stretch;margin:10px 0;}
+  .er-card{border:1px solid var(--blue2);border-radius:8px;background:#fff;min-width:200px;}
+  .er-card .h{background:var(--blue2);color:#fff;padding:7px 12px;font-weight:600;border-radius:7px 7px 0 0;font-size:13px;}
+  .er-card .b{padding:8px 12px;font-size:12px;color:#444;}
+  .er-rel{font-size:12px;color:var(--muted);margin:auto 0;}
+  .toolbar{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin:14px 0;}
+  .field{display:flex;flex-direction:column;gap:4px;}
+  .field label{font-size:12px;color:var(--muted);font-weight:600;}
+  select,input,button{font-family:inherit;font-size:13px;}
+  select,input{padding:7px 10px;border:1px solid #CBD5E1;border-radius:7px;background:#fff;min-width:150px;}
+  button{cursor:pointer;border:none;border-radius:7px;padding:8px 16px;font-weight:600;background:var(--blue2);color:#fff;}
+  button.ghost{background:#fff;border:1px solid var(--blue2);color:var(--blue2);}
+  button:hover{filter:brightness(.96);}
+  .btnrow{display:flex;gap:10px;margin:12px 0;}
+  .tbl-wrap{max-height:430px;overflow:auto;border:1px solid var(--line);border-radius:10px;}
+  .catband{position:sticky;left:0;background:#EEF2FA;font-weight:700;color:var(--ink);}
+  .tot{font-size:18px;font-weight:700;color:var(--ink);}
+  .note{color:var(--red);font-size:12px;}
+  .badge-ver{background:#E2EFDA;color:#2E5E1E;font-size:11px;padding:2px 8px;border-radius:10px;margin-left:8px;}
+  .preview-box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:26px 32px;max-width:760px;}
+  .preview-box h1{text-align:center;color:var(--ink);margin-top:0;}
+  .preview-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);border-bottom:2px solid var(--blue);padding-bottom:8px;margin-bottom:14px;}
+  .quote-total{text-align:right;font-size:16px;margin-top:14px;}
+  .quote-total b{color:var(--blue);font-size:20px;}
+  .empty{color:var(--muted);text-align:center;padding:30px;}
+  footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:14px;}
+  /* modal */
+  .mask{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;}
+  .mask.show{display:flex;}
+  .modal{background:#fff;border-radius:12px;width:560px;max-width:96vw;max-height:92vh;overflow:auto;box-shadow:0 12px 44px rgba(0,0,0,.28);}
+  .modal-h{background:var(--blue);color:#fff;padding:14px 18px;font-weight:700;font-size:15px;border-radius:12px 12px 0 0;display:flex;justify-content:space-between;align-items:center;}
+  .modal-h .x{cursor:pointer;font-size:18px;opacity:.85;}
+  .modal-b{padding:16px 18px;}
+  .formrow{display:flex;gap:12px;margin:10px 0;}
+  .formrow .field{flex:1;min-width:0;}
+  .modal-b input,.modal-b select{width:100%;min-width:0;}
+  .modal-f{padding:12px 18px 16px;display:flex;justify-content:flex-end;gap:10px;border-top:1px solid var(--line);}
+  .seg{display:inline-block;font-size:11px;background:#EEF2FA;color:var(--blue);border-radius:10px;padding:1px 8px;margin-left:6px;}
+  .mini{font-size:11px;padding:2px 10px;margin-top:4px;border-radius:6px;border:1px solid var(--blue2);background:#fff;color:var(--blue2);cursor:pointer;}
+  .mini:hover{background:var(--blue2);color:#fff;}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#2F5496;color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;box-shadow:0 4px 16px rgba(0,0,0,.18);display:none;opacity:0;transition:opacity .35s;z-index:9999;}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <h2>运费项目明细设定</h2>
+    <div class="sub">ERP 运费报价配置模块 · 需求文档 + 原型 v1.1</div>
+    <div class="navgroup">需求文档</div>
+    <div class="navitem active" data-page="prd">① 需求文档(PRD)</div>
+    <div class="navitem" data-page="datamodel">② 数据模型</div>
+    <div class="navgroup">交互原型 · 主数据</div>
+    <div class="navitem" data-page="p_feeitem">③ 费用项目明细设定</div>
+    <div class="navitem" data-page="p_factory">⑧ 厂址主数据</div>
+    <div class="navitem" data-page="p_factoryrate">⑨ 厂址→起运港运费</div>
+    <div class="navgroup">交互原型 · 配置/报价</div>
+    <div class="navitem" data-page="p_basedata">④ 基础数据管理</div>
+    <div class="navitem" data-page="p_detail">⑤ 运费明细配置</div>
+    <div class="navitem" data-page="p_quote">⑥ 报价单生成</div>
+    <div class="navitem" data-page="p_preview">⑦ 报价单预览</div>
+    <div class="navgroup">说明</div>
+    <div class="navitem" data-page="p_notes">⑩ 开放问题与对接</div>
+  </aside>
+
+  <main class="main">
+    <!-- ============ PRD ============ -->
+    <section class="page active" id="prd">
+      <h1 class="doc">运费项目明细设定模块 · 需求文档</h1>
+      <p class="doc-lead">将"海运运费报价"抽象为可在 ERP 中配置、复用、自动聚合的配置模块，替代手工 Excel 维护。版本 v1.1 · 2026-08-21（新增：费用项目弹窗、8 种计费方式、集团多厂址国内段运费）</p>
+
+      <div class="card">
+        <h2 class="sec">一、背景与问题</h2>
+        <ul>
+          <li><b>结构不可扩展</b>：左右并排仅能放 2 个目的港、2 家船公司、2 种柜型，新增航线需改版。</li>
+          <li><b>关键维度缺失</b>：原报价未注明<b>起运港</b>，标记为"（待补充）"；且公司是<b>集团多厂址</b>，缺"厂址→起运港"的国内段运费设定。</li>
+          <li><b>费用定义不标准</b>：费用项目散落，无统一编码/分类/计费方式/必选规则；原计费方式单一（仅按柜），缺按次/按KG/按CBM/按金额等。</li>
+          <li><b>无法自动聚合</b>：生成对外报价单需人工加总，易错、难复用。</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">二、目标（Goals）</h2>
+        <ul>
+          <li><b>G1</b> 建立统一<b>费用项目主数据</b>：编码、分类、计费方式(8种)、是否必选等标准定义。</li>
+          <li><b>G2</b> 运费明细支持 <b>起运港 × 目的港 × 船公司 × 柜型 × 费用项目</b> 多维度配置，结构可无限扩展。</li>
+          <li><b>G3</b> ERP 报价单选择少量条件即<b>自动聚合</b>完整费用明细、分类小计与总价。</li>
+          <li><b>G4</b> 现有 68 条历史报价可<b>无缝迁移</b>。</li>
+          <li><b>G5</b> 支持<b>集团多厂址 → 起运港</b>的国内段运费设定（拖车/散货），并计入总报价。</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">三、非目标（Non-Goals）</h2>
+        <table>
+          <tr><th style="width:30%">明确不做</th><th>理由</th></tr>
+          <tr><td>财务记账 / 应收应付</td><td>属 ERP 财务模块，本模块只产出"报价金额"，不入账。</td></tr>
+          <tr><td>报关 / 关税自动计算</td><td>关税需对接目的国税则，一期仅保留费用项、不计算。</td></tr>
+          <tr><td>拖车车辆调度 / 仓储作业排程</td><td>仅配置并<b>计入</b>"厂址→起运港"运费金额，不做运输调度。</td></tr>
+          <tr><td>多币种实时换算</td><td>一期固定币种（海运费 USD / 国内段 CNY），汇率换算后续扩展。</td></tr>
+          <tr><td>报价审批流</td><td>一期"配置即生效"，审批流后续接入 ERP 工作流。</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">四、用户角色与故事</h2>
+        <table>
+          <tr><th style="width:18%">角色</th><th>用户故事</th></tr>
+          <tr><td>运费管理员</td><td>作为运费管理员，我希望维护<b>费用项目主数据</b>、<b>厂址主数据</b>与<b>航线/厂址运费明细</b>，以便报价统一准确。</td></tr>
+          <tr><td>报价专员</td><td>作为报价专员，我希望在报价单中选择厂址、航线与柜型，系统<b>自动带出国内段+海运段全部费用</b>，以便快速报价。</td></tr>
+          <tr><td>销售 / 客户</td><td>作为销售，我希望向客户展示<b>清晰分项</b>（含国内段）的报价单，以便提升专业度。</td></tr>
+          <tr><td>ERP 开发者</td><td>作为 ERP 开发者，我希望拿到标准数据模型与原型，以便按统一结构落地。</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">五、功能需求（按优先级）</h2>
+        <h3 class="sec">P0 · 必须满足</h3>
+        <table>
+          <tr><th style="width:34%">需求</th><th>验收标准</th></tr>
+          <tr><td>费用项目主数据 CRUD <span class="seg">含弹窗</span></td><td>弹窗新增/编辑；字段含编码/分类/名称/说明/计费方式(8种)/是否必选/默认币种/状态。</td></tr>
+          <tr><td>基础数据管理</td><td>维护起运港、目的港、船公司、柜型、币种、计费方式枚举。</td></tr>
+          <tr><td>厂址主数据管理 <span class="seg">新增</span></td><td>维护集团多厂址：编码/名称/城市/地址/默认起运港/状态。</td></tr>
+          <tr><td>厂址→起运港运费设定 <span class="seg">新增</span></td><td>按 厂址×起运港×柜型 配置国内段运费（按柜/按CBM等），计入报价。</td></tr>
+          <tr><td>运费明细配置</td><td>按多维度录入每条费用金额，可扩展新航线/公司/柜型。</td></tr>
+          <tr><td>报价单生成</td><td>选择 厂址/起运港/目的港/船公司/柜型 → 自动聚合（含国内段）明细+小计+总价。</td></tr>
+        </table>
+        <h3 class="sec">P1 · 重要</h3>
+        <table>
+          <tr><th style="width:34%">需求</th><th>验收标准</th></tr>
+          <tr><td>有效期管理</td><td>每条运费明细有生效起止日期，按日期取有效报价。</td></tr>
+          <tr><td>必选/可选区分</td><td>报价单分别给出"必选合计"与"全部合计"。</td></tr>
+          <tr><td>多币种</td><td>海运费 USD、国内段 CNY，金额按币种存储与展示。</td></tr>
+          <tr><td>报价单预览/打印</td><td>对外报价单展示分项（含国内段）、小计、总价、不含费用声明，可打印。</td></tr>
+        </table>
+        <h3 class="sec">P2 · 后续</h3>
+        <p><span class="pill">批量导入/导出</span><span class="pill">运价变更历史</span><span class="pill">报价版本对比</span><span class="pill">审批流接入</span><span class="pill">多币种换算</span><span class="pill">关税/报关接口</span></p>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">六、成功指标</h2>
+        <div class="grid3">
+          <div class="metric"><div class="v">&lt;5 分钟</div><div class="l">新航线报价配置时长</div></div>
+          <div class="metric"><div class="v">100%</div><div class="l">历史报价可迁移率</div></div>
+          <div class="metric"><div class="v">↓ 错误率</div><div class="l">人工加总 → 自动聚合</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">七、演示约定（Demo Conventions）</h2>
+        <p>本原型用于向开发团队与业务方演示配置与估价流程，部分数据非真实报价，遵循以下约定：</p>
+        <table>
+          <thead><tr><th>约定项</th><th>规则</th><th>原型中的体现</th></tr></thead>
+          <tbody>
+            <tr><td>起运港缺失</td><td>原始 68 条报价起运港均未注明，统一标记为「（待补充）」；筛选时按软匹配处理（选真实港口也能带出对应海运费）。</td><td>明细「说明」列标注「起运港待补充」。</td></tr>
+            <tr><td>国内段默认档</td><td>厂址→起运港运费若所选组合未配置，自动套用默认档 <b>F001 → 深圳(盐田) → 20GP = 950 CNY</b>。</td><td>国内段卡、明细、预览均标注「默认档」。</td></tr>
+            <tr><td>柜型示例数据</td><td>原报价仅有 20GP / 40HQ；为演示其余整柜柜型，基于 20GP 按比例生成：<b>40GP 海运费×1.1、45HQ 海运费×1.2</b>（港口费/附加费等固定费保持原值）。</td><td>该柜型明细行标注「示例」标签。</td></tr>
+            <tr><td>柜型兜底回退</td><td>即便示例数据仍未覆盖的柜型（如散货 LCL），海运段自动回退到同航线 20GP 价格并标注「默认档」，确保演示永不空白。</td><td>明细「说明」列标注「柜型默认参考 20GP」。</td></tr>
+            <tr><td>数据持久化</td><td>「新增」操作经本地服务写入 <code>freight_data.txt</code>；服务未启动则回退内嵌种子数据（仅演示，新增不落盘）。</td><td>保存时 toast 提示「已保存到 freight_data.txt」。</td></tr>
+          </tbody>
+        </table>
+        <p class="note" style="margin-top:10px;">⚠️ 以上「默认档 / 示例 / 待补充」数据仅供演示，正式上线前需由业务在「运费明细配置」「厂址→起运港运费」页录入真实报价并校对比例系数。</p>
+      </div>
+    </section>
+
+    <!-- ============ DATA MODEL ============ -->
+    <section class="page" id="datamodel">
+      <h1 class="doc">数据模型</h1>
+      <p class="doc-lead">六张核心实体 + 关系，分层：<b>主数据</b>（稳定） → <b>运费明细</b>（配置） → <b>报价单</b>（计算/展示）。</p>
+
+      <div class="card">
+        <h2 class="sec">实体关系</h2>
+        <div class="er">
+          <div class="er-card"><div class="h">费用项目主数据</div><div class="b">code · 分类 · 名称 · 说明<br>计费方式(8种) · 是否必选</div></div>
+          <div class="er-rel">1 — *</div>
+          <div class="er-card"><div class="h">运费明细</div><div class="b">起运港 · 目的港 · 船公司<br>柜型 · 费用项目 · 金额</div></div>
+          <div class="er-rel">* — 1</div>
+          <div class="er-card"><div class="h">报价单</div><div class="b">条件筛选<br>聚合明细 · 小计 · 总价</div></div>
+        </div>
+        <div class="er">
+          <div class="er-card"><div class="h">厂址主数据</div><div class="b">code · 名称 · 城市<br>地址 · 默认起运港 · 状态</div></div>
+          <div class="er-rel">1 — *</div>
+          <div class="er-card"><div class="h">厂址运费明细</div><div class="b">厂址 · 起运港 · 柜型<br>金额 · 计费方式 · 有效期</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">① 费用项目主数据（freight_fee_item）</h2>
+        <table>
+          <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+          <tr><td>code</td><td>string(PK)</td><td>费用编码，如 SEA-01 / ORI-02</td></tr>
+          <tr><td>category</td><td>enum</td><td>海运费/起运港费用/目的港费用/附加费/关税/其他费用</td></tr>
+          <tr><td>name</td><td>string</td><td>费用项目名</td></tr>
+          <tr><td>description</td><td>string</td><td>含义说明</td></tr>
+          <tr><td>charge_method</td><td>enum</td><td><b>按柜/按票/按次/按KG/按CBM/按金额比例/按吨/按天</b></td></tr>
+          <tr><td>mandatory</td><td>enum</td><td>是/否/视情况</td></tr>
+          <tr><td>default_currency</td><td>enum</td><td>默认币种</td></tr>
+          <tr><td>status</td><td>enum</td><td>启用/停用</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">② 厂址主数据（factory）— 集团多厂址</h2>
+        <table>
+          <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+          <tr><td>code</td><td>string(PK)</td><td>厂址编码，如 F001</td></tr>
+          <tr><td>name</td><td>string</td><td>厂址名称</td></tr>
+          <tr><td>city</td><td>string</td><td>所属城市</td></tr>
+          <tr><td>address</td><td>string</td><td>详细地址</td></tr>
+          <tr><td>def_origin_port</td><td>fk</td><td>默认起运港（引用基础数据）</td></tr>
+          <tr><td>status</td><td>enum</td><td>启用/停用</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">③ 厂址运费明细（factory_freight_rate）— 国内段</h2>
+        <table>
+          <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+          <tr><td>id</td><td>bigint(PK)</td><td>主键</td></tr>
+          <tr><td>factory_code</td><td>fk</td><td>厂址（引用厂址主数据）</td></tr>
+          <tr><td>origin_port</td><td>fk</td><td>起运港</td></tr>
+          <tr><td>container_type</td><td>fk</td><td>柜型</td></tr>
+          <tr><td>amount</td><td>decimal</td><td>国内段运费金额</td></tr>
+          <tr><td>charge_method</td><td>enum</td><td>按柜 / 按CBM(散货) / 按KG 等</td></tr>
+          <tr><td>currency</td><td>enum</td><td>默认 CNY</td></tr>
+          <tr><td>effective_from / effective_to</td><td>date</td><td>生效起止</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">④ 基础数据（枚举表）</h2>
+        <table>
+          <tr><th>配置项</th><th>示例值</th></tr>
+          <tr><td>origin_port 起运港</td><td>深圳(盐田)/深圳(蛇口)/广州(南沙)/上海(洋山)/宁波(北仑)…</td></tr>
+          <tr><td>dest_port 目的港</td><td>曼萨尼约/格兰杰默斯/洛杉矶/汉堡/鹿特丹…</td></tr>
+          <tr><td>carrier 船公司</td><td>恒荣达/晨崴/马士基/MSC/达飞/中远…</td></tr>
+          <tr><td>container 柜型</td><td>20GP/40GP/40HQ/45HQ/冷藏/开顶/框架/LCL</td></tr>
+          <tr><td>charge_method 计费方式</td><td><b>按柜/按票/按次/按KG/按CBM/按金额比例/按吨/按天</b></td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2 class="sec">⑤ 运费明细（freight_rate_detail）— 单一数据源(海运段)</h2>
+        <table>
+          <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+          <tr><td>origin_port / dest_port / carrier / container_type / fee_code</td><td>fk</td><td>多维度引用</td></tr>
+          <tr><td>amount</td><td>decimal</td><td>金额</td></tr>
+          <tr><td>effective_from / effective_to</td><td>date</td><td>生效起止</td></tr>
+        </table>
+        <p class="note">报价单总额 = 海运段(freight_rate_detail 聚合) + 国内段(factory_freight_rate 按厂址/起运港/柜型 取值)。</p>
+      </div>
+    </section>
+
+    <!-- ============ ③ 费用项目明细设定 ============ -->
+    <section class="page" id="p_feeitem">
+      <h1 class="doc">③ 费用项目明细设定 <span class="badge-ver">主数据</span></h1>
+      <p class="doc-lead">维护所有可报费用项目的标准定义。点击"新增费用项目"弹出录入窗口；计费方式支持按次/按KG/按CBM/按金额等 8 种。</p>
+      <div class="btnrow">
+        <button onclick="openFeeModal()">+ 新增费用项目</button>
+        <button class="ghost" onclick="alert('导出 CSV / Excel 对接 ERP')">导出</button>
+      </div>
+      <div class="tbl-wrap">
+        <table id="tblFeeItem">
+          <thead><tr><th>编码</th><th>费用分类</th><th>费用项目</th><th>说明</th><th>计费方式</th><th>是否必选</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ ⑧ 厂址主数据 ============ -->
+    <section class="page" id="p_factory">
+      <h1 class="doc">⑧ 厂址主数据 <span class="badge-ver">集团多厂址</span></h1>
+      <p class="doc-lead">维护集团各工厂/仓库信息。每个厂址可指定默认起运港，用于自动带出国内段运费。</p>
+      <div class="btnrow">
+        <button onclick="openFactoryModal()">+ 新增厂址</button>
+        <button class="ghost" onclick="alert('导出厂址主数据')">导出</button>
+      </div>
+      <div class="tbl-wrap">
+        <table id="tblFactory">
+          <thead><tr><th>厂址编码</th><th>厂址名称</th><th>城市</th><th>详细地址</th><th>默认起运港</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ ⑨ 厂址→起运港运费 ============ -->
+    <section class="page" id="p_factoryrate">
+      <h1 class="doc">⑨ 厂址→起运港运费设定 <span class="badge-ver">国内段</span></h1>
+      <p class="doc-lead">按 厂址 × 起运港 × 柜型 配置国内段运费（拖车/散货）。计费方式按柜或按CBM；生成报价单时自动计入。</p>
+      <div class="toolbar">
+        <div class="field"><label>厂址</label><select id="fr_factory"></select></div>
+        <div class="field"><label>起运港</label><select id="fr_origin"></select></div>
+        <div class="field"><label>柜型</label><select id="fr_ct"></select></div>
+        <button onclick="renderFactoryRate()">筛选</button>
+        <button class="ghost" onclick="openFactoryRateModal()">+ 新增运费行</button>
+      </div>
+      <div class="tbl-wrap">
+        <table id="tblFactoryRate">
+          <thead><tr><th>厂址</th><th>起运港</th><th>柜型</th><th>金额</th><th>币种</th><th>计费方式</th><th>有效期</th><th>操作</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ ④ 基础数据管理 ============ -->
+    <section class="page" id="p_basedata">
+      <h1 class="doc">④ 基础数据管理</h1>
+      <p class="doc-lead">维护各维度枚举值。下表为只读演示，实际可编辑。</p>
+      <div class="btnrow">
+        <button class="ghost" data-tab="origin">起运港</button>
+        <button class="ghost" data-tab="dest">目的港</button>
+        <button class="ghost" data-tab="carrier">船公司</button>
+        <button class="ghost" data-tab="ct">柜型</button>
+        <button class="ghost" data-tab="method">计费方式</button>
+      </div>
+      <div class="tbl-wrap">
+        <table id="tblBase"><thead></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    <!-- ============ ⑤ 运费明细配置 ============ -->
+    <section class="page" id="p_detail">
+      <h1 class="doc">⑤ 运费明细配置 <span class="badge-ver">单一数据源</span></h1>
+      <p class="doc-lead">按航线维度录入/维护每条费用金额。下例按"墨西哥-曼萨尼约 / 恒荣达 / 20GP"筛选（当前起运港为待补充）。</p>
+      <div class="toolbar">
+        <div class="field"><label>起运港</label><select id="d_origin"></select></div>
+        <div class="field"><label>目的港</label><select id="d_dest"></select></div>
+        <div class="field"><label>船公司</label><select id="d_carrier"></select></div>
+        <div class="field"><label>柜型</label><select id="d_ct"></select></div>
+        <button onclick="renderDetail()">筛选</button>
+        <button class="ghost" onclick="openRateModal()">+ 新增运费明细</button>
+        <span class="hint" id="rateHint" style="font-size:12px;color:var(--muted)"></span>
+      </div>
+      <div class="tbl-wrap">
+        <table id="tblDetail">
+          <thead><tr><th>序号</th><th>费用分类</th><th>费用项目</th><th>金额(USD)</th><th>是否必选</th><th>计费方式</th><th>备注</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ ⑥ 报价单生成 ============ -->
+    <section class="page" id="p_quote">
+      <h1 class="doc">⑥ 报价单生成 <span class="badge-ver">自动聚合</span></h1>
+      <p class="doc-lead">选择条件即<b>实时聚合</b>：上方动态展示"厂址→起运港"国内段运费，下方明细表汇总国内段 + 海运段全部费用（分类小计 + 分币种总价）。可切换"必选/全部"。</p>
+      <div class="toolbar">
+        <div class="field"><label>起运厂址</label><select id="q_factory" onchange="renderQuote()"></select></div>
+        <div class="field"><label>起运港</label><select id="q_origin" onchange="renderQuote()"></select></div>
+        <div class="field"><label>目的港</label><select id="q_dest" onchange="renderQuote()"></select></div>
+        <div class="field"><label>船公司</label><select id="q_carrier" onchange="renderQuote()"></select></div>
+        <div class="field"><label>柜型</label><select id="q_ct" onchange="renderQuote()"></select></div>
+        <div class="field"><label>费用范围</label>
+          <select id="q_scope" onchange="renderQuote()"><option value="all">全部费用</option><option value="mand">仅必选</option></select>
+        </div>
+        <div class="field"><label>货量(CBM)</label><input id="q_cbm" type="number" min="0" step="0.5" placeholder="如 12" style="width:80px" oninput="renderRecommend()"></div>
+        <div class="field"><label>重量(KG)</label><input id="q_kg" type="number" min="0" step="100" placeholder="如 8000" style="width:90px" oninput="renderRecommend()"></div>
+        <div class="field" style="min-width:auto;align-self:flex-end"><label style="font-size:11px">&nbsp;</label><label style="font-size:12px;color:#666;display:flex;align-items:center;gap:4px"><input id="q_lcl" type="checkbox" checked onchange="renderRecommend()"> 含散货(LCL)对比</label></div>
+        <button onclick="renderQuote()">刷新报价</button>
+        <button class="ghost" onclick="renderPreview()">预览对外报价单</button>
+      </div>
+      <!-- 国内段即时展示：随厂址/起运港/柜型选择动态出现 -->
+      <div id="domesticPreview" class="card" style="display:none;background:#EAF4EA;border:1px solid #9CC99C;"></div>
+      <!-- 智能柜型推荐：决策辅助，输入货量/重量自动对比散货/20GP/40HQ并推荐最省方案 -->
+      <div id="recoPanel" class="card" style="display:none;background:#FFF7E6;border:1px solid #E0C089;margin-top:12px;">
+        <h3 class="sec" style="margin:4px 0 8px;color:#8A5A00">💡 智能柜型推荐（决策辅助）</h3>
+        <div id="recoBody"></div>
+        <p class="note" style="margin:8px 0 0;color:#7a5a16">说明：折算合计按演示汇率 <b>1 USD = 7.2 CNY</b> 将国内段(CNY)折算为 USD 后相加，仅用于三档横向比较。散货(LCL)海运价当前无真实数据，按「20GP 海运总价 ÷ 15CBM」<b>示例推导</b>（≈行业 15CBM 盈亏平衡点），待在「⑤ 运费明细配置」补录柜型=LCL、计费方式=按CBM 的真实海运价后即自动替换为真实值。重量校验依据柜型最大载重（海运用；公路限重更低需另行核对）。</p>
+      </div>
+      <div class="tbl-wrap">
+        <table id="tblQuote">
+          <thead><tr><th>费用分类</th><th>费用项目</th><th>金额</th><th>是否必选</th><th>计费方式</th><th>备注</th></tr></thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
+        </table>
+      </div>
+      <p class="note" style="margin-top:10px;">本报价不含：报关费用 ｜ 关税 ｜ 目的港仓储/滞箱/滞港费等（需单独确认）。国内段运费按所选厂址与起运港计。</p>
+    </section>
+
+    <!-- ============ ⑦ 报价单预览 ============ -->
+    <section class="page" id="p_preview">
+      <h1 class="doc">⑦ 报价单预览（对外）</h1>
+      <p class="doc-lead">客户视角的清晰分项报价单（含国内段），可直接打印。先在"⑥ 报价单生成"点击"预览对外报价单"。</p>
+      <div class="preview-box" id="previewBox"><div class="empty">尚未生成。请先到"报价单生成"选择条件并点击"预览对外报价单"。</div></div>
+      <div class="btnrow"><button class="ghost" onclick="window.print()">打印 / 导出 PDF</button></div>
+    </section>
+
+    <!-- ============ ⑩ 开放问题 ============ -->
+    <section class="page" id="p_notes">
+      <h1 class="doc">⑩ 开放问题与 ERP 对接</h1>
+      <div class="card">
+        <h2 class="sec">开放问题（需你确认）</h2>
+        <table>
+          <tr><th>问题</th><th>影响</th><th>建议</th></tr>
+          <tr><td>起运港实际值？</td><td>当前 68 条均为"（待补充）"</td><td>补全后批量更新 origin_port</td></tr>
+          <tr><td>厂址清单与默认起运港？</td><td>影响国内段运费取值</td><td>以实际集团厂址替换示例 F001~F004</td></tr>
+          <tr><td>国内段是否含散货按CBM/按KG？</td><td>计费方式取值</td><td>已支持 8 种计费方式，按实际选用</td></tr>
+          <tr><td>散货(LCL)海运价？</td><td>当前缺失，智能柜型推荐中 LCL 栏为示例推导</td><td>在「⑤ 运费明细配置」补录 柜型=LCL、计费方式=按CBM 的真实海运明细后，推荐自动改用真实值</td></tr>
+          <tr><td>是否对接关税/报关计算？</td><td>决定 P2 范围</td><td>一期仅保留费用项，不计算</td></tr>
+          <tr><td>ERP 技术栈 / 接口形式？</td><td>决定落地方式</td><td>提供数据模型 + 原型，便于建表</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h2 class="sec">对接建议（给开发）</h2>
+        <ul>
+          <li><b>建表顺序</b>：config → freight_fee_item → factory → factory_freight_rate → freight_rate_detail → quotation 视图。</li>
+          <li><b>聚合逻辑</b>：总价 = Σ(freight_rate_detail 按条件) + Σ(factory_freight_rate 按 厂址/起运港/柜型)。</li>
+          <li><b>迁移脚本</b>：68 条海运段 + 厂址段示例，补全起运港/厂址即可导入。</li>
+        </ul>
+      </div>
+      <footer>运费项目明细设定模块 · 原型 v1.1 · 由产品管理专家整理。数据源自恒荣达&amp;晨崴 墨西哥&amp;英国报价（68 条）+ 集团厂址示例。本原型用于需求对齐与开发指导，交互为演示性质。</footer>
+    </section>
+  </main>
+</div>
+
+<!-- ============ 弹窗：新增/编辑费用项目 ============ -->
+<div class="mask" id="maskFee">
+  <div class="modal">
+    <div class="modal-h"><span>新增 / 编辑费用项目</span><span class="x" onclick="closeModal('maskFee')">×</span></div>
+    <div class="modal-b">
+      <div class="formrow">
+        <div class="field"><label>费用编码</label><input id="fee_code" placeholder="留空自动生成，如 SEA-31"></div>
+        <div class="field"><label>费用分类 <span style="color:#C00">*</span></label>
+          <select id="fee_cat"></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>费用项目名称 <span style="color:#C00">*</span></label><input id="fee_name" placeholder="如 燃油附加费(BAF)"></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>说明</label><input id="fee_desc" placeholder="含义说明"></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>计费方式 <span style="color:#C00">*</span></label>
+          <select id="fee_method"></select></div>
+        <div class="field"><label>是否必选</label>
+          <select id="fee_mand"><option>是</option><option>否</option><option>视情况</option></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>默认币种</label><select id="fee_curr"></select></div>
+        <div class="field"><label>状态</label><select id="fee_status"><option>启用</option><option>停用</option></select></div>
+      </div>
+    </div>
+    <div class="modal-f">
+      <button class="ghost" onclick="closeModal('maskFee')">取消</button>
+      <button onclick="saveFeeModal()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 弹窗：新增/编辑厂址 ============ -->
+<div class="mask" id="maskFactory">
+  <div class="modal">
+    <div class="modal-h"><span>新增 / 编辑厂址</span><span class="x" onclick="closeModal('maskFactory')">×</span></div>
+    <div class="modal-b">
+      <div class="formrow">
+        <div class="field"><label>厂址编码</label><input id="fac_code" placeholder="如 F005"></div>
+        <div class="field"><label>厂址名称 <span style="color:#C00">*</span></label><input id="fac_name" placeholder="如 中山小榄工厂"></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>所属城市</label><input id="fac_city" placeholder="如 中山"></div>
+        <div class="field"><label>默认起运港</label><select id="fac_origin"></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>详细地址</label><input id="fac_addr" placeholder="街道/园区/门牌"></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>状态</label><select id="fac_status"><option>启用</option><option>停用</option></select></div>
+      </div>
+    </div>
+    <div class="modal-f">
+      <button class="ghost" onclick="closeModal('maskFactory')">取消</button>
+      <button onclick="saveFactoryModal()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 弹窗：新增厂址运费行 ============ -->
+<div class="mask" id="maskFactoryRate">
+  <div class="modal">
+    <div class="modal-h"><span>新增厂址运费行（国内段）</span><span class="x" onclick="closeModal('maskFactoryRate')">×</span></div>
+    <div class="modal-b">
+      <div class="formrow">
+        <div class="field"><label>厂址 <span style="color:#C00">*</span></label><select id="fr_factory_i"></select></div>
+        <div class="field"><label>起运港 <span style="color:#C00">*</span></label><select id="fr_origin_i"></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>柜型 <span style="color:#C00">*</span></label><select id="fr_ct_i"></select></div>
+        <div class="field"><label>计费方式</label><select id="fr_method_i"></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>金额</label><input id="fr_amount_i" type="number" placeholder="如 950"></div>
+        <div class="field"><label>币种</label><select id="fr_curr_i"></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>有效期</label><input id="fr_eff_i" placeholder="2026-08-18~2026-08-31"></div>
+      </div>
+    </div>
+    <div class="modal-f">
+      <button class="ghost" onclick="closeModal('maskFactoryRate')">取消</button>
+      <button onclick="saveFactoryRateModal()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 弹窗：新增运费明细（海运段） ============ -->
+<div class="mask" id="maskRate">
+  <div class="modal">
+    <div class="modal-h"><span>新增运费明细（海运段 · freight_rate_detail）</span><span class="x" onclick="closeModal('maskRate')">×</span></div>
+    <div class="modal-b">
+      <div class="formrow">
+        <div class="field"><label>起运港 <span style="color:#C00">*</span></label><select id="rate_origin"></select></div>
+        <div class="field"><label>目的港 <span style="color:#C00">*</span></label><select id="rate_dest"></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>船公司 <span style="color:#C00">*</span></label><select id="rate_carrier"></select></div>
+        <div class="field"><label>柜型 <span style="color:#C00">*</span></label><select id="rate_ct"></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>费用分类</label><select id="rate_cat"></select></div>
+        <div class="field"><label>费用项目 <span style="color:#C00">*</span></label><select id="rate_item"></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>金额</label><input id="rate_amount" type="number" placeholder="如 6900"></div>
+        <div class="field"><label>币种</label><select id="rate_curr"></select></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>计费方式</label><select id="rate_method"></select></div>
+        <div class="field"><label>有效期</label><input id="rate_eff" placeholder="2026-08-18~2026-08-31"></div>
+      </div>
+      <p class="note" style="margin:6px 2px 0;">提示：保存后写入 freight_data.txt，并在「运费明细配置 / 报价单生成」即时生效（演示回退规则：起运港标"待补充"的记录对所有起运港均可见）。</p>
+    </div>
+    <div class="modal-f">
+      <button class="ghost" onclick="closeModal('maskRate')">取消</button>
+      <button onclick="saveRateModal()">保存并落盘</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const CAT_COLORS = {'海运费':'#E2EFDA','起运港费用':'#DDEBF7','目的港费用':'#FCE4D6','附加费':'#FFF2CC','关税':'#F2F2F2','其他费用':'#EDEDED'};
+const SEED_RECORDS = [{"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "20GP", "cat": "海运费", "item": "基本海运费", "amount": 6900}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "20GP", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 245}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "20GP", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 67}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "20GP", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 67}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "20GP", "cat": "起运港费用", "item": "杂费", "amount": 30}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "20GP", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 285}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "20GP", "cat": "目的港费用", "item": "操作费(OP)", "amount": 175}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "20GP", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 2500}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "20GP", "cat": "海运费", "item": "基本海运费", "amount": 5650}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "20GP", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 180}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "20GP", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 75}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "20GP", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 75}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "20GP", "cat": "起运港费用", "item": "杂费", "amount": 45}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "20GP", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 190}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "20GP", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 135}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "20GP", "cat": "目的港费用", "item": "操作费(OP)", "amount": 150}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "20GP", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 3800}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40HQ", "cat": "海运费", "item": "基本海运费", "amount": 7200}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40HQ", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 245}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40HQ", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 67}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40HQ", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 67}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40HQ", "cat": "起运港费用", "item": "杂费", "amount": 30}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40HQ", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 285}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40HQ", "cat": "目的港费用", "item": "操作费(OP)", "amount": 175}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40HQ", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 2500}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40HQ", "cat": "海运费", "item": "基本海运费", "amount": 6000}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40HQ", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 280}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40HQ", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 75}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40HQ", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 75}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40HQ", "cat": "起运港费用", "item": "杂费", "amount": 45}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40HQ", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 190}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40HQ", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 135}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40HQ", "cat": "目的港费用", "item": "操作费(OP)", "amount": 150}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40HQ", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 3800}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "20GP", "cat": "海运费", "item": "基本海运费", "amount": 3750}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "20GP", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 145}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "20GP", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 67}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "20GP", "cat": "起运港费用", "item": "杂费", "amount": 35}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "20GP", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 340}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "20GP", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 85}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "20GP", "cat": "目的港费用", "item": "操作费(OP)", "amount": 300}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "20GP", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 1280}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "20GP", "cat": "海运费", "item": "基本海运费", "amount": 2600}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "20GP", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 180}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "20GP", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 75}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "20GP", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 75}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "20GP", "cat": "起运港费用", "item": "杂费", "amount": 45}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "20GP", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 265}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "20GP", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 85}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "20GP", "cat": "目的港费用", "item": "操作费(OP)", "amount": 280}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "20GP", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 2850}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40HQ", "cat": "海运费", "item": "基本海运费", "amount": 5550}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40HQ", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 273}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40HQ", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 67}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40HQ", "cat": "起运港费用", "item": "杂费", "amount": 35}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40HQ", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 340}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40HQ", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 85}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40HQ", "cat": "目的港费用", "item": "操作费(OP)", "amount": 300}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40HQ", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 1280}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40HQ", "cat": "海运费", "item": "基本海运费", "amount": 4350}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40HQ", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 280}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40HQ", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 75}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40HQ", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 75}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40HQ", "cat": "起运港费用", "item": "杂费", "amount": 45}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40HQ", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 265}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40HQ", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 85}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40HQ", "cat": "目的港费用", "item": "操作费(OP)", "amount": 280}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40HQ", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 2850}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40GP", "cat": "海运费", "item": "基本海运费", "amount": 7590, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "45HQ", "cat": "海运费", "item": "基本海运费", "amount": 8280, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40GP", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 245, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "45HQ", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 245, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40GP", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 67, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "45HQ", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 67, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40GP", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 67, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "45HQ", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 67, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40GP", "cat": "起运港费用", "item": "杂费", "amount": 30, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "45HQ", "cat": "起运港费用", "item": "杂费", "amount": 30, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40GP", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 285, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "45HQ", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 285, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40GP", "cat": "目的港费用", "item": "操作费(OP)", "amount": 175, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "45HQ", "cat": "目的港费用", "item": "操作费(OP)", "amount": 175, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "40GP", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 2500, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "恒荣达", "ct": "45HQ", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 2500, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40GP", "cat": "海运费", "item": "基本海运费", "amount": 6215, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "45HQ", "cat": "海运费", "item": "基本海运费", "amount": 6780, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40GP", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 180, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "45HQ", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 180, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40GP", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 75, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "45HQ", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 75, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40GP", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 75, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "45HQ", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 75, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40GP", "cat": "起运港费用", "item": "杂费", "amount": 45, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "45HQ", "cat": "起运港费用", "item": "杂费", "amount": 45, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40GP", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 190, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "45HQ", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 190, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40GP", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 135, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "45HQ", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 135, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40GP", "cat": "目的港费用", "item": "操作费(OP)", "amount": 150, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "45HQ", "cat": "目的港费用", "item": "操作费(OP)", "amount": 150, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "40GP", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 3800, "source": "demo"}, {"origin": "（待补充）", "country": "墨西哥", "port": "曼萨尼约", "company": "晨崴", "ct": "45HQ", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 3800, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40GP", "cat": "海运费", "item": "基本海运费", "amount": 4125, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "45HQ", "cat": "海运费", "item": "基本海运费", "amount": 4500, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40GP", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 145, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "45HQ", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 145, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40GP", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 67, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "45HQ", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 67, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40GP", "cat": "起运港费用", "item": "杂费", "amount": 35, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "45HQ", "cat": "起运港费用", "item": "杂费", "amount": 35, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40GP", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 340, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "45HQ", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 340, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40GP", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 85, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "45HQ", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 85, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40GP", "cat": "目的港费用", "item": "操作费(OP)", "amount": 300, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "45HQ", "cat": "目的港费用", "item": "操作费(OP)", "amount": 300, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "40GP", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 1280, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "恒荣达", "ct": "45HQ", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 1280, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40GP", "cat": "海运费", "item": "基本海运费", "amount": 2860, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "45HQ", "cat": "海运费", "item": "基本海运费", "amount": 3120, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40GP", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 180, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "45HQ", "cat": "起运港费用", "item": "码头操作费(THC)", "amount": 180, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40GP", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 75, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "45HQ", "cat": "起运港费用", "item": "文件费(DOC)", "amount": 75, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40GP", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 75, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "45HQ", "cat": "起运港费用", "item": "电放费(TLX)", "amount": 75, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40GP", "cat": "起运港费用", "item": "杂费", "amount": 45, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "45HQ", "cat": "起运港费用", "item": "杂费", "amount": 45, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40GP", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 265, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "45HQ", "cat": "目的港费用", "item": "码头操作费(DTHC)", "amount": 265, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40GP", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 85, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "45HQ", "cat": "目的港费用", "item": "文件费(DDOC)", "amount": 85, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40GP", "cat": "目的港费用", "item": "操作费(OP)", "amount": 280, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "45HQ", "cat": "目的港费用", "item": "操作费(OP)", "amount": 280, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "40GP", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 2850, "source": "demo"}, {"origin": "（待补充）", "country": "英国", "port": "格兰杰默斯", "company": "晨崴", "ct": "45HQ", "cat": "目的港费用", "item": "派送费(DEL)", "amount": 2850, "source": "demo"}];
+let RECORDS = [];
+const ORIGIN_PORTS = ["（待补充）", "深圳(盐田)", "深圳(蛇口)", "深圳(大铲)", "深圳(盐田/蛇口)", "广州(南沙)", "广州(黄埔)", "上海(外高桥)", "上海(洋山)", "宁波(北仑)", "厦门", "青岛", "天津", "大连", "珠海(高栏)", "东莞(虎门)", "佛山", "中山", "江门", "海口", "北海", "防城港"];
+const DEST_PORTS   = ["曼萨尼约", "拉萨罗卡德纳斯", "格兰杰默斯", "费利克斯托", "南安普顿", "洛杉矶", "长滩", "纽约", "温哥华", "悉尼", "汉堡", "勒阿弗尔", "鹿特丹", "巴塞罗那", "热那亚", "安特卫普", "东京", "神户", "釜山", "仁川", "海防", "林查班", "巴生港", "新加坡港", "孟买", "杰贝阿里", "达曼", "桑托斯", "布宜诺斯艾利斯", "圣安东尼奥", "德班", "拉各斯"];
+const COMPANIES    = ["恒荣达", "晨崴", "马士基(Maersk)", "地中海航运(MSC)", "达飞(CMA CGM)", "中远海运(COSCO)", "赫伯罗特(Hapag-Lloyd)", "ONE", "阳明海运(Yang Ming)", "长荣海运(Evergreen)", "现代商船(HMM)", "以星航运(ZIM)", "太平船务(PIL)"];
+const CONTAINERS   = [{"code": "20GP", "name": "20GP（20尺普通柜）", "volume": 33.2, "max_weight": 28200, "note": "普通干货"}, {"code": "40GP", "name": "40GP（40尺普通柜）", "volume": 67.7, "max_weight": 26650, "note": "普通干货"}, {"code": "40HQ", "name": "40HQ（40尺高柜）", "volume": 76.3, "max_weight": 26650, "note": "高柜"}, {"code": "45HQ", "name": "45HQ（45尺高柜）", "volume": 86.0, "max_weight": 25680, "note": "高柜"}, {"code": "20RF", "name": "20RF（20尺冷藏柜）", "volume": 27.2, "max_weight": 27480, "note": "冷藏"}, {"code": "40RF", "name": "40RF（40尺冷藏柜）", "volume": 65.3, "max_weight": 25600, "note": "冷藏"}, {"code": "20OT", "name": "20OT（20尺开顶柜）", "volume": 32.3, "max_weight": 28220, "note": "开顶"}, {"code": "40OT", "name": "40OT（40尺开顶柜）", "volume": 67.0, "max_weight": 26500, "note": "开顶"}, {"code": "20FR", "name": "20FR（20尺框架柜）", "volume": 32.7, "max_weight": 31200, "note": "框架"}, {"code": "40FR", "name": "40FR（40尺框架柜）", "volume": 62.2, "max_weight": 47400, "note": "框架"}, {"code": "LCL(散货拼箱)", "name": "LCL（散货拼箱）", "volume": null, "max_weight": null, "note": "按货量计费"}];
+const CHARGE_METHODS = ["按柜(Per Container)", "按票(Per BL)", "按次(Per Time)", "按KG(Per KG)", "按CBM(Per CBM)", "按金额比例(%)", "按吨(Per Ton)", "按天(Per Day)"];
+const CURRENCIES = ["USD", "CNY", "EUR", "GBP", "JPY", "HKD"];
+const CATS = ['海运费','起运港费用','目的港费用','附加费','关税','其他费用'];
+const CAT_CODE = {'海运费':'SEA','起运港费用':'ORI','目的港费用':'DES','附加费':'ADD','关税':'DUTY','其他费用':'OTH'};
+
+// ---- 数据：优先从文本文件(服务端 /api/data)读取，失败回退到内嵌种子 SEED_DATA ----
+let FEE_ITEMS=[], FACTORIES=[], FACTORY_RATES=[], DEFAULT_DOMESTIC={};
+let mandMap={}, facMap={};
+const SEED_DATA = {"default_domestic": {"factory": "F001", "origin": "深圳(盐田)", "ct": "20GP"}, "fee_items": [{"code": "SEA-01", "cat": "海运费", "item": "基本海运费", "desc": "船公司基本海运费", "mand": "是", "method": "按柜(Per Container)"}, {"code": "ORI-02", "cat": "起运港费用", "item": "码头操作费(THC)", "desc": "起运港码头装卸操作费", "mand": "是", "method": "按柜(Per Container)"}, {"code": "ORI-03", "cat": "起运港费用", "item": "文件费(DOC)", "desc": "起运港提单文件费", "mand": "是", "method": "按柜(Per Container)"}, {"code": "ORI-04", "cat": "起运港费用", "item": "电放费(TLX)", "desc": "起运港电放提单费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ORI-05", "cat": "起运港费用", "item": "杂费", "desc": "起运港其他杂项费用", "mand": "是", "method": "按柜(Per Container)"}, {"code": "ORI-06", "cat": "起运港费用", "item": "封条费(SEAL)", "desc": "集装箱封条费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ORI-07", "cat": "起运港费用", "item": "VGM申报费", "desc": "集装箱称重申报费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ORI-08", "cat": "起运港费用", "item": "打单费(BOOK)", "desc": "订舱打单费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ORI-09", "cat": "起运港费用", "item": "拖车费(TRUCK)", "desc": "发货仓库到起运港拖车费（原报价未含）", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ORI-10", "cat": "起运港费用", "item": "出口报关费(CUSTOMS)", "desc": "出口报关费（原报价未含）", "mand": "否", "method": "按柜(Per Container)"}, {"code": "DES-11", "cat": "目的港费用", "item": "码头操作费(DTHC)", "desc": "目的港码头装卸操作费", "mand": "是", "method": "按柜(Per Container)"}, {"code": "DES-12", "cat": "目的港费用", "item": "文件费(DDOC)", "desc": "目的港提单文件费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "DES-13", "cat": "目的港费用", "item": "操作费(OP)", "desc": "目的港操作处理费", "mand": "是", "method": "按柜(Per Container)"}, {"code": "DES-14", "cat": "目的港费用", "item": "派送费(DEL)", "desc": "目的港到收货地址派送费", "mand": "是", "method": "按柜(Per Container)"}, {"code": "DES-15", "cat": "目的港费用", "item": "清关费(CLEAR)", "desc": "目的港进口清关费（原报价未含）", "mand": "否", "method": "按柜(Per Container)"}, {"code": "DES-16", "cat": "目的港费用", "item": "杂费", "desc": "目的港其他杂项费用", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-17", "cat": "附加费", "item": "保险费(INS)", "desc": "货物运输保险费（按货值比例）", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-18", "cat": "附加费", "item": "反恐费(ISPS)", "desc": "国际船舶和港口设施保安费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-19", "cat": "附加费", "item": "AMS费", "desc": "美国舱单申报费（美国航线）", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-20", "cat": "附加费", "item": "ENS费", "desc": "欧盟舱单申报费（欧盟航线）", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-21", "cat": "附加费", "item": "燃油附加费(BAF)", "desc": "燃油调整附加费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-22", "cat": "附加费", "item": "低硫油附加费(LSS)", "desc": "低硫燃油附加费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-23", "cat": "附加费", "item": "旺季附加费(PSS)", "desc": "旺季附加费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-24", "cat": "附加费", "item": "货币调整费(CAF)", "desc": "货币调整附加费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-25", "cat": "附加费", "item": "一般性涨价(GRI)", "desc": "综合费率上涨附加费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-26", "cat": "附加费", "item": "集装箱清洁费(CC)", "desc": "集装箱清洁费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "ADD-27", "cat": "附加费", "item": "超重附加费(OWS)", "desc": "超重货物附加费", "mand": "否", "method": "按柜(Per Container)"}, {"code": "DUTY-28", "cat": "关税", "item": "进口关税(DUTY)", "desc": "进口关税（需单独确认）", "mand": "否", "method": "按柜(Per Container)"}, {"code": "DUTY-29", "cat": "关税", "item": "增值税(VAT)", "desc": "进口增值税（需单独确认）", "mand": "否", "method": "按柜(Per Container)"}, {"code": "OTH-30", "cat": "其他费用", "item": "其他费用", "desc": "其他未列明费用", "mand": "否", "method": "按柜(Per Container)"}], "factories": [{"code": "F001", "name": "深圳坪山工厂", "city": "深圳", "addr": "深圳市坪山区出口加工区1号", "def_origin": "深圳(盐田)", "status": "启用"}, {"code": "F002", "name": "东莞松山湖工厂", "city": "东莞", "addr": "东莞市松山湖高新区科技路8号", "def_origin": "深圳(蛇口)", "status": "启用"}, {"code": "F003", "name": "广州黄埔工厂", "city": "广州", "addr": "广州市黄埔区开发大道22号", "def_origin": "广州(南沙)", "status": "启用"}, {"code": "F004", "name": "苏州工业园工厂", "city": "苏州", "addr": "苏州市工业园区胜浦路99号", "def_origin": "上海(洋山)", "status": "启用"}], "factory_rates": [{"factory": "F001", "origin": "深圳(盐田)", "ct": "20GP", "amount": 950, "method": "按柜(Per Container)", "curr": "CNY", "eff": "2026-08-18~2026-08-31"}, {"factory": "F001", "origin": "深圳(盐田)", "ct": "40HQ", "amount": 1300, "method": "按柜(Per Container)", "curr": "CNY", "eff": "2026-08-18~2026-08-31"}, {"factory": "F001", "origin": "深圳(盐田)", "ct": "LCL(散货拼箱)", "amount": 85, "method": "按CBM(Per CBM)", "curr": "CNY", "eff": "2026-08-18~2026-08-31"}, {"factory": "F002", "origin": "深圳(蛇口)", "ct": "20GP", "amount": 1100, "method": "按柜(Per Container)", "curr": "CNY", "eff": "2026-08-18~2026-08-31"}, {"factory": "F002", "origin": "深圳(蛇口)", "ct": "40HQ", "amount": 1500, "method": "按柜(Per Container)", "curr": "CNY", "eff": "2026-08-18~2026-08-31"}, {"factory": "F003", "origin": "广州(南沙)", "ct": "20GP", "amount": 800, "method": "按柜(Per Container)", "curr": "CNY", "eff": "2026-08-18~2026-08-31"}, {"factory": "F003", "origin": "广州(南沙)", "ct": "40HQ", "amount": 1150, "method": "按柜(Per Container)", "curr": "CNY", "eff": "2026-08-18~2026-08-31"}, {"factory": "F004", "origin": "上海(洋山)", "ct": "20GP", "amount": 1200, "method": "按柜(Per Container)", "curr": "CNY", "eff": "2026-08-18~2026-08-31"}, {"factory": "F004", "origin": "上海(洋山)", "ct": "40HQ", "amount": 1650, "method": "按柜(Per Container)", "curr": "CNY", "eff": "2026-08-18~2026-08-31"}]};
+async function loadData(){
+  try{
+    const r=await fetch('/api/data',{cache:'no-store'});
+    if(!r.ok) throw 0;
+    const d=await r.json();
+    FEE_ITEMS=d.fee_items||SEED_DATA.fee_items||[];
+    FACTORIES=d.factories||SEED_DATA.factories||[];
+    FACTORY_RATES=d.factory_rates||SEED_DATA.factory_rates||[];
+    DEFAULT_DOMESTIC=d.default_domestic||SEED_DATA.default_domestic||{};
+    RECORDS=SEED_RECORDS.concat(d.rates||[]);
+  }catch(e){
+    FEE_ITEMS=SEED_DATA.fee_items||[]; FACTORIES=SEED_DATA.factories||[];
+    FACTORY_RATES=SEED_DATA.factory_rates||[]; DEFAULT_DOMESTIC=SEED_DATA.default_domestic||{};
+    RECORDS=SEED_RECORDS.slice();
+  }
+  mandMap={}; FEE_ITEMS.forEach(f=>mandMap[f.item]=f.mand);
+  facMap={}; FACTORIES.forEach(f=>facMap[f.code]=f.name);
+  init();
+}
+
+// ---- nav ----
+document.querySelectorAll('.navitem').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.navitem').forEach(n=>n.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById(el.dataset.page).classList.add('active');
+    window.scrollTo(0,0);
+  });
+});
+
+// ---- modal 通用 ----
+function openModal(id){document.getElementById(id).classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.querySelectorAll('.mask').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');}));
+
+// ---- 轻提示 + 持久化到文本文件 ----
+function toast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.style.display='block';t.style.opacity='1';setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.style.display='none',400);},2400);}
+async function persist(kind,obj){
+  try{
+    const ep={'fee':'/api/fee','factory':'/api/factory','factoryrate':'/api/factoryrate','rate':'/api/rate'}[kind];
+    const r=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(obj)});
+    if(!r.ok) throw 0;
+    toast('已保存到 freight_data.txt');
+  }catch(e){ toast('已本地保存（未连接数据服务，重启 prototype_server.py 后持久化）'); }
+}
+function refillFactorySelects(){
+  const q=document.getElementById('q_factory');
+  if(q){const cur=q.value;q.innerHTML='';['（不选）'].concat(FACTORIES.map(f=>f.code)).forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;if(v===cur)o.selected=true;q.appendChild(o);});}
+  const fr=document.getElementById('fr_factory');
+  if(fr){const cur=fr.value;fr.innerHTML='';[''].concat(FACTORIES.map(f=>f.code)).forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;if(v===cur)o.selected=true;fr.appendChild(o);});}
+}
+
+// ---- ③ 费用项目明细设定 ----
+function renderFeeItem(){
+  const tb=document.querySelector('#tblFeeItem tbody'); tb.innerHTML='';
+  FEE_ITEMS.forEach(f=>{
+    const tr=document.createElement('tr');
+    const color=CAT_COLORS[f.cat]||'#fff';
+    tr.innerHTML=`<td><code>${f.code}</code></td>
+      <td style="background:${color}"><b>${f.cat}</b></td>
+      <td>${f.item}</td><td>${f.desc}</td>
+      <td>${f.method}</td>
+      <td>${f.mand==='是'?'<span class="tag y">必选</span>':'<span class="tag n">可选</span>'}</td>
+      <td><span class="tag c">${f.status||'启用'}</span></td>
+      <td><span class="pill" onclick="editFeeItem('${f.code}')">编辑</span><span class="pill" onclick="alert('停用 ${f.item}')">停用</span></td>`;
+    tb.appendChild(tr);
+  });
+}
+function fillSelectOpts(id,arr,def){
+  const s=document.getElementById(id);s.innerHTML='';
+  arr.forEach(v=>{
+    const isObj=typeof v==='object' && v!==null;
+    const val=isObj?v.code:v, txt=isObj?v.name:v;
+    const o=document.createElement('option');o.value=val;o.textContent=txt;if(val===def)o.selected=true;s.appendChild(o);
+  });
+}
+function openFeeModal(code){
+  fillSelectOpts('fee_cat',CATS,'海运费');
+  fillSelectOpts('fee_method',CHARGE_METHODS,'按柜(Per Container)');
+  fillSelectOpts('fee_curr',CURRENCIES,'USD');
+  if(code){const f=FEE_ITEMS.find(x=>x.code===code);
+    document.getElementById('fee_code').value=f.code;
+    document.getElementById('fee_cat').value=f.cat;
+    document.getElementById('fee_name').value=f.item;
+    document.getElementById('fee_desc').value=f.desc;
+    document.getElementById('fee_method').value=f.method;
+    document.getElementById('fee_mand').value=f.mand;
+    document.getElementById('fee_curr').value='USD';
+    document.getElementById('fee_status').value=f.status||'启用';
+  }else{
+    document.getElementById('fee_code').value='';
+    document.getElementById('fee_name').value='';
+    document.getElementById('fee_desc').value='';
+    document.getElementById('fee_mand').value='否';
+    document.getElementById('fee_status').value='启用';
+  }
+  openModal('maskFee');
+}
+function editFeeItem(code){openFeeModal(code);}
+function saveFeeModal(){
+  const code=document.getElementById('fee_code').value.trim();
+  const cat=document.getElementById('fee_cat').value;
+  const name=document.getElementById('fee_name').value.trim();
+  const desc=document.getElementById('fee_desc').value.trim();
+  const method=document.getElementById('fee_method').value;
+  const mand=document.getElementById('fee_mand').value;
+  const curr=document.getElementById('fee_curr').value;
+  const status=document.getElementById('fee_status').value;
+  if(!name){alert('请填写费用项目名称');return;}
+  const cc = code || (CAT_CODE[cat]||'OTH')+'-'+(FEE_ITEMS.length+1);
+  const ex=FEE_ITEMS.find(x=>x.code===cc);
+  if(ex){ex.cat=cat;ex.item=name;ex.desc=desc;ex.method=method;ex.mand=mand;ex.status=status;}
+  else FEE_ITEMS.push({code:cc,cat,item:name,desc,method,mand,status});
+  mandMap[name]=mand;
+  renderFeeItem(); closeModal('maskFee');
+  persist('fee',{code:cc,cat,item:name,desc,method,mand,status});
+}
+
+// ---- ⑧ 厂址主数据 ----
+function renderFactory(){
+  const tb=document.querySelector('#tblFactory tbody'); tb.innerHTML='';
+  FACTORIES.forEach(f=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td><code>${f.code}</code></td><td><b>${f.name}</b></td><td>${f.city}</td>
+      <td>${f.addr}</td><td>${f.def_origin}</td>
+      <td><span class="tag c">${f.status}</span></td>
+      <td><span class="pill" onclick="alert('编辑 ${f.name}')">编辑</span></td>`;
+    tb.appendChild(tr);
+  });
+}
+function openFactoryModal(){
+  fillSelectOpts('fac_origin',ORIGIN_PORTS,'深圳(盐田)');
+  document.getElementById('fac_code').value='';
+  document.getElementById('fac_name').value='';
+  document.getElementById('fac_city').value='';
+  document.getElementById('fac_addr').value='';
+  document.getElementById('fac_status').value='启用';
+  openModal('maskFactory');
+}
+function saveFactoryModal(){
+  const code=document.getElementById('fac_code').value.trim()||('F'+(FACTORIES.length+1).toString().padStart(3,'0'));
+  const name=document.getElementById('fac_name').value.trim();
+  if(!name){alert('请填写厂址名称');return;}
+  const obj={code,name,city:document.getElementById('fac_city').value.trim(),
+    addr:document.getElementById('fac_addr').value.trim(),def_origin:document.getElementById('fac_origin').value,status:document.getElementById('fac_status').value};
+  FACTORIES.push(obj); renderFactory(); closeModal('maskFactory'); refillFactorySelects();
+  persist('factory',obj);
+}
+
+// ---- ⑨ 厂址→起运港运费 ----
+function renderFactoryRate(){
+  const f=document.getElementById('fr_factory').value, p=document.getElementById('fr_origin').value, t=document.getElementById('fr_ct').value;
+  const rows=FACTORY_RATES.filter(r=>(!f||r.factory===f)&&(!p||r.origin===p)&&(!t||r.ct===t));
+  const tb=document.querySelector('#tblFactoryRate tbody'); tb.innerHTML='';
+  if(!rows.length){tb.innerHTML='<tr><td colspan="8" class="empty">无匹配运费行</td></tr>';return;}
+  rows.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${facMap[r.factory]||r.factory}</td><td>${r.origin}</td><td>${r.ct}</td>
+      <td style="text-align:right">${Number(r.amount).toLocaleString()} ${r.curr}</td>
+      <td>${r.curr}</td><td>${r.method}</td><td>${r.eff}</td>
+      <td><span class="pill" onclick="alert('编辑 ${r.factory}→${r.origin}')">编辑</span></td>`;
+    tb.appendChild(tr);
+  });
+}
+function openFactoryRateModal(){
+  fillSelectOpts('fr_factory_i',FACTORIES.map(f=>f.code),FACTORIES[0]&&FACTORIES[0].code);
+  fillSelectOpts('fr_origin_i',ORIGIN_PORTS,ORIGIN_PORTS[1]||ORIGIN_PORTS[0]);
+  fillSelectOpts('fr_ct_i',CONTAINERS,CONTAINERS[0].code);
+  fillSelectOpts('fr_method_i',CHARGE_METHODS,'按柜(Per Container)');
+  fillSelectOpts('fr_curr_i',CURRENCIES,'CNY');
+  document.getElementById('fr_amount_i').value='';
+  document.getElementById('fr_eff_i').value='2026-08-18~2026-08-31';
+  openModal('maskFactoryRate');
+}
+function saveFactoryRateModal(){
+  const r={factory:document.getElementById('fr_factory_i').value,
+    origin:document.getElementById('fr_origin_i').value,
+    ct:document.getElementById('fr_ct_i').value,
+    amount:parseFloat(document.getElementById('fr_amount_i').value)||0,
+    method:document.getElementById('fr_method_i').value,
+    curr:document.getElementById('fr_curr_i').value,
+    eff:document.getElementById('fr_eff_i').value||'2026-08-18~2026-08-31'};
+  FACTORY_RATES.push(r); renderFactoryRate(); closeModal('maskFactoryRate'); renderQuote();
+  persist('factoryrate',r);
+}
+
+// ---- ⑤ 新增运费明细（海运段，落盘）----
+function openRateModal(){
+  // 预填当前筛选条件，新增即针对该航线
+  fillSelectOpts('rate_origin',ORIGIN_PORTS,document.getElementById('d_origin').value||'（待补充）');
+  fillSelectOpts('rate_dest',DEST_PORTS,document.getElementById('d_dest').value||'曼萨尼约');
+  fillSelectOpts('rate_carrier',COMPANIES,document.getElementById('d_carrier').value||'恒荣达');
+  fillSelectOpts('rate_ct',CONTAINERS,document.getElementById('d_ct').value||'20GP');
+  fillSelectOpts('rate_cat',CATS,'海运费');
+  fillSelectOpts('rate_item',FEE_ITEMS.map(f=>f.item),FEE_ITEMS[0]&&FEE_ITEMS[0].item);
+  fillSelectOpts('rate_curr',CURRENCIES,'USD');
+  fillSelectOpts('rate_method',CHARGE_METHODS,'按柜(Per Container)');
+  document.getElementById('rate_amount').value='';
+  document.getElementById('rate_eff').value='2026-08-18~2026-08-31';
+  openModal('maskRate');
+}
+function saveRateModal(){
+  const obj={
+    origin:document.getElementById('rate_origin').value,
+    port:document.getElementById('rate_dest').value,
+    company:document.getElementById('rate_carrier').value,
+    ct:document.getElementById('rate_ct').value,
+    cat:document.getElementById('rate_cat').value,
+    item:document.getElementById('rate_item').value.trim(),
+    amount:parseFloat(document.getElementById('rate_amount').value)||0,
+    curr:document.getElementById('rate_curr').value,
+    method:document.getElementById('rate_method').value,
+    eff:document.getElementById('rate_eff').value||'2026-08-18~2026-08-31',
+    country:'', source:'user'
+  };
+  if(!obj.item){alert('请选择/填写费用项目');return;}
+  RECORDS.push(obj);
+  closeModal('maskRate');
+  renderDetail(); renderQuote();
+  const h=document.getElementById('rateHint'); if(h) h.textContent='已新增 1 条（点击"保存并落盘"后写入文本文件）';
+  persist('rate',obj);
+}
+
+// ---- ④ 基础数据 ----
+const baseTabs={origin:['起运港',ORIGIN_PORTS],dest:['目的港',DEST_PORTS],carrier:['船公司',COMPANIES],ct:['柜型',CONTAINERS],method:['计费方式',CHARGE_METHODS]};
+function renderBase(tab){
+  const [label,arr]=baseTabs[tab]||baseTabs.origin;
+  const thead=document.querySelector('#tblBase thead'); const tb=document.querySelector('#tblBase tbody'); tb.innerHTML='';
+  if(tab==='ct'){
+    thead.innerHTML='<tr><th>类型</th><th>柜型</th><th>容积(CBM)</th><th>最大载重(KG)</th><th>说明</th></tr>';
+    arr.forEach(v=>{const tr=document.createElement('tr');tr.innerHTML=`<td><b>${label}</b></td><td>${v.name}</td><td style="text-align:right">${v.volume!=null?v.volume+' CBM':'—'}</td><td style="text-align:right">${v.max_weight!=null?v.max_weight.toLocaleString()+' KG':'—'}</td><td>${v.note||''}</td>`;tb.appendChild(tr);});
+  }else{
+    thead.innerHTML='<tr><th>类型</th><th>值</th></tr>';
+    arr.forEach(v=>{const tr=document.createElement('tr');tr.innerHTML=`<td><b>${label}</b></td><td>${v}</td>`;tb.appendChild(tr);});
+  }
+}
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>renderBase(b.dataset.tab)));
+
+// ---- 填充下拉 ----
+function fillSelect(id,arr,def){
+  const s=document.getElementById(id);s.innerHTML='';
+  arr.forEach(v=>{
+    const isObj=typeof v==='object' && v!==null;
+    const val=isObj?v.code:v, txt=isObj?v.name:v;
+    const o=document.createElement('option');o.value=val;o.textContent=txt;if(val===def)o.selected=true;s.appendChild(o);
+  });
+}
+
+// ---- ⑤ 运费明细配置 ----
+function renderDetail(){
+  const o=document.getElementById('d_origin').value, p=document.getElementById('d_dest').value,
+        c=document.getElementById('d_carrier').value, t=document.getElementById('d_ct').value;
+  const rows=RECORDS.filter(r=>(r.origin===o||r.origin==='（待补充）')&&r.port===p&&r.company===c&&r.ct===t);
+  const tb=document.querySelector('#tblDetail tbody'); tb.innerHTML='';
+  if(!rows.length){tb.innerHTML='<tr><td colspan="7" class="empty">无匹配明细</td></tr>';return;}
+  rows.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    const srcTag = r.source==='user' ? ' <span class="tag c">新增</span>' : (r.source==='demo' ? ' <span class="tag c">示例</span>' : '');
+    tr.innerHTML=`<td>${i+1}</td><td style="background:${CAT_COLORS[r.cat]||'#fff'}">${r.cat}</td>
+      <td>${r.item}${srcTag}</td><td style="text-align:right">${r.amount.toLocaleString()}</td>
+      <td>${mandMap[r.item]==='是'?'<span class="tag y">必选</span>':'<span class="tag n">可选</span>'}</td>
+      <td>${r.method||'按柜'}</td><td>${r.origin==='（待补充）'?'原报价未注明起运港':''}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+// ---- ⑥ 报价单生成（含国内段）----
+let lastQuote=null;
+function renderQuote(){
+  const fac=document.getElementById('q_factory').value, o=document.getElementById('q_origin').value,
+        p=document.getElementById('q_dest').value, c=document.getElementById('q_carrier').value,
+        t=document.getElementById('q_ct').value, scope=document.getElementById('q_scope').value;
+  // 海运段：原始数据起运港为"（待补充）"，起运港软匹配；柜型若未配置则回退到该航线 20GP（默认档），演示永远有数据
+  let seaFbNote='';
+  let rows=RECORDS.filter(r=>(r.origin===o||r.origin==='（待补充）')&&r.port===p&&r.company===c&&r.ct===t);
+  if(scope==='mand') rows=rows.filter(r=>mandMap[r.item]==='是');
+  if(!rows.length){
+    let fallbackSource=RECORDS.filter(r=>(r.origin===o||r.origin==='（待补充）')&&r.port===p&&r.company===c&&r.ct==='20GP');
+    if(scope==='mand') fallbackSource=fallbackSource.filter(r=>mandMap[r.item]==='是');
+    if(!fallbackSource.length){
+      fallbackSource=RECORDS.filter(r=>(r.origin===o||r.origin==='（待补充）')&&r.port===p&&r.company===c);
+      if(scope==='mand') fallbackSource=fallbackSource.filter(r=>mandMap[r.item]==='是');
+    }
+    if(fallbackSource.length){
+      rows=fallbackSource.map(r=>Object.assign({},r,{fallback:true,fallbackCt:r.ct})); // 复制并标记默认档
+      seaFbNote='（海运段柜型未配置，默认档参考 '+fallbackSource[0].ct+'）';
+    }
+  }
+  const tb=document.querySelector('#tblQuote tbody'); tb.innerHTML='';
+  const tf=document.querySelector('#tblQuote tfoot'); tf.innerHTML='';
+  // ---- 国内段（厂址→起运港）即时展示 ----
+  let domestic=0; const domesticRows=[];
+  const dp=document.getElementById('domesticPreview');
+  if(fac && fac!=='（不选）'){
+    let matched = FACTORY_RATES.filter(r=>r.factory===fac && r.origin===o && r.ct===t);
+    let fbNote='';
+    if(!matched.length && DEFAULT_DOMESTIC){
+      const def=FACTORY_RATES.find(r=>r.factory===DEFAULT_DOMESTIC.factory && r.origin===DEFAULT_DOMESTIC.origin && r.ct===DEFAULT_DOMESTIC.ct);
+      if(def){ matched=[Object.assign({},def,{origin:o,ct:t,fallback:true})]; fbNote='（默认档·参考 '+DEFAULT_DOMESTIC.factory+'→'+DEFAULT_DOMESTIC.origin+'·'+DEFAULT_DOMESTIC.ct+'）'; }
+    }
+    matched.forEach(r=>{ domestic+=Number(r.amount); domesticRows.push(r); });
+    const facName=facMap[fac]||fac;
+    if(domesticRows.length){
+      let lines=domesticRows.map(r=>`<tr><td>${facName} → ${r.origin}</td><td>${r.ct}</td>
+        <td style="text-align:right;font-weight:700">${Number(r.amount).toLocaleString()} ${r.curr}</td>
+        <td>${r.method}${r.fallback?'<br><span style="color:#B26A00;font-size:12px">默认档</span>':''}</td><td>${r.eff||''}</td></tr>`).join('');
+      dp.innerHTML=`<h3 class="sec" style="margin:4px 0 8px;color:#2E5E1E">🚚 国内段运费（厂址 → 起运港，已随选择动态计算）</h3>
+        <table><thead><tr><th>路线</th><th>柜型</th><th>金额</th><th>计费方式</th><th>有效期</th></tr></thead>
+        <tbody>${lines}<tr style="background:#DCEFDC"><td colspan="2" style="font-weight:700">国内段小计${fbNote}</td>
+        <td style="text-align:right;font-weight:700">${domestic.toLocaleString()} CNY</td><td colspan="2"></td></tr></tbody></table>`;
+      dp.style.display='block';
+    }else{
+      dp.innerHTML=`<h3 class="sec" style="margin:4px 0 4px;color:#2E5E1E">🚚 国内段运费（厂址 → 起运港）</h3>
+        <p class="note" style="margin:0">所选厂址「${facName}」与起运港「${o}」、柜型「${t}」暂未配置国内段运费（可在「⑨ 厂址→起运港运费」补充）。</p>`;
+      dp.style.display='block';
+    }
+  }else{
+    dp.style.display='none';
+  }
+  if(!rows.length && !domesticRows.length){tb.innerHTML='<tr><td colspan="6" class="empty">无匹配明细</td></tr>';lastQuote=null;return;}
+  let seaTotal=0; const subtot={};
+  rows.forEach(r=>{
+    subtot[r.cat]=(subtot[r.cat]||0)+r.amount; seaTotal+=r.amount;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="background:${CAT_COLORS[r.cat]||'#fff'}">${r.cat}</td>
+      <td>${r.item}${r.fallback?' <span class="tag n">默认档</span>':''}${r.source==='demo'?' <span class="tag c">示例</span>':''}</td><td style="text-align:right">${r.amount.toLocaleString()} USD</td>
+      <td>${mandMap[r.item]==='是'?'<span class="tag y">必选</span>':'<span class="tag n">可选</span>'}</td>
+      <td>${r.method||'按柜'}</td><td>${r.origin==='（待补充）'?'起运港待补充':''}${r.fallback?' / 柜型默认参考'+r.fallbackCt:''}</td>`;
+    tb.appendChild(tr);
+  });
+  // 国内段行（并入明细表）
+  if(domesticRows.length){
+    const facName=facMap[fac]||fac;
+    domesticRows.forEach(r=>{
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td style="background:#EAF4EA"><b>国内段(厂址→起运港)</b></td>
+        <td>${facName} → ${r.origin} (${r.ct})${r.fallback?' <span class="tag n">默认档</span>':''}</td>
+        <td style="text-align:right">${Number(r.amount).toLocaleString()} ${r.curr}</td>
+        <td><span class="tag y">必选</span></td><td>${r.method}</td><td>拖车/国内段</td>`;
+      tb.appendChild(tr);
+    });
+    subtot['国内段']=(subtot['国内段']||0)+domestic;
+  }
+  CATS.forEach(cat=>{ if(subtot[cat]){
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td colspan="2" style="background:${CAT_COLORS[cat]};font-weight:700">${cat} 小计</td>
+      <td style="text-align:right;font-weight:700;background:${CAT_COLORS[cat]}">${subtot[cat].toLocaleString()} USD</td>
+      <td colspan="3" style="background:${CAT_COLORS[cat]}"></td>`;
+    tb.appendChild(tr);
+  }});
+  if(subtot['国内段']){
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td colspan="2" style="background:#EAF4EA;font-weight:700">国内段 小计</td>
+      <td style="text-align:right;font-weight:700;background:#EAF4EA">${subtot['国内段'].toLocaleString()} CNY</td>
+      <td colspan="3" style="background:#EAF4EA"></td>`;
+    tb.appendChild(tr);
+  }
+  // 海运段小计 + 默认档提示
+  const seaSubTr=document.createElement('tr');
+  seaSubTr.innerHTML=`<td colspan="2" style="background:#DDEBF7;font-weight:700">海运段 小计${seaFbNote}</td>
+    <td style="text-align:right;font-weight:700;background:#DDEBF7">${seaTotal.toLocaleString()} USD</td>
+    <td colspan="3" style="background:#DDEBF7"></td>`;
+  tb.appendChild(seaSubTr);
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td colspan="2" style="background:#2F5496;color:#fff;font-weight:700">合计 (Total)</td>
+    <td style="text-align:right;background:#2F5496;color:#fff;font-weight:700;font-size:16px">海运 ${seaTotal.toLocaleString()} USD ＋ 国内段 ${domestic.toLocaleString()} CNY</td>
+    <td colspan="3" style="background:#2F5496;color:#fff;text-align:center">USD / CNY</td>`;
+  tf.appendChild(tr);
+  lastQuote={fac,o,p,c,t,scope,rows,domesticRows,grand:seaTotal+domestic,seaTotal,domestic,subtot,seaFbNote};
+  renderRecommend();
+}
+
+// ---- 智能柜型推荐（决策辅助）：散货 / 20GP / 40HQ 三档对比，标注最省 + 重量校验 ----
+function maxWeightOf(ct){const o=CONTAINERS.find(x=>x.code===ct);return o?o.max_weight:null;}
+function renderRecommend(){
+  const cbm=parseFloat(document.getElementById('q_cbm').value)||0,
+        kg=parseFloat(document.getElementById('q_kg').value)||0;
+  const fac=document.getElementById('q_factory').value, o=document.getElementById('q_origin').value,
+        p=document.getElementById('q_dest').value, c=document.getElementById('q_carrier').value;
+  const lclChk=document.getElementById('q_lcl');
+  const includeLCL=lclChk?lclChk.checked:false;
+  const FX=7.2;
+  const panel=document.getElementById('recoPanel'), body=document.getElementById('recoBody');
+  if((cbm<=0&&kg<=0)||!fac||fac==='（不选）'){panel.style.display='none';return;}
+  panel.style.display='block';
+  // 海运段匹配（含默认档回退，与估价表一致）
+  function seaOf(ct){
+    const hit=RECORDS.filter(r=>(r.origin===o||r.origin==='（待补充）')&&r.port===p&&r.company===c&&r.ct===ct);
+    if(hit.length) return {sum:hit.reduce((s,r)=>s+r.amount,0), demo:false};
+    let fb=RECORDS.filter(r=>(r.origin===o||r.origin==='（待补充）')&&r.port===p&&r.company===c&&r.ct==='20GP');
+    if(!fb.length) fb=RECORDS.filter(r=>(r.origin===o||r.origin==='（待补充）')&&r.port===p&&r.company===c);
+    return {sum:fb.reduce((s,r)=>s+r.amount,0), demo:true};
+  }
+  function domesticOf(ct){
+    let m=FACTORY_RATES.filter(r=>r.factory===fac&&r.origin===o&&r.ct===ct), fb=false;
+    if(!m.length&&DEFAULT_DOMESTIC){const def=FACTORY_RATES.find(r=>r.factory===DEFAULT_DOMESTIC.factory&&r.origin===DEFAULT_DOMESTIC.origin&&r.ct===DEFAULT_DOMESTIC.ct);if(def){m=[Object.assign({},def,{origin:o,ct:ct})];fb=true;}}
+    return {sum:m.reduce((s,r)=>s+Number(r.amount),0), fb};
+  }
+  const cab20=Object.assign({ct:'20GP'},seaOf('20GP'),domesticOf('20GP'));
+  const cab40=Object.assign({ct:'40HQ'},seaOf('40HQ'),domesticOf('40HQ'));
+  // 散货 LCL：海运价缺失→示例推导(20GP海运÷15CBM)；国内段缺失→默认档按柜折算每CBM
+  const lclSea=RECORDS.filter(r=>(r.origin===o||r.origin==='（待补充）')&&r.port===p&&r.company===c&&r.ct==='LCL(散货拼箱)');
+  const lclSeaRate=lclSea.length?lclSea.reduce((s,r)=>s+r.amount,0):seaOf('20GP').sum/15;
+  const lclDomRows=FACTORY_RATES.filter(r=>r.factory===fac&&r.origin===o&&r.ct&&r.ct.indexOf('LCL')>=0);
+  const lclDomRate=lclDomRows.length?lclDomRows.reduce((s,r)=>s+Number(r.amount),0):domesticOf('20GP').sum/33.2;
+  const cabLCL={ct:'LCL(散货拼箱)',sum:lclSeaRate*cbm,demo:!lclSea.length,
+                dom:lclDomRate*cbm,fb:!lclDomRows.length};
+  const list=[cab20,cab40]; if(includeLCL) list.push(cabLCL);
+  list.forEach(x=>{x.totUsd=x.sum+x.dom/FX;});
+  const minTot=Math.min.apply(null,list.map(x=>x.totUsd));
+  const vmap={'20GP':'≈33.2 CBM / 28,200 KG','40HQ':'≈76.3 CBM / 26,650 KG','LCL(散货拼箱)':'按货量计费'};
+  const rowsHtml=list.map(x=>{
+    const isRec=x.totUsd<=minTot+1e-6;
+    const mw=maxWeightOf(x.ct), overW=(kg>0&&mw&&kg>mw)?`<br><span style="color:#C00;font-size:12px">⚠ 超${x.ct}载重(${mw.toLocaleString()}KG)</span>`:'';
+    const badge=x.demo?'<span class="tag c">示例</span>':(x.fb?'<span class="tag n">默认档</span>':'');
+    const seaDemo=x.demo&&x.ct==='LCL(散货拼箱)'?'<br><span style="font-size:11px;color:#B26A00">示例海运价</span>':'';
+    return `<tr style="${isRec?'background:#FFF3D6':''}">
+      <td><b>${x.ct}</b><br><span style="font-size:11px;color:#888">${vmap[x.ct]}</span>${overW}</td>
+      <td style="text-align:right">${Math.round(x.sum).toLocaleString()} USD${seaDemo}</td>
+      <td style="text-align:right">${Math.round(x.dom).toLocaleString()} CNY</td>
+      <td style="text-align:right;font-weight:700">${Math.round(x.totUsd).toLocaleString()} USD</td>
+      <td>${isRec?'<span class="tag y">推荐</span> ':''}${badge}<br><button class="mini" onclick="document.getElementById('q_ct').value='${x.ct}';renderQuote();">选用此柜型</button></td></tr>`;
+  }).join('');
+  let note='';
+  if(includeLCL&&!lclSea.length){
+    note=`<p class="note" style="margin:6px 0 0;color:#7a5a16">📌 散货(LCL)海运价为示例推导，按此口径盈亏平衡点约 <b>15 CBM</b>：低于约 15 CBM 散货更省，高于则 20GP 整柜更优。录入真实散货海运价后结论会更准。</p>`;
+  }
+  body.innerHTML=`<table style="font-size:13px"><thead><tr><th>柜型方案</th><th>海运段</th><th>国内段</th><th>折算合计(USD)</th><th>建议</th></tr></thead><tbody>${rowsHtml}</tbody></table>${note}`;
+}
+
+// ---- ⑦ 报价单预览 ----
+function renderPreview(){
+  if(!lastQuote){alert('请先在"报价单生成"选择条件并生成报价单');return;}
+  const q=lastQuote;
+  let html=`<h1>海运运费报价单</h1>
+    <div class="preview-meta"><span>起运厂址：${q.fac?facMap[q.fac]:'—'}</span><span>起运港：${q.o}</span>
+    <span>目的港：${q.p}</span><span>船公司：${q.c}</span><span>柜型：${q.t}</span></div>
+    <table><thead><tr><th>费用分类</th><th>费用项目</th><th>金额</th><th>说明</th></tr></thead><tbody>`;
+  q.rows.forEach(r=>{html+=`<tr><td>${r.cat}</td><td>${r.item}${r.fallback?'（默认档·参考'+r.fallbackCt+'）':''}${r.source==='demo'?'（示例数据）':''}</td><td style="text-align:right">${r.amount.toLocaleString()} USD</td><td>${r.origin==='（待补充）'?'起运港待补充':''}${r.fallback?' / 柜型默认参考'+r.fallbackCt:''}</td></tr>`;});
+  q.domesticRows.forEach(r=>{html+=`<tr><td>国内段</td><td>${facMap[r.factory]||r.factory} → ${r.origin}${r.fallback?'（默认档）':''}</td><td style="text-align:right">${Number(r.amount).toLocaleString()} ${r.curr}</td><td>拖车/国内段</td></tr>`;});
+  CATS.forEach(cat=>{ if(q.subtot[cat]){html+=`<tr style="background:${CAT_COLORS[cat]}"><td colspan="2" style="font-weight:700">${cat} 小计</td><td style="text-align:right;font-weight:700">${q.subtot[cat].toLocaleString()} USD</td><td></td></tr>`;}});
+  if(q.subtot['国内段']){html+=`<tr style="background:#EAF4EA"><td colspan="2" style="font-weight:700">国内段 小计</td><td style="text-align:right;font-weight:700">${q.subtot['国内段'].toLocaleString()} CNY</td><td></td></tr>`;}
+  html+=`<tr style="background:#DDEBF7"><td colspan="2" style="font-weight:700">海运段 小计${q.seaFbNote||''}</td><td style="text-align:right;font-weight:700">${q.seaTotal.toLocaleString()} USD</td><td></td></tr>`;
+  html+=`</tbody></table>
+    <div class="quote-total">合计：海运 <b>${q.seaTotal.toLocaleString()} USD</b> ＋ 国内段 <b>${q.domestic.toLocaleString()} CNY</b></div>
+    <p class="note" style="margin-top:14px;">注：本报价不含报关费、关税、目的港仓储/滞箱/滞港费等，需单独确认。国内段运费按所选厂址与起运港计。${q.seaFbNote?' '+q.seaFbNote:''}</p>`;
+  document.getElementById('previewBox').innerHTML=html;
+  document.querySelector('.navitem[data-page="p_preview"]').click();
+}
+
+// ---- init ----
+function init(){
+  renderFeeItem(); renderFactory(); renderFactoryRate(); renderBase('origin');
+  fillSelect('d_origin',ORIGIN_PORTS,'（待补充）');
+  fillSelect('d_dest',DEST_PORTS,'曼萨尼约');
+  fillSelect('d_carrier',COMPANIES,'恒荣达');
+  fillSelect('d_ct',CONTAINERS,'20GP');
+  fillSelect('q_factory',['（不选）'].concat(FACTORIES.map(f=>f.code)),'（不选）');
+  fillSelect('q_origin',ORIGIN_PORTS,'（待补充）');
+  fillSelect('q_dest',DEST_PORTS,'曼萨尼约');
+  fillSelect('q_carrier',COMPANIES,'恒荣达');
+  fillSelect('q_ct',CONTAINERS,'20GP');
+  fillSelect('fr_factory',[''].concat(FACTORIES.map(f=>f.code)),'');
+  fillSelect('fr_origin',ORIGIN_PORTS,'');
+  fillSelect('fr_ct',CONTAINERS,'');
+  renderDetail(); renderQuote();
+}
+loadData();
+</script>
+<div id="toast" class="toast"></div>
+</body>
+</html>
