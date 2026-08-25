@@ -106,6 +106,8 @@
     <div class="navitem" data-page="p_detail">⑤ 运费明细配置</div>
     <div class="navitem" data-page="p_quote">⑥ 报价单生成</div>
     <div class="navitem" data-page="p_preview">⑦ 报价单预览</div>
+    <div class="navgroup">交互原型 · 出口作业</div>
+    <div class="navitem" data-page="p_packing">⑪ 装箱单(Packing List)</div>
     <div class="navgroup">说明</div>
     <div class="navitem" data-page="p_notes">⑩ 开放问题与对接</div>
   </aside>
@@ -429,6 +431,51 @@
       <p class="doc-lead">客户视角的清晰分项报价单（含国内段），可直接打印。先在"⑥ 报价单生成"点击"预览对外报价单"。</p>
       <div class="preview-box" id="previewBox"><div class="empty">尚未生成。请先到"报价单生成"选择条件并点击"预览对外报价单"。</div></div>
       <div class="btnrow"><button class="ghost" onclick="window.print()">打印 / 导出 PDF</button></div>
+    </section>
+
+    <!-- ============ ⑪ 装箱单 ============ -->
+    <section class="page" id="p_packing">
+      <h1 class="doc">⑪ 出口装箱单（Packing List）</h1>
+      <p class="doc-lead">装箱单是运费与报关的<b>输入层</b>：录入明细行后系统自动汇总总件数 / 总毛重 / 总净重 / 总体积，并据此推荐 <b>柜型 × 数量</b>；同时标出直接用于报关尚缺的字段（HS编码 / 单价 / 原产国 / 贸易术语等）。</p>
+      <div class="toolbar" style="align-items:flex-end">
+        <div class="field"><label>装箱单号</label><input id="pk_no" value="PK-2026-0812-01"></div>
+        <div class="field"><label>关联送货单号</label><input id="pk_dn" value="DN-2207,DN-2208"></div>
+        <div class="field"><label>订单编号</label><input id="pk_so" value="SO-EXP-3391"></div>
+        <div class="field"><label>客户 / 收货人</label><input id="pk_cust" value="ABC Trading Ltd."></div>
+        <div class="field"><label>起运厂址</label><select id="pk_factory"></select></div>
+        <div class="field"><label>目的港</label><select id="pk_dest"></select></div>
+        <div class="field"><label>运输条款</label><select id="pk_term"><option>FOB</option><option>CIF</option><option>CFR</option><option>EXW</option></select></div>
+        <div class="field"><label>状态</label><select id="pk_status"><option>草稿</option><option>已确认</option><option>已报关</option></select></div>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <h3 class="sec">装箱单明细
+          <button class="ghost" onclick="addPackRow()">＋ 新增行</button>
+          <button class="ghost" onclick="seedPackDemo()">载入示例(含报关字段)</button>
+        </h3>
+        <div class="tbl-wrap" style="overflow:auto">
+        <table id="tblPack">
+          <thead><tr>
+            <th>#</th><th>料号</th><th>品名/规格</th><th>数量</th><th>单位</th><th>包装种类</th><th>件数</th>
+            <th>单件毛重<br>KG</th><th>单件净重<br>KG</th><th>单件体积<br>CBM</th><th>箱号/批次</th>
+            <th>HS编码*</th><th>单价*</th><th>币制*</th><th>原产国*</th><th>贸易术语*</th><th></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+        </div>
+        <p class="note" style="margin:6px 0 0">带 <b>*</b> 为报关所需补充字段；未填则该行在报关可用性检查中标红。</p>
+      </div>
+      <div class="card" style="margin-top:12px;background:#F3F8FF;border:1px solid #BCD4F0">
+        <h3 class="sec">自动汇总（由明细行计算）</h3>
+        <div id="pkSummary"></div>
+      </div>
+      <div class="card" style="margin-top:12px;background:#F1FBF3;border:1px solid #BFE3C4">
+        <h3 class="sec">柜型 × 数量 推荐（总CBM÷柜容 向上取整，并受最大载重约束）</h3>
+        <div id="pkContainer"></div>
+      </div>
+      <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089">
+        <h3 class="sec">报关可用性检查</h3>
+        <div id="pkCustoms"></div>
+      </div>
     </section>
 
     <!-- ============ ⑩ 开放问题 ============ -->
@@ -1050,6 +1097,102 @@ function renderPreview(){
   document.querySelector('.navitem[data-page="p_preview"]').click();
 }
 
+// ---- ⑪ 装箱单（Packing List）：明细汇总 + 柜型×数量 + 报关缺口 ----
+const PACK_FCL = ['20GP','40GP','40HQ','45HQ'];
+let PACK_ROWS = [
+  {pn:'A1001',name:'LED 灯管',qty:200,unit:'PCS',pkg:'纸箱',pkgs:20,gw:5,nw:4.2,vol:0.03,box:'C1',hs:'',price:'',curr:'',origin:'',term:''},
+  {pn:'A1002',name:'电源适配器',qty:300,unit:'PCS',pkg:'纸箱',pkgs:30,gw:3,nw:2.6,vol:0.025,box:'C2',hs:'',price:'',curr:'',origin:'',term:''},
+  {pn:'A1003',name:'塑料外壳',qty:150,unit:'PCS',pkg:'托盘',pkgs:3,gw:12,nw:11,vol:0.5,box:'P1',hs:'',price:'',curr:'',origin:'',term:''},
+];
+function pkInput(i,key,type,w){
+  const v=PACK_ROWS[i][key];
+  return `<input type="${type}" value="${v}" style="width:${w||60}px" oninput="pkEdit(${i},'${key}',this.value,'${type}')">`;
+}
+function renderPacking(){
+  const tb=document.querySelector('#tblPack tbody'); tb.innerHTML='';
+  PACK_ROWS.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${i+1}</td>`+
+      `<td>${pkInput(i,'pn','text',72)}</td>`+
+      `<td>${pkInput(i,'name','text',110)}</td>`+
+      `<td>${pkInput(i,'qty','number',60)}</td>`+
+      `<td>${pkInput(i,'unit','text',52)}</td>`+
+      `<td>${pkInput(i,'pkg','text',60)}</td>`+
+      `<td>${pkInput(i,'pkgs','number',56)}</td>`+
+      `<td>${pkInput(i,'gw','number',60)}</td>`+
+      `<td>${pkInput(i,'nw','number',60)}</td>`+
+      `<td>${pkInput(i,'vol','number',60)}</td>`+
+      `<td>${pkInput(i,'box','text',60)}</td>`+
+      `<td>${pkInput(i,'hs','text',72)} <span id="pk_hsTag_${i}">${r.hs?'':'<span class="tag n">缺HS</span>'}</span></td>`+
+      `<td>${pkInput(i,'price','number',60)}</td>`+
+      `<td>${pkInput(i,'curr','text',48)}</td>`+
+      `<td>${pkInput(i,'origin','text',60)}</td>`+
+      `<td>${pkInput(i,'term','text',48)}</td>`+
+      `<td><span class="pill" onclick="PACK_ROWS.splice(${i},1);renderPacking();">删除</span></td>`;
+    tb.appendChild(tr);
+  });
+  calcPacking();
+}
+function pkEdit(i,key,val,type){
+  PACK_ROWS[i][key]= type==='number' ? (parseFloat(val)||0) : val;
+  if(key==='hs'){const t=document.getElementById('pk_hsTag_'+i); if(t)t.innerHTML=PACK_ROWS[i].hs?'':'<span class="tag n">缺HS</span>';}
+  calcPacking();
+}
+function addPackRow(){
+  PACK_ROWS.push({pn:'',name:'',qty:0,unit:'',pkg:'',pkgs:0,gw:0,nw:0,vol:0,box:'',hs:'',price:'',curr:'',origin:'',term:''});
+  renderPacking();
+}
+function seedPackDemo(){
+  PACK_ROWS=[
+    {pn:'A1001',name:'LED 灯管',qty:200,unit:'PCS',pkg:'纸箱',pkgs:20,gw:5,nw:4.2,vol:0.03,box:'C1',hs:'9405409000',price:2.3,curr:'USD',origin:'CN',term:'FOB'},
+    {pn:'A1002',name:'电源适配器',qty:300,unit:'PCS',pkg:'纸箱',pkgs:30,gw:3,nw:2.6,vol:0.025,box:'C2',hs:'8504401300',price:3.1,curr:'USD',origin:'CN',term:'FOB'},
+    {pn:'A1003',name:'塑料外壳',qty:150,unit:'PCS',pkg:'托盘',pkgs:3,gw:12,nw:11,vol:0.5,box:'P1',hs:'3923900000',price:0.8,curr:'USD',origin:'CN',term:'FOB'},
+  ];
+  renderPacking();
+}
+function calcPacking(){
+  let tq=0,tpk=0,tgw=0,tnw=0,tcbm=0;
+  PACK_ROWS.forEach(r=>{
+    const q=Number(r.qty)||0,gw=Number(r.gw)||0,nw=Number(r.nw)||0,v=Number(r.vol)||0;
+    tq+=q; tpk+=(Number(r.pkgs)||0); tgw+=q*gw; tnw+=q*nw; tcbm+=q*v;
+  });
+  document.getElementById('pkSummary').innerHTML=
+    `<div style="display:flex;gap:30px;flex-wrap:wrap">
+      <div><div style="font-size:12px;color:#666">总货量(数量)</div><div style="font-size:22px;font-weight:700">${tq.toLocaleString()}</div></div>
+      <div><div style="font-size:12px;color:#666">总包装件数</div><div style="font-size:22px;font-weight:700">${tpk.toLocaleString()}</div></div>
+      <div><div style="font-size:12px;color:#666">总毛重(KG)</div><div style="font-size:22px;font-weight:700">${tgw.toLocaleString()}</div></div>
+      <div><div style="font-size:12px;color:#666">总净重(KG)</div><div style="font-size:22px;font-weight:700">${tnw.toLocaleString()}</div></div>
+      <div><div style="font-size:12px;color:#666">总体积(CBM)</div><div style="font-size:22px;font-weight:700;color:#1E40AF">${tcbm.toLocaleString()}</div></div>
+    </div>`;
+  const ctn=CONTAINERS.filter(c=>PACK_FCL.includes(c.code)&&c.volume!=null);
+  let best=null;
+  const rows=ctn.map(c=>{
+    const byVol=tcbm>0?Math.ceil(tcbm/c.volume):1;
+    const byW=(tgw>0&&c.max_weight)?Math.ceil(tgw/c.max_weight):0;
+    const qty=Math.max(byVol,byW,1);
+    if(!best||qty<best.qty||(qty===best.qty&&c.volume<best.vol)) best={code:c.code,qty:qty,vol:c.volume};
+    return {code:c.code,qty:qty,vol:c.volume};
+  });
+  let h='<table style="font-size:13px"><thead><tr><th>柜型</th><th>单柜容积</th><th>需要柜数</th></tr></thead><tbody>';
+  rows.forEach(r=>{h+=`<tr style="${r.code===best.code?'background:#FFF3D6':''}"><td><b>${r.code}</b>${r.code===best.code?' <span class="tag y">推荐</span>':''}</td><td style="text-align:right">${r.vol} CBM</td><td style="text-align:right;font-weight:700">${r.qty} 柜</td></tr>`;});
+  h+='</tbody></table>';
+  if(tcbm>0||tgw>0) h+=`<p class="note" style="margin:6px 0 0;color:#2E5E1E">💡 按总体积 <b>${tcbm.toLocaleString()} CBM</b> / 总毛重 <b>${tgw.toLocaleString()} KG</b> 估算，建议装 <b>${best.qty} × ${best.code}</b>（重量约束已计入）。</p>`;
+  document.getElementById('pkContainer').innerHTML=h;
+  let mHs=0,mPr=0,mCu=0,mOr=0,mTe=0;
+  PACK_ROWS.forEach(r=>{if(!r.hs)mHs++; if(!(Number(r.price)>0))mPr++; if(!r.curr)mCu++; if(!r.origin)mOr++; if(!r.term)mTe++;});
+  const tot=PACK_ROWS.length; let items=[];
+  if(mHs)items.push(`<b>${mHs}/${tot}</b> 行缺 <b>HS编码</b>`);
+  if(mPr)items.push(`${mPr}/${tot} 行缺 单价`);
+  if(mCu)items.push(`${mCu}/${tot} 行缺 币制`);
+  if(mOr)items.push(`${mOr}/${tot} 行缺 原产国`);
+  if(mTe)items.push(`${mTe}/${tot} 行缺 贸易术语`);
+  let ch='';
+  if(!tot) ch='<p class="note">暂无明细行，点击「载入示例」或「新增行」开始。</p>';
+  else if(!items.length) ch='<p style="color:#2E5E1E;font-weight:600">✅ 报关所需字段已齐，装箱单可直接用于报关（仍建议补全表头「境内货源地」及每行「包装种类/件数」、毛重与净重区分）。</p>';
+  else ch=`<p style="color:#9B1C1C;font-weight:600">⚠ 直接用于报关尚缺：${items.join('；')}。</p><p class="note" style="margin:6px 0 0">装箱单(PL)是报关所需单据之一，但≠报关单。补全上述字段（及表头「境内货源地」、每行「包装种类/件数」、毛净重区分）后，即可据此生成 <b>报关单草稿</b>。当前为演示状态，示例行留空属正常。</p>`;
+  document.getElementById('pkCustoms').innerHTML=ch;
+}
+
 // ---- init ----
 function init(){
   renderFeeItem(); renderFactory(); renderFactoryRate(); renderBase('origin');
@@ -1066,6 +1209,9 @@ function init(){
   fillSelect('fr_origin',ORIGIN_PORTS,'');
   fillSelect('fr_ct',CONTAINERS,'');
   renderDetail(); renderQuote();
+  fillSelect('pk_factory',[''].concat(FACTORIES.map(f=>f.code)),'F001');
+  fillSelect('pk_dest',DEST_PORTS,'曼萨尼约');
+  renderPacking();
 }
 loadData();
 </script>
