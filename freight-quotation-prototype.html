@@ -439,9 +439,8 @@
       <p class="doc-lead">装箱单是运费与报关的<b>输入层</b>：录入明细行后系统自动汇总总件数 / 总毛重 / 总净重 / 总体积，并据此推荐 <b>柜型 × 数量</b>；同时标出直接用于报关尚缺的字段（HS编码 / 单价 / 原产国 / 贸易术语等）。</p>
       <div class="toolbar" style="align-items:flex-end">
         <div class="field"><label>装箱单号</label><input id="pk_no" value="PK-2026-0812-01"></div>
-        <div class="field"><label>关联送货单号</label><input id="pk_dn" value="DN-2207,DN-2208"></div>
-        <div class="field"><label>订单编号</label><input id="pk_so" value="SO-EXP-3391"></div>
         <div class="field"><label>客户 / 收货人</label><input id="pk_cust" value="ABC Trading Ltd."></div>
+        <div class="field"><label>境内货源地</label><input id="pk_origin" value="深圳特区"></div>
         <div class="field"><label>起运厂址</label><select id="pk_factory"></select></div>
         <div class="field"><label>目的港</label><select id="pk_dest"></select></div>
         <div class="field"><label>运输条款</label><select id="pk_term"><option>FOB</option><option>CIF</option><option>CFR</option><option>EXW</option></select></div>
@@ -455,14 +454,14 @@
         <div class="tbl-wrap" style="overflow:auto">
         <table id="tblPack">
           <thead><tr>
-            <th>#</th><th>料号</th><th>品名/规格</th><th>数量</th><th>单位</th><th>包装种类</th><th>件数</th>
-            <th>单件毛重<br>KG</th><th>单件净重<br>KG</th><th>单件体积<br>CBM</th><th>箱号/批次</th>
+            <th>#</th><th>送货单号</th><th>订单编号</th><th>料号</th><th>品名/规格</th><th>数量</th><th>单位</th><th>包装种类</th><th>件数<br>(箱/卡板)</th>
+            <th>单件毛重<br>KG/件</th><th>单件净重<br>KG/件</th><th>单件体积<br>CBM/件</th><th>箱号/批次</th>
             <th>HS编码*</th><th>单价*</th><th>币制*</th><th>原产国*</th><th>贸易术语*</th><th></th>
           </tr></thead>
           <tbody></tbody>
         </table>
         </div>
-        <p class="note" style="margin:6px 0 0">带 <b>*</b> 为报关所需补充字段；未填则该行在报关可用性检查中标红。</p>
+        <p class="note" style="margin:6px 0 0">「送货单号 / 订单编号」已下沉到明细行：一行一来源，支持同一料号跨送货单/订单分行。<b>件数</b>＝该「包装种类」的件数（纸箱→箱数，卡板→卡板数）；<b>单件</b>毛重/净重/体积＝<b>每包装件</b>的重量体积，行总重＝件数×单件。带 <b>*</b> 为报关所需字段。</p>
       </div>
       <div class="card" style="margin-top:12px;background:#F3F8FF;border:1px solid #BCD4F0">
         <h3 class="sec">自动汇总（由明细行计算）</h3>
@@ -475,6 +474,11 @@
       <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089">
         <h3 class="sec">报关可用性检查</h3>
         <div id="pkCustoms"></div>
+      </div>
+      <div class="card" style="margin-top:12px;background:#F6F0FF;border:1px solid #D6C2F0">
+        <h3 class="sec">报关汇总（按 HS编码+品名+原产国+贸易术语+币制+单位 合并 → 报关单草稿行）</h3>
+        <p class="note" style="margin:0 0 8px">装箱单明细行<b>不强制合并</b>（同料号可多行，如实记录物理装箱）；报关时按上方合并键归集为一行申报要素。下方汇总即"报关单草稿"的应填报行。</p>
+        <div id="pkCustomsRoll"></div>
       </div>
     </section>
 
@@ -1113,6 +1117,8 @@ function renderPacking(){
   PACK_ROWS.forEach((r,i)=>{
     const tr=document.createElement('tr');
     tr.innerHTML=`<td>${i+1}</td>`+
+      `<td>${pkInput(i,'dn','text',92)}</td>`+
+      `<td>${pkInput(i,'so','text',92)}</td>`+
       `<td>${pkInput(i,'pn','text',72)}</td>`+
       `<td>${pkInput(i,'name','text',110)}</td>`+
       `<td>${pkInput(i,'qty','number',60)}</td>`+
@@ -1139,22 +1145,26 @@ function pkEdit(i,key,val,type){
   calcPacking();
 }
 function addPackRow(){
-  PACK_ROWS.push({pn:'',name:'',qty:0,unit:'',pkg:'',pkgs:0,gw:0,nw:0,vol:0,box:'',hs:'',price:'',curr:'',origin:'',term:''});
+  PACK_ROWS.push({dn:'',so:'',pn:'',name:'',qty:0,unit:'',pkg:'',pkgs:0,gw:0,nw:0,vol:0,box:'',hs:'',price:'',curr:'',origin:'',term:''});
   renderPacking();
 }
 function seedPackDemo(){
+  // 演示场景：同一料号 A1001 出现在同一送货单 DN-2207 的两张订单(SO-3391/3392)中
+  // → 装箱单应保留 2 行；报关汇总按 HS+要素合并为 1 行
   PACK_ROWS=[
-    {pn:'A1001',name:'LED 灯管',qty:200,unit:'PCS',pkg:'纸箱',pkgs:20,gw:5,nw:4.2,vol:0.03,box:'C1',hs:'9405409000',price:2.3,curr:'USD',origin:'CN',term:'FOB'},
-    {pn:'A1002',name:'电源适配器',qty:300,unit:'PCS',pkg:'纸箱',pkgs:30,gw:3,nw:2.6,vol:0.025,box:'C2',hs:'8504401300',price:3.1,curr:'USD',origin:'CN',term:'FOB'},
-    {pn:'A1003',name:'塑料外壳',qty:150,unit:'PCS',pkg:'托盘',pkgs:3,gw:12,nw:11,vol:0.5,box:'P1',hs:'3923900000',price:0.8,curr:'USD',origin:'CN',term:'FOB'},
+    {dn:'DN-2207',so:'SO-EXP-3391',pn:'A1001',name:'LED 灯管',qty:4000,unit:'PCS',pkg:'纸箱',pkgs:200,gw:10,nw:9,vol:0.1,box:'C1-1',hs:'9405409000',price:2.3,curr:'USD',origin:'CN',term:'FOB'},
+    {dn:'DN-2207',so:'SO-EXP-3392',pn:'A1001',name:'LED 灯管',qty:4000,unit:'PCS',pkg:'纸箱',pkgs:200,gw:10,nw:9,vol:0.1,box:'C1-2',hs:'9405409000',price:2.3,curr:'USD',origin:'CN',term:'FOB'},
+    {dn:'DN-2208',so:'SO-EXP-3391',pn:'A1002',name:'电源适配器',qty:10000,unit:'PCS',pkg:'纸箱',pkgs:500,gw:8,nw:7,vol:0.1,box:'C2',hs:'8504401300',price:3.1,curr:'USD',origin:'CN',term:'FOB'},
+    {dn:'DN-2208',so:'SO-EXP-3393',pn:'A1003',name:'塑料外壳',qty:600,unit:'PCS',pkg:'托盘',pkgs:20,gw:300,nw:280,vol:3,box:'P1',hs:'3923900000',price:0.8,curr:'USD',origin:'CN',term:'FOB'},
   ];
   renderPacking();
 }
 function calcPacking(){
   let tq=0,tpk=0,tgw=0,tnw=0,tcbm=0;
   PACK_ROWS.forEach(r=>{
-    const q=Number(r.qty)||0,gw=Number(r.gw)||0,nw=Number(r.nw)||0,v=Number(r.vol)||0;
-    tq+=q; tpk+=(Number(r.pkgs)||0); tgw+=q*gw; tnw+=q*nw; tcbm+=q*v;
+    const q=Number(r.qty)||0,pkgs=Number(r.pkgs)||0,gw=Number(r.gw)||0,nw=Number(r.nw)||0,v=Number(r.vol)||0;
+    // 行总重/总体积 = 件数 × 单件（单件＝每包装件），与"包装种类"绑定
+    tq+=q; tpk+=pkgs; tgw+=pkgs*gw; tnw+=pkgs*nw; tcbm+=pkgs*v;
   });
   document.getElementById('pkSummary').innerHTML=
     `<div style="display:flex;gap:30px;flex-wrap:wrap">
@@ -1191,6 +1201,48 @@ function calcPacking(){
   else if(!items.length) ch='<p style="color:#2E5E1E;font-weight:600">✅ 报关所需字段已齐，装箱单可直接用于报关（仍建议补全表头「境内货源地」及每行「包装种类/件数」、毛重与净重区分）。</p>';
   else ch=`<p style="color:#9B1C1C;font-weight:600">⚠ 直接用于报关尚缺：${items.join('；')}。</p><p class="note" style="margin:6px 0 0">装箱单(PL)是报关所需单据之一，但≠报关单。补全上述字段（及表头「境内货源地」、每行「包装种类/件数」、毛净重区分）后，即可据此生成 <b>报关单草稿</b>。当前为演示状态，示例行留空属正常。</p>`;
   document.getElementById('pkCustoms').innerHTML=ch;
+
+  // ===== 报关汇总：按 HS+品名+原产国+贸易术语+币制+单位 合并（料号可多行）=====
+  const grp={};
+  PACK_ROWS.forEach(r=>{
+    const key=[r.hs||'?',r.name||'?',r.origin||'?',r.term||'?',r.curr||'?',r.unit||'?'].join('||');
+    if(!grp[key]) grp[key]={hs:r.hs,name:r.name,origin:r.origin,term:r.term,curr:r.curr,unit:r.unit,qty:0,amount:0,gw:0,nw:0,cbm:0,pkgs:0,pns:new Set(),dns:new Set(),sos:new Set()};
+    const g=grp[key];
+    const q=Number(r.qty)||0,pkgs=Number(r.pkgs)||0,gw=Number(r.gw)||0,nw=Number(r.nw)||0,v=Number(r.vol)||0,price=Number(r.price)||0;
+    g.qty+=q; g.amount+=q*price; g.gw+=pkgs*gw; g.nw+=pkgs*nw; g.cbm+=pkgs*v; g.pkgs+=pkgs;
+    if(r.pn)g.pns.add(r.pn); if(r.dn)g.dns.add(r.dn); if(r.so)g.sos.add(r.so);
+  });
+  const gks=Object.keys(grp);
+  let rh='';
+  if(!PACK_ROWS.length){ rh='<p class="note">暂无明细行。</p>'; }
+  else{
+    rh+='<table style="font-size:13px;width:100%"><thead><tr>'
+      +'<th>HS编码</th><th>品名</th><th>数量</th><th>单位</th><th>金额</th><th>币制</th><th>毛重KG</th><th>净重KG</th><th>体积CBM</th><th>件数</th><th>来源(料号/送货单/订单)</th><th>状态</th>'
+      +'</tr></thead><tbody>';
+    gks.forEach(k=>{
+      const g=grp[k];
+      const noHs=!g.hs, noPrice=!(Number(g.amount)>0);
+      const bad=noHs||noPrice;
+      const src=[...g.pns].join('/')+' · '+[...g.dns].join('/')+' · '+[...g.sos].join('/');
+      rh+=`<tr style="${bad?'background:#FDECEC':''}">`
+        +`<td>${g.hs||'<span class="tag n">缺HS</span>'}</td>`
+        +`<td>${g.name||''}</td>`
+        +`<td style="text-align:right">${g.qty.toLocaleString()}</td>`
+        +`<td>${g.unit||''}</td>`
+        +`<td style="text-align:right">${g.amount?g.amount.toLocaleString(undefined,{maximumFractionDigits:2}):'<span class="tag n">缺单价</span>'}</td>`
+        +`<td>${g.curr||''}</td>`
+        +`<td style="text-align:right">${g.gw.toLocaleString()}</td>`
+        +`<td style="text-align:right">${g.nw.toLocaleString()}</td>`
+        +`<td style="text-align:right">${g.cbm.toLocaleString()}</td>`
+        +`<td style="text-align:right">${g.pkgs.toLocaleString()}</td>`
+        +`<td style="font-size:12px;color:#555">${src}</td>`
+        +`<td>${bad?'<span class="tag n">不可申报</span>':'<span class="tag y">可申报</span>'}</td>`
+        +`</tr>`;
+    });
+    rh+='</tbody></table>';
+    rh+=`<p class="note" style="margin:8px 0 0">共 <b>${gks.length}</b> 条报关申报行（装箱单明细 <b>${PACK_ROWS.length}</b> 行）。例如同料号 <b>A1001</b> 在两订单中分两行录入，此处按 HS 合并为 <b>1</b> 行；合并键缺 HS/单价则该行暂不可申报。</p>`;
+  }
+  document.getElementById('pkCustomsRoll').innerHTML=rh;
 }
 
 // ---- init ----
