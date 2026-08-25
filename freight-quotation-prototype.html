@@ -101,6 +101,7 @@
     <div class="navitem" data-page="p_feeitem">③ 费用项目明细设定</div>
     <div class="navitem" data-page="p_factory">⑧ 厂址主数据</div>
     <div class="navitem" data-page="p_factoryrate">⑨ 厂址→起运港运费</div>
+    <div class="navitem" data-page="p_hsmap">⑬ HS 国别对照表</div>
     <div class="navgroup">交互原型 · 配置/报价</div>
     <div class="navitem" data-page="p_basedata">④ 基础数据管理</div>
     <div class="navitem" data-page="p_detail">⑤ 运费明细配置</div>
@@ -352,6 +353,25 @@
       </div>
     </section>
 
+    <!-- ============ ⑬ HS 国别对照表 ============ -->
+    <section class="page" id="p_hsmap">
+      <h1 class="doc">⑬ HS 国别对照表 <span class="badge-ver">跨境关务主数据</span></h1>
+      <p class="doc-lead">维护 <b>CN HS(10位) ↔ VN HS(10位)</b> 对照，供「⑫ 越南进口报关单」映射时自动取用。数据保存在浏览器本地(localStorage)，可导入 / 导出 JSON 备份。</p>
+      <div class="btnrow">
+        <button onclick="openHsModal(-1)">+ 新增对照</button>
+        <button class="ghost" onclick="exportHs()">导出JSON</button>
+        <button class="ghost" onclick="importHs()">导入JSON</button>
+        <button class="ghost" onclick="resetHs()">恢复演示种子</button>
+      </div>
+      <div class="tbl-wrap">
+        <table id="tblHsMap">
+          <thead><tr><th>CN HS（中国海关编码）</th><th>品名 / 说明</th><th>VN HS（越南编码）</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:10px">说明：HS 前 6 位为国际通用，中越后 4 位国标细分不同，需逐条维护。越南进口报关单中<b>匹配不到对照</b>的行会标红「查无对照」，提示在此补映射。维护后刷新「⑫ 越南进口报关单」即自动生效（点该屏任意输入或重进即可）。</p>
+    </section>
+
     <!-- ============ ④ 基础数据管理 ============ -->
     <section class="page" id="p_basedata">
       <h1 class="doc">④ 基础数据管理</h1>
@@ -581,6 +601,29 @@
     <div class="modal-f">
       <button class="ghost" onclick="closeModal('maskFee')">取消</button>
       <button onclick="saveFeeModal()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 弹窗：新增/编辑 HS 国别对照 ============ -->
+<div class="mask" id="maskHs">
+  <div class="modal">
+    <div class="modal-h"><span id="hsModalTitle">新增 HS 对照</span><span class="x" onclick="closeModal('maskHs')">×</span></div>
+    <div class="modal-b">
+      <div class="formrow">
+        <div class="field"><label>CN HS（中国·10位） <span style="color:#C00">*</span></label><input id="hs_cn" placeholder="如 9405409000" maxlength="10"></div>
+        <div class="field"><label>VN HS（越南·10位） <span style="color:#C00">*</span></label><input id="hs_vn" placeholder="如 9405409010" maxlength="10"></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>品名 / 说明</label><input id="hs_name" placeholder="如 LED 灯管"></div>
+      </div>
+      <div class="formrow">
+        <div class="field"><label>状态</label><select id="hs_status"><option>启用</option><option>停用</option></select></div>
+      </div>
+    </div>
+    <div class="modal-f">
+      <button class="ghost" onclick="closeModal('maskHs')">取消</button>
+      <button onclick="saveHsModal()">保存</button>
     </div>
   </div>
 </div>
@@ -1288,10 +1331,20 @@ function calcPacking(){
 
 // ---- init ----
 // ===== ⑫ 越南进口报关单：中国出口报关单 → 映射生成 =====
-const HS_CROSSWALK = {
-  '9405409000':'9405409010',   // LED 灯管 CN→VN
-  '8504401300':'8504401300'    // 电源适配器 CN→VN（演示：3923900000 故意不配置）
-};
+// HS 国别对照（CN 10位 ↔ VN 10位）主数据：默认种子 + 浏览器本地维护
+const HS_SEED = [
+  {cnHs:'9405409000', vnHs:'9405409010', name:'LED 灯管',   status:'启用'},
+  {cnHs:'8504401300', vnHs:'8504401300', name:'电源适配器', status:'启用'},
+];   // 演示：3923900000 故意不配置，用于演示「查无对照」
+const HS_LS_KEY = 'freight_hs_crosswalk';
+function loadHsRows(){
+  try{ const s=localStorage.getItem(HS_LS_KEY); if(s) return JSON.parse(s); }catch(e){}
+  return JSON.parse(JSON.stringify(HS_SEED));
+}
+function saveHsRows(rows){ localStorage.setItem(HS_LS_KEY, JSON.stringify(rows)); }
+function getHsMap(){
+  const m={}; loadHsRows().forEach(r=>{ if((r.status||'启用')==='启用') m[r.cnHs]=r.vnHs; }); return m;
+}
 const EXPORT_DECL = {
   no:'CD-2026-0812-01',
   exporter:'深圳总公司 (CN)',
@@ -1316,7 +1369,7 @@ function calcVn(){
     const ins=(fob+fr)*insRate;
     const cif=fob+fr+ins;
     totFob+=fob; totFr+=fr; totIns+=ins; totCif+=cif;
-    const vnHs=HS_CROSSWALK[r.cnHs];
+    const vnHs=getHsMap()[r.cnHs];
     const checks=[];
     if(!vnHs) checks.push('HS查无VN对照');
     if(!forme) checks.push('缺Form E');
@@ -1354,6 +1407,65 @@ function calcVn(){
   document.getElementById('viTodo').innerHTML=th;
 }
 
+// ---- ⑬ HS 国别对照表：可维护主数据 ----
+function renderHsMap(){
+  const rows=loadHsRows();
+  const tb=document.querySelector('#tblHsMap tbody'); tb.innerHTML='';
+  rows.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="font-family:monospace">${r.cnHs}</td>`+
+      `<td>${r.name||''}</td>`+
+      `<td style="font-family:monospace">${r.vnHs}</td>`+
+      `<td>${r.status==='停用'?'<span class="tag n">停用</span>':'<span class="tag y">启用</span>'}</td>`+
+      `<td><a href="javascript:void(0)" onclick="openHsModal(${i})">编辑</a> <a href="javascript:void(0)" onclick="delHs(${i})" style="color:#C00">删除</a></td>`;
+    tb.appendChild(tr);
+  });
+}
+let hsEditIdx=-1;
+function openHsModal(idx){
+  hsEditIdx=idx;
+  const rows=loadHsRows();
+  document.getElementById('hsModalTitle').textContent = idx<0?'新增 HS 对照':'编辑 HS 对照';
+  const r = idx<0?{cnHs:'',vnHs:'',name:'',status:'启用'}:rows[idx];
+  document.getElementById('hs_cn').value=r.cnHs||'';
+  document.getElementById('hs_vn').value=r.vnHs||'';
+  document.getElementById('hs_name').value=r.name||'';
+  document.getElementById('hs_status').value=r.status||'启用';
+  openModal('maskHs');
+}
+function saveHsModal(){
+  const cn=document.getElementById('hs_cn').value.trim();
+  const vn=document.getElementById('hs_vn').value.trim();
+  if(!cn||!vn){ alert('CN HS 与 VN HS 均必填'); return; }
+  const rows=loadHsRows();
+  const rec={cnHs:cn, vnHs:vn, name:document.getElementById('hs_name').value.trim(), status:document.getElementById('hs_status').value};
+  if(hsEditIdx<0) rows.push(rec); else rows[hsEditIdx]=rec;
+  saveHsRows(rows); closeModal('maskHs'); renderHsMap(); calcVn();
+}
+function delHs(i){
+  if(!confirm('确认删除该 HS 对照？')) return;
+  const rows=loadHsRows(); rows.splice(i,1); saveHsRows(rows); renderHsMap(); calcVn();
+}
+function exportHs(){
+  const data=JSON.stringify(loadHsRows(),null,2);
+  const blob=new Blob([data],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='hs_crosswalk.json'; a.click(); URL.revokeObjectURL(a.href);
+}
+function importHs(){
+  const inp=document.createElement('input'); inp.type='file'; inp.accept='.json,application/json';
+  inp.onchange=()=>{ const f=inp.files[0]; if(!f) return; const rd=new FileReader();
+    rd.onload=()=>{ try{ const arr=JSON.parse(rd.result); if(!Array.isArray(arr)) throw 0;
+      saveHsRows(arr); renderHsMap(); calcVn(); alert('导入成功，共 '+arr.length+' 条'); }
+      catch(e){ alert('导入失败：文件格式不正确'); } };
+    rd.readAsText(f); };
+  inp.click();
+}
+function resetHs(){
+  if(!confirm('恢复为演示种子（将清除本地维护的对照记录）？')) return;
+  saveHsRows(JSON.parse(JSON.stringify(HS_SEED))); renderHsMap(); calcVn();
+}
+
 function init(){
   renderFeeItem(); renderFactory(); renderFactoryRate(); renderBase('origin');
   fillSelect('d_origin',ORIGIN_PORTS,'（待补充）');
@@ -1372,6 +1484,7 @@ function init(){
   fillSelect('pk_factory',[''].concat(FACTORIES.map(f=>f.code)),'F001');
   fillSelect('pk_dest',DEST_PORTS,'曼萨尼约');
   renderPacking();
+  renderHsMap();
   calcVn();
 }
 loadData();
