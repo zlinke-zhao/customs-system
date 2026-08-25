@@ -1440,11 +1440,11 @@ function saveHsModal(){
   const rows=loadHsRows();
   const rec={cnHs:cn, vnHs:vn, name:document.getElementById('hs_name').value.trim(), status:document.getElementById('hs_status').value};
   if(hsEditIdx<0) rows.push(rec); else rows[hsEditIdx]=rec;
-  saveHsRows(rows); closeModal('maskHs'); renderHsMap(); calcVn();
+  saveHsRows(rows); closeModal('maskHs'); renderHsMap(); window.dispatchEvent(new Event('hsmap:changed'));
 }
 function delHs(i){
   if(!confirm('确认删除该 HS 对照？')) return;
-  const rows=loadHsRows(); rows.splice(i,1); saveHsRows(rows); renderHsMap(); calcVn();
+  const rows=loadHsRows(); rows.splice(i,1); saveHsRows(rows); renderHsMap(); window.dispatchEvent(new Event('hsmap:changed'));
 }
 function exportHs(){
   const data=JSON.stringify(loadHsRows(),null,2);
@@ -1456,17 +1456,24 @@ function importHs(){
   const inp=document.createElement('input'); inp.type='file'; inp.accept='.json,application/json';
   inp.onchange=()=>{ const f=inp.files[0]; if(!f) return; const rd=new FileReader();
     rd.onload=()=>{ try{ const arr=JSON.parse(rd.result); if(!Array.isArray(arr)) throw 0;
-      saveHsRows(arr); renderHsMap(); calcVn(); alert('导入成功，共 '+arr.length+' 条'); }
+      saveHsRows(arr); renderHsMap(); window.dispatchEvent(new Event('hsmap:changed')); alert('导入成功，共 '+arr.length+' 条'); }
       catch(e){ alert('导入失败：文件格式不正确'); } };
     rd.readAsText(f); };
   inp.click();
 }
 function resetHs(){
   if(!confirm('恢复为演示种子（将清除本地维护的对照记录）？')) return;
-  saveHsRows(JSON.parse(JSON.stringify(HS_SEED))); renderHsMap(); calcVn();
+  saveHsRows(JSON.parse(JSON.stringify(HS_SEED))); renderHsMap(); window.dispatchEvent(new Event('hsmap:changed'));
 }
 
 function init(){
+
+// 跨屏事件：HS 对照表变更 -> 自动重算越南进口报关单并提示
+window.addEventListener('hsmap:changed', ()=>{
+  try{ calcVn(); }catch(_){}
+  if(typeof toast==='function') toast('HS 对照已更新 · ⑫ 越南进口报关单已自动应用');
+});
+
   renderFeeItem(); renderFactory(); renderFactoryRate(); renderBase('origin');
   fillSelect('d_origin',ORIGIN_PORTS,'（待补充）');
   fillSelect('d_dest',DEST_PORTS,'曼萨尼约');
