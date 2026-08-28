@@ -103,14 +103,13 @@
     <div class="navitem" data-page="p_factoryrate">⑨ 厂址→起运港运费</div>
     <div class="navgroup">交互原型 · 流程/作业</div>
     <div class="navitem" data-page="p_flow">🔄 海运流程图</div>
+    <div class="navitem" data-page="p_packing">⑪ 出口装箱单(Packing List)</div>
     <div class="navitem" data-page="p_dispatch">⑭ 派车单（国内拖车）</div>
     <div class="navgroup">交互原型 · 配置/报价</div>
     <div class="navitem" data-page="p_basedata">④ 基础数据管理</div>
     <div class="navitem" data-page="p_detail">⑤ 运费明细配置</div>
     <div class="navitem" data-page="p_quote">⑥ 报价单生成</div>
     <div class="navitem" data-page="p_preview">⑦ 报价单预览</div>
-    <div class="navgroup">交互原型 · 出口作业</div>
-    <div class="navitem" data-page="p_packing">⑪ 装箱单(Packing List)</div>
     <div class="navgroup">说明</div>
     <div class="navitem" data-page="p_notes">⑩ 开放问题与对接</div>
   </aside>
@@ -439,74 +438,76 @@
     <!-- ============ 🔄 海运流程图 ============ -->
     <section class="page" id="p_flow">
       <h1 class="doc">🔄 海运出口全流程图</h1>
-      <p class="doc-lead">本模块当前聚焦「派车单 → 国内拖车 → 出口装箱单 → 海运运费 → 订舱/报关」主线，暂不涉及目的国进口报关。</p>
+      <p class="doc-lead">本模块当前聚焦「工厂装柜 + 封条 → 出口装箱单 → 派车单拉柜到港 → 海运运费 → 订舱/报关」主线，暂不涉及目的国进口报关。</p>
       <div class="card">
         <svg viewBox="0 0 900 520" style="width:100%;max-width:900px;display:block;margin:0 auto;font-family:'Microsoft YaHei',sans-serif;">
           <defs>
             <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#4472C4"/></marker>
             <marker id="arrDashed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#9CA3AF"/></marker>
           </defs>
-          <!-- 标题 -->
           <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="#1F3864">海运出口作业流程（一期范围）</text>
 
-          <!-- 节点 -->
-          <rect x="60" y="70" width="140" height="56" rx="8" fill="#E2EFDA" stroke="#2E5E1E" stroke-width="2"/>
-          <text x="130" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">① ERP 销售订单</text>
-          <text x="130" y="115" text-anchor="middle" font-size="11" fill="#555">生成出货计划</text>
+          <!-- ① ERP 销售订单 -->
+          <rect x="40" y="70" width="140" height="58" rx="8" fill="#E2EFDA" stroke="#2E5E1E" stroke-width="2"/>
+          <text x="110" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">① ERP 销售订单</text>
+          <text x="110" y="115" text-anchor="middle" font-size="11" fill="#555">生成出货计划</text>
 
-          <rect x="300" y="70" width="140" height="56" rx="8" fill="#DDEBF7" stroke="#1F3864" stroke-width="2"/>
-          <text x="370" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">② 派车单</text>
-          <text x="370" y="115" text-anchor="middle" font-size="11" fill="#555">国内拖车 / 计算运费</text>
+          <!-- ② 出口装箱单（源头） -->
+          <rect x="200" y="70" width="165" height="58" rx="8" fill="#FFF2CC" stroke="#B7791F" stroke-width="2"/>
+          <text x="282" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">② 出口装箱单</text>
+          <text x="282" y="110" text-anchor="middle" font-size="11" fill="#555">工厂装柜 + 封条(PL)</text>
+          <text x="282" y="125" text-anchor="middle" font-size="11" fill="#555">柜型×数量推荐</text>
 
-          <rect x="540" y="70" width="140" height="56" rx="8" fill="#DDEBF7" stroke="#1F3864" stroke-width="2"/>
-          <text x="610" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">③ 厂址→起运港</text>
-          <text x="610" y="115" text-anchor="middle" font-size="11" fill="#555">拖车到达起运港</text>
+          <!-- ③ 派车单 -->
+          <rect x="375" y="70" width="140" height="58" rx="8" fill="#DDEBF7" stroke="#1F3864" stroke-width="2"/>
+          <text x="445" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">③ 派车单</text>
+          <text x="445" y="115" text-anchor="middle" font-size="11" fill="#555">选PL拉柜到港</text>
 
-          <rect x="60" y="190" width="180" height="70" rx="8" fill="#FFF2CC" stroke="#B7791F" stroke-width="2"/>
-          <text x="150" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">④ 出口装箱单</text>
-          <text x="150" y="235" text-anchor="middle" font-size="11" fill="#555">Packing List</text>
-          <text x="150" y="250" text-anchor="middle" font-size="11" fill="#555">柜型×数量推荐</text>
+          <!-- ④ 厂址→起运港 -->
+          <rect x="525" y="70" width="160" height="58" rx="8" fill="#E2EFDA" stroke="#2E5E1E" stroke-width="2"/>
+          <text x="605" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">④ 厂址→起运港</text>
+          <text x="605" y="115" text-anchor="middle" font-size="11" fill="#555">拖车到货确认</text>
 
-          <rect x="340" y="190" width="180" height="70" rx="8" fill="#E0ECFF" stroke="#1E40AF" stroke-width="2"/>
-          <text x="430" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">⑤ 海运运费报价</text>
-          <text x="430" y="235" text-anchor="middle" font-size="11" fill="#555">聚合国内段+海运段</text>
-          <text x="430" y="250" text-anchor="middle" font-size="11" fill="#555">智能柜型推荐</text>
+          <!-- ⑤ 海运运费报价 -->
+          <rect x="695" y="70" width="160" height="58" rx="8" fill="#E0ECFF" stroke="#1E40AF" stroke-width="2"/>
+          <text x="775" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">⑤ 海运运费报价</text>
+          <text x="775" y="115" text-anchor="middle" font-size="11" fill="#555">国内+海运段</text>
 
-          <rect x="620" y="190" width="180" height="70" rx="8" fill="#FCE4D6" stroke="#9C4221" stroke-width="2"/>
-          <text x="710" y="215" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">⑥ 订舱 / 派船</text>
-          <text x="710" y="235" text-anchor="middle" font-size="11" fill="#555">确认船公司/柜型</text>
-          <text x="710" y="250" text-anchor="middle" font-size="11" fill="#555">生成 Booking</text>
+          <!-- ⑥ 订舱/派船 -->
+          <rect x="525" y="230" width="160" height="58" rx="8" fill="#FCE4D6" stroke="#9C4221" stroke-width="2"/>
+          <text x="605" y="256" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">⑥ 订舱 / 派船</text>
+          <text x="605" y="275" text-anchor="middle" font-size="11" fill="#555">确认船司/柜型</text>
 
-          <rect x="340" y="330" width="180" height="70" rx="8" fill="#F2F2F2" stroke="#6B7280" stroke-width="2"/>
-          <text x="430" y="355" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">⑦ 出口报关单</text>
-          <text x="430" y="375" text-anchor="middle" font-size="11" fill="#555">由装箱单生成草稿</text>
-          <text x="430" y="390" text-anchor="middle" font-size="11" fill="#555">报关员确认申报</text>
+          <!-- ⑦ 出口报关单 -->
+          <rect x="695" y="230" width="160" height="58" rx="8" fill="#F2F2F2" stroke="#6B7280" stroke-width="2"/>
+          <text x="775" y="256" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">⑦ 出口报关单</text>
+          <text x="775" y="275" text-anchor="middle" font-size="11" fill="#555">由装箱单生成</text>
 
-          <rect x="620" y="330" width="180" height="70" rx="8" fill="#EDEDED" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6,4"/>
-          <text x="710" y="355" text-anchor="middle" font-size="13" font-weight="700" fill="#6B7280">⑧ 目的国进口报关</text>
-          <text x="710" y="375" text-anchor="middle" font-size="11" fill="#6B7280">（二期单独处理）</text>
-          <text x="710" y="390" text-anchor="middle" font-size="11" fill="#6B7280">不在当前范围</text>
+          <!-- ⑧ 目的国进口报关(二期) -->
+          <rect x="695" y="390" width="160" height="58" rx="8" fill="#EDEDED" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6,4"/>
+          <text x="775" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#6B7280">⑧ 目的国进口报关</text>
+          <text x="775" y="435" text-anchor="middle" font-size="11" fill="#6B7280">（二期单独处理）</text>
 
-          <!-- 连接线 -->
-          <line x1="200" y1="98" x2="300" y2="98" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="440" y1="98" x2="540" y2="98" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="610" y1="126" x2="610" y2="170" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="610" y1="170" x2="240" y2="170" stroke="#4472C4" stroke-width="2"/>
-          <line x1="240" y1="170" x2="240" y2="190" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="240" y1="225" x2="340" y2="225" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="520" y1="225" x2="620" y2="225" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="710" y1="260" x2="710" y2="290" stroke="#4472C4" stroke-width="2"/>
-          <line x1="710" y1="290" x2="430" y2="290" stroke="#4472C4" stroke-width="2"/>
-          <line x1="430" y1="290" x2="430" y2="330" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
-          <line x1="520" y1="365" x2="620" y2="365" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrDashed)"/>
+          <!-- 连接线（主线） -->
+          <line x1="180" y1="99" x2="200" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="365" y1="99" x2="375" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="515" y1="99" x2="525" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="685" y1="99" x2="695" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <polyline points="775,128 775,200 605,200 605,230" fill="none" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="685" y1="259" x2="695" y2="259" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="775" y1="288" x2="775" y2="390" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrDashed)"/>
+
+          <!-- 连接线：② 装箱单 → ⑦ 报关（数据来源） -->
+          <polyline points="282,128 282,170 775,170 775,230" fill="none" stroke="#9CA3AF" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrDashed)"/>
 
           <!-- 数据/单据标注 -->
-          <text x="250" y="85" font-size="11" fill="#6B7280">出货计划</text>
-          <text x="490" y="85" font-size="11" fill="#6B7280">派车单</text>
-          <text x="560" y="158" font-size="11" fill="#6B7280">拖车到货</text>
-          <text x="290" y="215" font-size="11" fill="#6B7280">箱/货数据</text>
-          <text x="570" y="215" font-size="11" fill="#6B7280">柜型+运费</text>
-          <text x="570" y="355" font-size="11" fill="#6B7280">报关草稿</text>
+          <text x="190" y="88" font-size="11" fill="#6B7280">出货计划</text>
+          <text x="368" y="88" font-size="11" fill="#6B7280">箱/货数据</text>
+          <text x="518" y="88" font-size="11" fill="#6B7280">装柜拖车到港</text>
+          <text x="688" y="88" font-size="11" fill="#6B7280">起运港+柜型</text>
+          <text x="648" y="218" font-size="11" fill="#6B7280">报价单/柜型</text>
+          <text x="688" y="278" font-size="11" fill="#6B7280">Booking/SO</text>
+          <text x="430" y="162" font-size="11" fill="#9CA3AF">装箱单(PL)→报关</text>
         </svg>
       </div>
       <div class="card">
@@ -514,9 +515,9 @@
         <table>
           <tr><th>步骤</th><th>负责模块</th><th>输入</th><th>输出</th><th>备注</th></tr>
           <tr><td>① ERP 销售订单</td><td>ERP 销售/出货计划</td><td>客户订单</td><td>出货计划</td><td>本模块不改造，作为起点。</td></tr>
-          <tr><td>② 派车单</td><td>⑭ 派车单（国内拖车）</td><td>出货计划 / 送货单</td><td>派车单 + 国内运费</td><td>按公里/柜型/重量计算国内段运费。</td></tr>
-          <tr><td>③ 厂址→起运港</td><td>⑨ 厂址→起运港运费</td><td>派车单 / 厂址</td><td>到达确认</td><td>运费已在报价单中聚合。</td></tr>
-          <tr><td>④ 出口装箱单</td><td>⑪ 装箱单(Packing List)</td><td>派车单明细 / 送货单</td><td>PL + 柜型推荐</td><td>关联派车单，自动带入箱货数据。</td></tr>
+          <tr><td>② 出口装箱单</td><td>⑪ 装箱单(Packing List)</td><td>出货计划 / 装柜记录</td><td>PL + 柜型推荐 + 封条号</td><td>工厂装柜封条后生成，是后续单据的数据源头。</td></tr>
+          <tr><td>③ 派车单</td><td>⑭ 派车单（国内拖车）</td><td>装箱单号（选 PL）</td><td>派车单 + 国内运费</td><td>选装箱单带出承运体积/重量/货款项数/数量，按公里/运价算运费。</td></tr>
+          <tr><td>④ 厂址→起运港</td><td>⑨ 厂址→起运港运费</td><td>派车单 / 厂址</td><td>到货确认</td><td>运费已在报价单中聚合。</td></tr>
           <tr><td>⑤ 海运运费报价</td><td>⑥ 报价单生成</td><td>起运港/目的港/船公司/柜型</td><td>报价单</td><td>含国内段+海运段，智能柜型推荐。</td></tr>
           <tr><td>⑥ 订舱 / 派船</td><td>ERP 物流/货代模块</td><td>报价单 / 柜型</td><td>Booking / SO</td><td>本模块输出柜型×数量供参考。</td></tr>
           <tr><td>⑦ 出口报关单</td><td>ERP 报关模块</td><td>装箱单</td><td>出口报关单草稿</td><td>由装箱单按 HS 合并生成。</td></tr>
@@ -528,7 +529,7 @@
     <!-- ============ ⑭ 派车单（国内拖车） ============ -->
     <section class="page" id="p_dispatch">
       <h1 class="doc">⑭ 派车单（国内拖车）</h1>
-      <p class="doc-lead">派车单是「厂址 → 起运港」国内拖车的执行单据。录入车牌、司机、客户、公里数、货量后自动计算国内运费；确认后可被<b>⑪ 装箱单</b>引用，自动带入柜型/重量/体积。</p>
+      <p class="doc-lead">派车单是「工厂装柜封条后 → 拉柜到起运港」的执行单据。<b>先有装箱单</b>：在此<b>选择装箱单号</b>即自动带出该柜的承运体积 / 重量 / 货物款数 / 数量；再录入车牌、司机、公里数与运价，自动计算国内运费。</p>
       <div class="toolbar" style="align-items:flex-end">
         <div class="field"><label>派车单号</label><input id="dp_no" value="DP-2026-0826-01"></div>
         <div class="field"><label>派车日期</label><input id="dp_date" type="date" value="2026-08-26"></div>
@@ -538,42 +539,39 @@
         <div class="field"><label>车辆来源</label><select id="dp_source"><option>自有车辆</option><option>外租车</option><option>第三方物流</option></select></div>
       </div>
       <div class="toolbar" style="align-items:flex-end">
+        <div class="field"><label>装箱单号（选 PL）</label><select id="dp_pk" onchange="onPickPacking()"></select></div>
         <div class="field"><label>发货厂址</label><select id="dp_factory"></select></div>
         <div class="field"><label>起运港</label><select id="dp_origin"></select></div>
         <div class="field"><label>计划柜型</label><select id="dp_ct"><option value="">按货量自动</option></select></div>
         <div class="field"><label>总公里数</label><input id="dp_km" type="number" value="7284" style="width:90px"></div>
-        <div class="field"><label>总重量(KG)</label><input id="dp_kg" type="number" value="1836" style="width:90px"></div>
-        <div class="field"><label>总体积(CBM)</label><input id="dp_cbm" type="number" step="0.1" value="18.82" style="width:90px"></div>
+        <div class="field"><label>运价(RMB/公里)</label><input id="dp_rate" type="number" step="0.001" value="5.356" style="width:90px"></div>
         <button onclick="calcDispatch()">重新计算运费</button>
-        <button class="ghost" onclick="seedDispatchDemo()">载入示例</button>
+      </div>
+      <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089">
+        <h3 class="sec" style="margin:4px 0 10px;color:#8A5A00">承运指标（由所选装箱单自动带入）</h3>
+        <div style="display:flex;gap:30px;flex-wrap:wrap">
+          <div><div style="font-size:12px;color:#666">承运体积(CBM)</div><div id="dp_cbm" style="font-size:22px;font-weight:700;color:#1E40AF">—</div></div>
+          <div><div style="font-size:12px;color:#666">承运总重量(KG)</div><div id="dp_kg" style="font-size:22px;font-weight:700">—</div></div>
+          <div><div style="font-size:12px;color:#666">货物款数(料号种类)</div><div id="dp_types" style="font-size:22px;font-weight:700">—</div></div>
+          <div><div style="font-size:12px;color:#666">承运总数量</div><div id="dp_qty" style="font-size:22px;font-weight:700">—</div></div>
+        </div>
+        <p class="note" style="margin:8px 0 0">选好装箱单号后，以上四项自动从「⑪ 出口装箱单」汇总带出；如未选则显示「—」，请先到装箱单录入装柜数据。</p>
       </div>
       <div class="card" style="margin-top:12px;background:#EAF4EA;border:1px solid #9CC99C">
         <h3 class="sec" style="margin:4px 0 10px;color:#2E5E1E">派车单运费汇总</h3>
         <div id="dpSummary"></div>
       </div>
       <div class="card" style="margin-top:12px">
-        <h3 class="sec">派车明细
-          <button class="ghost" onclick="addDispatchRow()">＋ 新增行</button>
-          <button class="ghost" onclick="seedDispatchRows()">载入示例行</button>
-        </h3>
+        <h3 class="sec">承运明细（按送货单 / 料号，由所选装箱单自动生成，只读）</h3>
         <div class="tbl-wrap" style="overflow:auto">
           <table id="tblDispatch">
             <thead><tr>
-              <th>#</th><th>送货单号</th><th>客户编号</th><th>客户名称</th><th>类型</th><th>送货日期</th>
-              <th>运价(RMB)</th><th>公里数</th><th>送货数</th><th>体积(CBM)</th><th>总重量(KG)</th><th>送货地址</th><th>卡板数</th><th>备注</th><th></th>
+              <th>#</th><th>送货单号</th><th>料号</th><th>品名</th><th>数量</th><th>单位</th><th>体积(CBM)</th><th>重量(KG)</th><th>件数</th>
             </tr></thead>
             <tbody></tbody>
           </table>
         </div>
-        <p class="note" style="margin:6px 0 0">参考现有 ERP 派车单：一行对应一次客户送货；「运价×公里数」为该 line 运费，汇总后计入派车单总运费。若未维护协议运价，则回退到「厂址→起运港运费」默认值。</p>
-      </div>
-      <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089">
-        <h3 class="sec" style="margin:4px 0 10px;color:#8A5A00">与装箱单对接</h3>
-        <div class="toolbar" style="align-items:flex-end">
-          <div class="field"><label>选择要关联的派车单</label><select id="dp_link"></select></div>
-          <button onclick="linkDispatchToPacking()">带入装箱单 →</button>
-        </div>
-        <p class="note" style="margin:6px 0 0">点击「带入装箱单」会把当前派车单号、发货厂址、总体积/总重量/柜型推荐写入<b>⑪ 装箱单</b>主表，并把明细行按送货单/客户合并为装箱单明细行（可继续编辑）。</p>
+        <p class="note" style="margin:6px 0 0">承运明细来自所选装箱单的明细行，与装箱单保持一致（装箱单是源头）；国内运费按「公里数 × 运价」或「厂址→起运港协议价」取较高值预估。</p>
       </div>
     </section>
 
@@ -583,7 +581,7 @@
       <p class="doc-lead">装箱单是运费与报关的<b>输入层</b>：录入明细行后系统自动汇总总件数 / 总毛重 / 总净重 / 总体积，并据此推荐 <b>柜型 × 数量</b>；同时标出直接用于报关尚缺的字段（HS编码 / 单价 / 原产国 / 贸易术语等）。</p>
       <div class="toolbar" style="align-items:flex-end">
         <div class="field"><label>装箱单号</label><input id="pk_no" value="PK-2026-0812-01"></div>
-        <div class="field"><label>关联派车单</label><select id="pk_dispatch"><option value="">（不关联）</option></select></div>
+        <div class="field"><label>封条号(Seal)</label><input id="pk_seal" value="SEAL-2026-0812-A1" placeholder="装柜封条号"></div>
         <div class="field"><label>客户 / 收货人</label><input id="pk_cust" value="ABC Trading Ltd."></div>
         <div class="field"><label>境内货源地</label><input id="pk_origin" value="深圳特区"></div>
         <div class="field"><label>起运厂址</label><select id="pk_factory"></select></div>
@@ -591,7 +589,7 @@
         <div class="field"><label>运输条款</label><select id="pk_term"><option>FOB</option><option>CIF</option><option>CFR</option><option>EXW</option></select></div>
         <div class="field"><label>状态</label><select id="pk_status"><option>草稿</option><option>已确认</option><option>已报关</option></select></div>
       </div>
-      <p class="note" style="margin:-8px 0 10px">关联派车单后，可从「⑭ 派车单」自动带入厂址、总重、总体积与明细行；柜型推荐也将参考派车单货量重新计算。</p>
+      <p class="note" style="margin:-8px 0 10px">装箱单在<b>工厂装柜封条后</b>生成，是派车单 / 海运报价 / 出口报关的<b>数据源头</b>。封条号记录于本单，便于「柜号—封条—货权」追溯。</p>
       <div class="card" style="margin-top:12px">
         <h3 class="sec">装箱单明细
           <button class="ghost" onclick="addPackRow()">＋ 新增行</button>
@@ -1391,76 +1389,53 @@ function calcPacking(){
   document.getElementById('pkCustomsRoll').innerHTML=rh;
 }
 
-// ---- ⑭ 派车单（国内拖车）：明细 + 运费计算 + 对接装箱单 ----
-let DISPATCH_LIST = [
-  {no:'DP-2026-0826-01',date:'2026-08-26',plate:'粤S·G7962',driver:'黄利方 / 13717185588',logistics:'WULIU',source:'外租车',
-   factory:'F001',origin:'深圳(盐田)',ct:'',km:7284,kg:1836,cbm:18.82,rows:[
-     {dn:'EA922410',custCode:'C0471',custName:'三只松鼠',type:'主送',plate:'粤ABD179',date:'2026/8/26',price:5.356,km:7284,qty:1,cbm:18.82,kg:1836,addr:'安徽省芜湖市...',pallets:0,docs:1,memo:''}
-   ]}
-];
-function dpRowInput(i,key,type,w){
-  const rows=DISPATCH_LIST[0].rows;
-  const v=rows[i][key];
-  return `<input type="${type}" value="${v}" style="width:${w||60}px" oninput="dpEdit(${i},'${key}',this.value,'${type}')">`;
+// ---- ⑭ 派车单（国内拖车）：选装箱单带出承运数据 + 运费计算 ----
+// 业务顺序：工厂装柜封条 → 生成出口装箱单(⑪) → 再开派车单(⑭)拉柜到港
+// 派车单选「装箱单号」即从装箱单(PACK_ROWS)带出承运体积 / 重量 / 货物款数 / 数量
+function dpPackTotals(){
+  const tq=PACK_ROWS.reduce((s,r)=>s+(Number(r.qty)||0),0);
+  const tcbm=PACK_ROWS.reduce((s,r)=>s+(Number(r.pkgs)||0)*(Number(r.vol)||0),0);
+  const tkg=PACK_ROWS.reduce((s,r)=>s+(Number(r.pkgs)||0)*(Number(r.gw)||0),0);
+  const types=new Set(PACK_ROWS.filter(r=>r.pn).map(r=>r.pn)).size;
+  return {tq,tcbm,tkg,types};
 }
 function renderDispatchRows(){
-  const rows=DISPATCH_LIST[0].rows;
   const tb=document.querySelector('#tblDispatch tbody'); tb.innerHTML='';
-  rows.forEach((r,i)=>{
+  const no=document.getElementById('dp_pk').value;
+  if(!no || !PACK_ROWS.length){
+    tb.innerHTML='<tr><td colspan="9" style="text-align:center;color:#999">请先在上方选择装箱单号；装箱单录入装柜数据后，此处自动列出承运明细。</td></tr>';
+    return;
+  }
+  PACK_ROWS.forEach((r,i)=>{
+    const cbm=(Number(r.pkgs)||0)*(Number(r.vol)||0);
+    const kg=(Number(r.pkgs)||0)*(Number(r.gw)||0);
     const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${i+1}</td>`+
-      `<td>${dpRowInput(i,'dn','text',92)}</td>`+
-      `<td>${dpRowInput(i,'custCode','text',72)}</td>`+
-      `<td>${dpRowInput(i,'custName','text',100)}</td>`+
-      `<td>${dpRowInput(i,'type','text',60)}</td>`+
-      `<td>${dpRowInput(i,'date','text',80)}</td>`+
-      `<td>${dpRowInput(i,'price','number',72)}</td>`+
-      `<td>${dpRowInput(i,'km','number',64)}</td>`+
-      `<td>${dpRowInput(i,'qty','number',60)}</td>`+
-      `<td>${dpRowInput(i,'cbm','number',64)}</td>`+
-      `<td>${dpRowInput(i,'kg','number',72)}</td>`+
-      `<td>${dpRowInput(i,'addr','text',120)}</td>`+
-      `<td>${dpRowInput(i,'pallets','number',52)}</td>`+
-      `<td>${dpRowInput(i,'memo','text',80)}</td>`+
-      `<td><span class="pill" onclick="DISPATCH_LIST[0].rows.splice(${i},1);renderDispatchRows();calcDispatch();">删除</span></td>`;
+    tr.innerHTML=`<td>${i+1}</td><td>${r.dn||'-'}</td><td>${r.pn||'-'}</td><td>${r.name||'-'}</td>`+
+      `<td style="text-align:right">${(Number(r.qty)||0).toLocaleString()}</td><td>${r.unit||'-'}</td>`+
+      `<td style="text-align:right">${cbm.toLocaleString()}</td>`+
+      `<td style="text-align:right">${kg.toLocaleString()}</td>`+
+      `<td style="text-align:right">${Number(r.pkgs)||0}</td>`;
     tb.appendChild(tr);
   });
 }
-function dpEdit(i,key,val,type){
-  const rows=DISPATCH_LIST[0].rows;
-  rows[i][key]= type==='number' ? (parseFloat(val)||0) : val;
+function onPickPacking(){
+  // 选装箱单后，带出厂址/起运港，并重算承运指标
+  const f=document.getElementById('pk_factory').value;
+  if(f) document.getElementById('dp_factory').value=f;
+  const fr=FACTORY_RATES.find(r=>r.factory===f);
+  if(fr && fr.origin) document.getElementById('dp_origin').value=fr.origin;
   calcDispatch();
 }
-function addDispatchRow(){
-  DISPATCH_LIST[0].rows.push({dn:'',custCode:'',custName:'',type:'',plate:'',date:'',price:0,km:0,qty:0,cbm:0,kg:0,addr:'',pallets:0,docs:0,memo:''});
-  renderDispatchRows();
-}
-function seedDispatchDemo(){
-  DISPATCH_LIST[0]={no:'DP-2026-0826-01',date:'2026-08-26',plate:'粤S·G7962',driver:'黄利方 / 13717185588',logistics:'WULIU',source:'外租车',
-    factory:'F001',origin:'深圳(盐田)',ct:'',km:7284,kg:1836,cbm:18.82,rows:DISPATCH_LIST[0].rows};
-  document.getElementById('dp_no').value='DP-2026-0826-01';
-  document.getElementById('dp_date').value='2026-08-26';
-  document.getElementById('dp_plate').value='粤S·G7962';
-  document.getElementById('dp_driver').value='黄利方 / 13717185588';
-  document.getElementById('dp_logistics').value='WULIU';
-  document.getElementById('dp_source').value='外租车';
-  document.getElementById('dp_factory').value='F001';
-  document.getElementById('dp_origin').value='深圳(盐田)';
-  document.getElementById('dp_ct').value='';
-  document.getElementById('dp_km').value='7284';
-  document.getElementById('dp_kg').value='1836';
-  document.getElementById('dp_cbm').value='18.82';
-  calcDispatch();
-}
-function seedDispatchRows(){
-  DISPATCH_LIST[0].rows=[
-    {dn:'EA922410',custCode:'C0471',custName:'三只松鼠',type:'主送',plate:'粤ABD179',date:'2026/8/26',price:5.356,km:7284,qty:1,cbm:18.82,kg:1836,addr:'安徽省芜湖市...',pallets:0,docs:1,memo:''}
-  ];
-  renderDispatchRows(); calcDispatch();
+function refreshPkSelect(){
+  const s=document.getElementById('dp_pk'); if(!s)return;
+  const cur=s.value;
+  const no=(document.getElementById('pk_no').value||'').trim()||'PK-2026-0812-01';
+  s.innerHTML='<option value="">（请选择装箱单）</option>';
+  const o=document.createElement('option'); o.value=no; o.textContent=no+'（当前装箱单）';
+  if(!cur||cur===no) o.selected=true; s.appendChild(o);
 }
 function calcDispatch(){
-  const d=DISPATCH_LIST[0];
-  // 同步主表输入到对象
+  const d={};
   d.no=document.getElementById('dp_no').value;
   d.date=document.getElementById('dp_date').value;
   d.plate=document.getElementById('dp_plate').value;
@@ -1471,15 +1446,15 @@ function calcDispatch(){
   d.origin=document.getElementById('dp_origin').value;
   d.ct=document.getElementById('dp_ct').value;
   d.km=parseFloat(document.getElementById('dp_km').value)||0;
-  d.kg=parseFloat(document.getElementById('dp_kg').value)||0;
-  d.cbm=parseFloat(document.getElementById('dp_cbm').value)||0;
-  // 明细行汇总
-  let lineFare=0, lineCbms=0, lineKgs=0;
-  d.rows.forEach(r=>{
-    const fare=(Number(r.price)||0)*(Number(r.km)||0)*(Number(r.qty)||0);
-    lineFare+=fare; lineCbms+=Number(r.cbm)||0; lineKgs+=Number(r.kg)||0;
-  });
-  // 协议运价优先：厂址×起运港×柜型
+  d.rate=parseFloat(document.getElementById('dp_rate').value)||0;
+  // 承运指标（来自所选装箱单）
+  const t=dpPackTotals();
+  document.getElementById('dp_cbm').textContent=t.tcbm?t.tcbm.toLocaleString():'—';
+  document.getElementById('dp_kg').textContent=t.tkg?t.tkg.toLocaleString():'—';
+  document.getElementById('dp_types').textContent=t.types||'—';
+  document.getElementById('dp_qty').textContent=t.tq?t.tq.toLocaleString():'—';
+  // 运费：公里数×运价 与 协议按柜价 取较高值
+  const lineFare=d.km*d.rate;
   let ct=d.ct||'20GP';
   let contract=FACTORY_RATES.find(r=>r.factory===d.factory&&r.origin===d.origin&&r.ct===ct);
   let contractNote='';
@@ -1488,60 +1463,18 @@ function calcDispatch(){
     if(def){ contract=Object.assign({},def,{origin:d.origin,ct:ct,fallback:true}); contractNote='（默认档·参考 '+DEFAULT_DOMESTIC.factory+'→'+DEFAULT_DOMESTIC.origin+'·'+DEFAULT_DOMESTIC.ct+'）'; }
   }
   const contractFare=contract?Number(contract.amount):0;
-  // 取「按明细计算」与「协议按柜价」的较大值（演示逻辑）
   const totalFare=Math.max(lineFare, contractFare);
-  const note= contract ? (contract.fallback?`默认档 ${contract.ct} = ${contract.amount} CNY${contractNote}`:`协议价 ${contract.ct} = ${contract.amount} CNY`) : '未配置协议运价，按明细行运价×公里数计算';
+  const note= contract ? (contract.fallback?`默认档 ${contract.ct} = ${contract.amount} CNY${contractNote}`:`协议价 ${contract.ct} = ${contract.amount} CNY`) : '未配置协议运价，按 公里数×运价 计算';
   document.getElementById('dpSummary').innerHTML=
     `<div style="display:flex;gap:30px;flex-wrap:wrap">
       <div><div style="font-size:12px;color:#666">派车单号</div><div style="font-size:18px;font-weight:700">${d.no}</div></div>
       <div><div style="font-size:12px;color:#666">车牌 / 司机</div><div style="font-size:18px;font-weight:700">${d.plate} · ${d.driver}</div></div>
       <div><div style="font-size:12px;color:#666">路线</div><div style="font-size:18px;font-weight:700">${facMap[d.factory]||d.factory} → ${d.origin}</div></div>
       <div><div style="font-size:12px;color:#666">总公里数</div><div style="font-size:22px;font-weight:700">${d.km.toLocaleString()}</div></div>
-      <div><div style="font-size:12px;color:#666">总重量(KG)</div><div style="font-size:22px;font-weight:700">${(d.kg||lineKgs).toLocaleString()}</div></div>
-      <div><div style="font-size:12px;color:#666">总体积(CBM)</div><div style="font-size:22px;font-weight:700;color:#1E40AF">${(d.cbm||lineCbms).toLocaleString()}</div></div>
       <div><div style="font-size:12px;color:#666">估算国内运费</div><div style="font-size:22px;font-weight:700;color:#2E5E1E">${totalFare.toLocaleString()} CNY</div></div>
     </div>
-    <p class="note" style="margin:10px 0 0">计费规则：${note}。明细行合计 ${lineFare.toLocaleString()} CNY，协议按柜价 ${contractFare.toLocaleString()} CNY，系统取较高值作为预估。</p>`;
-  refreshDispatchSelect();
-}
-function refreshDispatchSelect(){
-  const s=document.getElementById('dp_link'); if(!s)return;
-  const cur=s.value;
-  s.innerHTML='';
-  DISPATCH_LIST.forEach(d=>{const o=document.createElement('option');o.value=d.no;o.textContent=d.no; if(d.no===cur)o.selected=true; s.appendChild(o);});
-  // 同时刷新装箱单的下拉
-  const pk=document.getElementById('pk_dispatch'); if(!pk)return;
-  const pkCur=pk.value;
-  pk.innerHTML='<option value="">（不关联）</option>';
-  DISPATCH_LIST.forEach(d=>{const o=document.createElement('option');o.value=d.no;o.textContent=d.no; if(d.no===pkCur)o.selected=true; pk.appendChild(o);});
-}
-function linkDispatchToPacking(){
-  const no=document.getElementById('dp_link').value;
-  const d=DISPATCH_LIST.find(x=>x.no===no);
-  if(!d){alert('请先创建派车单');return;}
-  // 写入装箱单主表
-  document.getElementById('pk_dispatch').value=d.no;
-  document.getElementById('pk_factory').value=d.factory;
-  // 按送货单+客户+料号生成装箱单明细行（演示：同送货单合并为一行简化）
-  const map={};
-  d.rows.forEach(r=>{
-    const key=(r.dn||'')+'|'+(r.custCode||'')+'|'+(r.custName||'');
-    if(!map[key]) map[key]={dn:r.dn,so:'',pn:'',name:r.custName+' 货物',qty:0,unit:'PCS',pkg:r.pallets>0?'托盘':'纸箱',pkgs:0,gw:0,nw:0,vol:0,box:'',hs:'',price:'',curr:'',origin:'',term:''};
-    const g=map[key];
-    g.qty+=Number(r.qty)||0;
-    g.pkgs+=Number(r.pallets)||Math.ceil((Number(r.cbm)||0)/0.1)||1;
-    g.gw=Math.max(g.gw, (Number(r.kg)||0)/Math.max(g.pkgs,1));
-    g.nw=Math.max(g.nw, g.gw*0.92);
-    g.vol=(Number(r.cbm)||0)/Math.max(g.pkgs,1);
-  });
-  PACK_ROWS=Object.values(map);
-  if(!PACK_ROWS.length){
-    PACK_ROWS=[{dn:'',so:'',pn:'',name:'',qty:0,unit:'PCS',pkg:'',pkgs:0,gw:0,nw:0,vol:0,box:'',hs:'',price:'',curr:'',origin:'',term:''}];
-  }
-  renderPacking();
-  // 切换屏
-  document.querySelector('.navitem[data-page="p_packing"]').click();
-  toast('派车单 '+d.no+' 已带入装箱单，请补全料号/HS/单价等报关字段');
+    <p class="note" style="margin:10px 0 0">计费规则：${note}。公里数×运价 = ${lineFare.toLocaleString()} CNY，协议按柜价 ${contractFare.toLocaleString()} CNY，系统取较高值作为预估。</p>`;
+  renderDispatchRows();
 }
 
 // ---- init ----
@@ -1560,15 +1493,14 @@ function init(){
   fillSelect('fr_origin',ORIGIN_PORTS,'');
   fillSelect('fr_ct',CONTAINERS,'');
   renderDetail(); renderQuote();
-  // 派车单初始化
+  // 派车单初始化（先有装箱单，再选装箱单带出承运数据）
   fillSelect('dp_factory',FACTORIES.map(f=>f.code),FACTORIES[0]&&FACTORIES[0].code);
   fillSelect('dp_origin',ORIGIN_PORTS,ORIGIN_PORTS[1]||ORIGIN_PORTS[0]);
   fillSelect('dp_ct',CONTAINERS.filter(c=>!c.code.includes('LCL')).map(c=>c.code),'');
-  renderDispatchRows(); calcDispatch(); refreshDispatchSelect();
+  refreshPkSelect(); calcDispatch();
   // 装箱单初始化
   fillSelect('pk_factory',[''].concat(FACTORIES.map(f=>f.code)),'F001');
   fillSelect('pk_dest',DEST_PORTS,'曼萨尼约');
-  fillSelect('pk_dispatch',['（不关联）'].concat(DISPATCH_LIST.map(d=>d.no)),'（不关联）');
   renderPacking();
 }
 loadData();
