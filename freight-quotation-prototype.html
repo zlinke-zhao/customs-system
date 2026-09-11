@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="EJpqGlxZQhyf1JLBEEW3TR">
-<head data-page-node-id="bcbUMEX7X3lnu4lULZI45n">
-<meta charset="UTF-8" data-page-node-id="aqpa6q7x843k75xDyPXCtt">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="o7uwOGwAsq1Qd2ul9LLKYf">
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>运费项目明细设定模块 · 需求文档与交互原型 v1.1</title>
 <style>
   :root{
@@ -89,854 +89,853 @@
   .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#2F5496;color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;box-shadow:0 4px 16px rgba(0,0,0,.18);display:none;opacity:0;transition:opacity .35s;z-index:9999;}
 </style>
 </head>
-<body data-page-node-id="y9lvXHdHkT2JjcIZnQLNI4">
-<div class="app" data-page-node-id="iCB1UKNGib8ia2Olbt3ZGr">
-  <aside class="sidebar" data-page-node-id="mLZoy3XEsJgEisdums2OFW">
-    <h2 data-page-node-id="tJWn3HIYC5enI2ykYoS6qE">运费项目明细设定</h2>
-    <div class="sub" data-page-node-id="6orwa6qhxHqYEwgjWht5F2">ERP 运费报价配置模块 · 需求文档 + 原型 v1.1</div>
-    <div class="navgroup" data-page-node-id="I0aHSX0CnjgyApEEnqGpO9">需求文档</div>
-    <div class="navitem active" data-page="prd" data-page-node-id="1cH6gVAXfM7Ejr3H6HevBa">① 需求文档(PRD)</div>
-    <div class="navitem" data-page="datamodel" data-page-node-id="lCw2xcvSl49Hn1gqrMFvZY">② 数据模型</div>
-    <div class="navgroup" data-page-node-id="sapRsrulxLtkdiUVcpaSI9">交互原型 · 主数据</div>
-    <div class="navitem" data-page="p_feeitem" data-page-node-id="4ClsQudG8tnZJGKZYx9Tit">③ 费用项目明细设定</div>
-    <div class="navitem" data-page="p_factory" data-page-node-id="FEH0OwDipvcJkfqk3KnXpC">⑧ 厂址主数据</div>
-    <div class="navitem" data-page="p_factoryrate" data-page-node-id="y7rjovp4KDoE2PWeRotq9k">⑨ 厂址→起运港运费</div>
-    <div class="navgroup" data-page-node-id="OlJoPmgl2DhBZuSkTxVPEL">交互原型 · 流程/作业</div>
-    <div class="navitem" data-page="p_flow" data-page-node-id="Cnp9USFZxF3L9dX7pEVLeY">🔄 海运流程图</div>
-    <div class="navitem" data-page="p_packing" data-page-node-id="0vzBxKJGJdRsmcMV2OOnF3">⑪ 出口装箱单(Packing List)</div>
-    <div class="navitem" data-page="p_delivery" data-page-node-id="52YrB6Zu0KgFDGHhSjmexU">⑫ 送货单(Delivery Order)</div>
-    <div class="navitem" data-page="p_dispatch" data-page-node-id="6kE4La1Rtzqh2S7dIdWBDh">⑭ 派车单（国内拖车）</div>
-    <div class="navitem" data-page="p_settle" data-page-node-id="x59uj5UX39RGWYBkimJXxh">⑮ 费用汇总与分摊（实际结算）</div>
-    <div class="navitem" data-page="p_seafreight" data-page-node-id="TCyYBgBkLJxpnBU6OukyDm">⑯ 海运对账单（生成+批核）</div>
-    <div class="navgroup" data-page-node-id="s8gBk4Dgo3kpWMteVVJvOe">交互原型 · 配置/报价</div>
-    <div class="navitem" data-page="p_basedata" data-page-node-id="CTeuoX779jGAWjERQ71Giv">④ 基础数据管理</div>
-    <div class="navitem" data-page="p_detail" data-page-node-id="JhsIBjwFs3xGMURayF2gfk">⑤ 运费明细配置</div>
-    <div class="navitem" data-page="p_quote" data-page-node-id="c1wahWrDmlLE4YOgiHNGIX">⑥ 报价单生成</div>
-    <div class="navitem" data-page="p_preview" data-page-node-id="izNCYkpqUjoMd7oedoMT7r">⑦ 报价单预览</div>
-    <div class="navgroup" data-page-node-id="DkRMlTopAloD4N9ClSbBAt">说明</div>
-    <div class="navitem" data-page="p_notes" data-page-node-id="KOrcsfDrWgh07bUGK3dqx7">⑩ 开放问题与对接</div>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <h2>运费项目明细设定</h2>
+    <div class="sub">ERP 运费报价配置模块 · 需求文档 + 原型 v1.1</div>
+    <div class="navgroup">需求文档</div>
+    <div class="navitem active" data-page="prd">① 需求文档(PRD)</div>
+    <div class="navitem" data-page="datamodel">② 数据模型</div>
+    <div class="navgroup">交互原型 · 主数据</div>
+    <div class="navitem" data-page="p_feeitem">③ 费用项目明细设定</div>
+    <div class="navitem" data-page="p_factory">⑧ 厂址主数据</div>
+    <div class="navitem" data-page="p_factoryrate">⑨ 厂址→起运港运费</div>
+    <div class="navgroup">交互原型 · 流程/作业</div>
+    <div class="navitem" data-page="p_flow">🔄 海运流程图</div>
+    <div class="navitem" data-page="p_packing">⑪ 出口装箱单(Packing List)</div>
+    <div class="navitem" data-page="p_delivery">⑫ 送货单(Delivery Order)</div>
+    <div class="navitem" data-page="p_dispatch">⑭ 派车单（国内拖车）</div>
+    <div class="navitem" data-page="p_settle">⑮ 费用汇总与分摊（实际结算）</div>
+    <div class="navitem" data-page="p_seafreight">⑯ 海运对账单（生成+批核）</div>
+    <div class="navgroup">交互原型 · 配置/报价</div>
+    <div class="navitem" data-page="p_basedata">④ 基础数据管理</div>
+    <div class="navitem" data-page="p_detail">⑤ 运费明细配置</div>
+    <div class="navitem" data-page="p_quote">⑥ 报价单生成</div>
+    <div class="navitem" data-page="p_preview">⑦ 报价单预览</div>
+    <div class="navgroup">说明</div>
+    <div class="navitem" data-page="p_notes">⑩ 开放问题与对接</div>
   </aside>
 
-  <main class="main" data-page-node-id="aNjebKDOZU1IHDSNhZY0HE">
+  <main class="main">
     <!-- ============ PRD ============ -->
-    <section class="page active" id="prd" data-page-node-id="mMAcKnAHOIKgRLKuNYpUz5">
-      <h1 class="doc" data-page-node-id="zF8dpATsZPRuYGj3mgyr3b">运费项目明细设定模块 · 需求文档</h1>
-      <p class="doc-lead" data-page-node-id="DAKRh0QqBDpoRHdOmOjJER">将"海运运费报价"抽象为可在 ERP 中配置、复用、自动聚合的配置模块，替代手工 Excel 维护。版本 v1.1 · 2026-08-21（新增：费用项目弹窗、8 种计费方式、集团多厂址国内段运费）</p>
+    <section class="page active" id="prd">
+      <h1 class="doc">运费项目明细设定模块 · 需求文档</h1>
+      <p class="doc-lead">将"海运运费报价"抽象为可在 ERP 中配置、复用、自动聚合的配置模块，替代手工 Excel 维护。版本 v1.1 · 2026-08-21（新增：费用项目弹窗、8 种计费方式、集团多厂址国内段运费）</p>
 
-      <div class="card" data-page-node-id="DuHYvnWT4iq4dgue3AdkDV">
-        <h2 class="sec" data-page-node-id="LSXeMNS12jzjJZksl6oE4V">一、背景与问题</h2>
-        <ul data-page-node-id="20PxftlkfRB8xpNSacvEjU">
-          <li data-page-node-id="qX8ONlPzrhfz0rG7fOMxPg"><b data-page-node-id="UPxkYGzr4YLTE66VHPWa7Z">结构不可扩展</b>：左右并排仅能放 2 个目的港、2 家船公司、2 种柜型，新增航线需改版。</li>
-          <li data-page-node-id="nV5quuvjOrmgzE4SS2ri9V"><b data-page-node-id="s7AR64GclvgE9aGBK226TO">关键维度缺失</b>：原报价未注明<b data-page-node-id="YsyGhRHDNAt2sNHE7d0iQx">起运港</b>，标记为"（待补充）"；且公司是<b data-page-node-id="MbQeUzZnoJSqKI7SQw8rtq">集团多厂址</b>，缺"厂址→起运港"的国内段运费设定。</li>
-          <li data-page-node-id="wUF9xyTBb7wQzRVcYLwH1r"><b data-page-node-id="vC9fiRjWmYo3OQe1A3bws1">费用定义不标准</b>：费用项目散落，无统一编码/分类/计费方式/必选规则；原计费方式单一（仅按柜），缺按次/按KG/按CBM/按金额等。</li>
-          <li data-page-node-id="Mo36EIlxqjDrUJ4QoMsOSj"><b data-page-node-id="5rOCq8cT7fXfRw15iVhoBR">无法自动聚合</b>：生成对外报价单需人工加总，易错、难复用。</li>
+      <div class="card">
+        <h2 class="sec">一、背景与问题</h2>
+        <ul>
+          <li><b>结构不可扩展</b>：左右并排仅能放 2 个目的港、2 家船公司、2 种柜型，新增航线需改版。</li>
+          <li><b>关键维度缺失</b>：原报价未注明<b>起运港</b>，标记为"（待补充）"；且公司是<b>集团多厂址</b>，缺"厂址→起运港"的国内段运费设定。</li>
+          <li><b>费用定义不标准</b>：费用项目散落，无统一编码/分类/计费方式/必选规则；原计费方式单一（仅按柜），缺按次/按KG/按CBM/按金额等。</li>
+          <li><b>无法自动聚合</b>：生成对外报价单需人工加总，易错、难复用。</li>
         </ul>
       </div>
 
-      <div class="card" data-page-node-id="LxpsMlFrAHhn94yHRJN8JD">
-        <h2 class="sec" data-page-node-id="MiFXaUyImDj2A2SqMnQqMt">二、目标（Goals）</h2>
-        <ul data-page-node-id="i0bNjESQ6J5vQB2fGX7BoH">
-          <li data-page-node-id="3qZZ8PMzYXJFKYv8mACWz9"><b data-page-node-id="hZ4JmSifJ1Os0fvrPuqoLX">G1</b> 建立统一<b data-page-node-id="xzDFHpibv0VFGfH97CcfNA">费用项目主数据</b>：编码、分类、计费方式(8种)、是否必选等标准定义。</li>
-          <li data-page-node-id="EwVgAr7W3jThb9VZudH4zm"><b data-page-node-id="4NzDhDO94fcuHvg2RV1zu7">G2</b> 运费明细支持 <b data-page-node-id="CwDiKH4dCEDciUmrC8Nrxy">起运港 × 目的港 × 船公司 × 柜型 × 费用项目</b> 多维度配置，结构可无限扩展。</li>
-          <li data-page-node-id="QB2VGJpE11EYJ8bSW9BySx"><b data-page-node-id="YiPrOTaNfAk46Pt9JuPbo2">G3</b> ERP 报价单选择少量条件即<b data-page-node-id="MO8PIwY9wVanZzXD3qrCkD">自动聚合</b>完整费用明细、分类小计与总价。</li>
-          <li data-page-node-id="FujgEOcAuRubN2zc7AkX8D"><b data-page-node-id="gJBL5cqJwFoPIBYWhI1Ehy">G4</b> 现有 68 条历史报价可<b data-page-node-id="fzKPWw4B0f6DPEFaAyoLJ3">无缝迁移</b>。</li>
-          <li data-page-node-id="mTHmQUmGmhX462RCBgCKJ8"><b data-page-node-id="P25gPCkOSspi5Z0cSdMuNJ">G5</b> 支持<b data-page-node-id="ueum64ZfP29ejGCn9tPrUD">集团多厂址 → 起运港</b>的国内段运费设定（拖车/散货），并计入总报价。</li>
+      <div class="card">
+        <h2 class="sec">二、目标（Goals）</h2>
+        <ul>
+          <li><b>G1</b> 建立统一<b>费用项目主数据</b>：编码、分类、计费方式(8种)、是否必选等标准定义。</li>
+          <li><b>G2</b> 运费明细支持 <b>起运港 × 目的港 × 船公司 × 柜型 × 费用项目</b> 多维度配置，结构可无限扩展。</li>
+          <li><b>G3</b> ERP 报价单选择少量条件即<b>自动聚合</b>完整费用明细、分类小计与总价。</li>
+          <li><b>G4</b> 现有 68 条历史报价可<b>无缝迁移</b>。</li>
+          <li><b>G5</b> 支持<b>集团多厂址 → 起运港</b>的国内段运费设定（拖车/散货），并计入总报价。</li>
         </ul>
       </div>
 
-      <div class="card" data-page-node-id="ZGfKIfvUuBV02yraZ6fM4A">
-        <h2 class="sec" data-page-node-id="HGHmXhlbxPXW1LbkTjsot4">三、非目标（Non-Goals）</h2>
-        <table data-page-node-id="OoMQyNUjgxLZTmRrpsdc20">
-          <tr data-page-node-id="zv519OSKnHGh4E2kqqQbuv"><th style="width:30%" data-page-node-id="ZIIorv61kv4oeDwvpnj8KH">明确不做</th><th data-page-node-id="cgwKqnHrERSx74QR7Q58fx">理由</th></tr>
-          <tr data-page-node-id="geySEtMGm0X3P7HvGwSoJM"><td data-page-node-id="P0AVX8T30yEjUxBvfUAQu3">财务记账 / 应收应付</td><td data-page-node-id="AEsEU4YrYldFG5e8pyCVSa">属 ERP 财务模块，本模块只产出"报价金额"，不入账。</td></tr>
-          <tr data-page-node-id="9bLigcB98Kr1NjPY0ZLVOS"><td data-page-node-id="CQlXqs1yN9SxhsQg9hAn7p">报关 / 关税自动计算</td><td data-page-node-id="Kx8lbU5LyjWPsfDWq1b1Qg">关税需对接目的国税则，一期仅保留费用项、不计算。</td></tr>
-          <tr data-page-node-id="ClHBJTaFCEH0HY3sIFsdyd"><td data-page-node-id="7b46cb5Mu9fLc02gRFLtyW">拖车车辆调度 / 仓储作业排程</td><td data-page-node-id="CADmGk6Swdpui1HcsfuqEv">仅配置并<b data-page-node-id="jP5KGEsJJ9XXGbcfMRBpsq">计入</b>"厂址→起运港"运费金额，不做运输调度。</td></tr>
-          <tr data-page-node-id="me6vooBinET41JpflhYiuE"><td data-page-node-id="GpdHdV4QNyidzEZ18tOhFE">多币种实时换算</td><td data-page-node-id="xWe8B9EhQKaUdHEFhWdiha">一期固定币种（海运费 USD / 国内段 CNY），汇率换算后续扩展。</td></tr>
-          <tr data-page-node-id="2HOdNq8EwoKTLbwYiBBD1L"><td data-page-node-id="RcUuW6O7H2J7RaKiCpCE2Y">报价审批流</td><td data-page-node-id="jQyENMui5vfO6JeEVYnLU2">一期"配置即生效"，审批流后续接入 ERP 工作流。</td></tr>
+      <div class="card">
+        <h2 class="sec">三、非目标（Non-Goals）</h2>
+        <table>
+          <tr><th style="width:30%">明确不做</th><th>理由</th></tr>
+          <tr><td>财务记账 / 应收应付</td><td>属 ERP 财务模块，本模块只产出"报价金额"，不入账。</td></tr>
+          <tr><td>报关 / 关税自动计算</td><td>关税需对接目的国税则，一期仅保留费用项、不计算。</td></tr>
+          <tr><td>拖车车辆调度 / 仓储作业排程</td><td>仅配置并<b>计入</b>"厂址→起运港"运费金额，不做运输调度。</td></tr>
+          <tr><td>多币种实时换算</td><td>一期固定币种（海运费 USD / 国内段 CNY），汇率换算后续扩展。</td></tr>
+          <tr><td>报价审批流</td><td>一期"配置即生效"，审批流后续接入 ERP 工作流。</td></tr>
         </table>
       </div>
 
-      <div class="card" data-page-node-id="xvltBuf3XAN7sPsNC0wOii">
-        <h2 class="sec" data-page-node-id="U84CtaAUiuw6jGjx9v1RAB">四、用户角色与故事</h2>
-        <table data-page-node-id="usTGtQwlTqbCUonCoVvpCa">
-          <tr data-page-node-id="WK7ouKEiS0K0WX3Lvbh7HB"><th style="width:18%" data-page-node-id="3EFdLcIFCJTSFdVmEyDNs7">角色</th><th data-page-node-id="FBEjlJ3kG9rXFaQevMTn1c">用户故事</th></tr>
-          <tr data-page-node-id="G2jtTmymhPIA3vV7CXxenj"><td data-page-node-id="5RQgnBsDNuAHrvZE5MUnxS">运费管理员</td><td data-page-node-id="oZpPkTSot2pU51KF2C9RwX">作为运费管理员，我希望维护<b data-page-node-id="fw8iUZivqOf0S8nvI3IS8A">费用项目主数据</b>、<b data-page-node-id="IPFKLisrD43mFKyyGYDEpM">厂址主数据</b>与<b data-page-node-id="gCiwj9wURl4FvHaaedUguT">航线/厂址运费明细</b>，以便报价统一准确。</td></tr>
-          <tr data-page-node-id="YDx2ofyNXLOXhYqrdmo0j2"><td data-page-node-id="IDp0WkOGG2jkUGW0EpqZ3G">报价专员</td><td data-page-node-id="dAeR7X2C5XMn1IBOsivdFu">作为报价专员，我希望在报价单中选择厂址、航线与柜型，系统<b data-page-node-id="D66vuZlq9BFLgZZgWPDiJ4">自动带出国内段+海运段全部费用</b>，以便快速报价。</td></tr>
-          <tr data-page-node-id="LacrOna9PMAaIxqZVMKMMj"><td data-page-node-id="GiHamcTFV4HBfCu8np5p0l">销售 / 客户</td><td data-page-node-id="QHX9BfjXNVoRaNxfFLxjCC">作为销售，我希望向客户展示<b data-page-node-id="xIkxBdLoOD02nRMfavsdgD">清晰分项</b>（含国内段）的报价单，以便提升专业度。</td></tr>
-          <tr data-page-node-id="1d0B3NTHwDJqWQi3H3Si3v"><td data-page-node-id="mvWvxVtOgTuCaYaHouW8DS">ERP 开发者</td><td data-page-node-id="On3dgBlBd5amcUsLFLUqrp">作为 ERP 开发者，我希望拿到标准数据模型与原型，以便按统一结构落地。</td></tr>
+      <div class="card">
+        <h2 class="sec">四、用户角色与故事</h2>
+        <table>
+          <tr><th style="width:18%">角色</th><th>用户故事</th></tr>
+          <tr><td>运费管理员</td><td>作为运费管理员，我希望维护<b>费用项目主数据</b>、<b>厂址主数据</b>与<b>航线/厂址运费明细</b>，以便报价统一准确。</td></tr>
+          <tr><td>报价专员</td><td>作为报价专员，我希望在报价单中选择厂址、航线与柜型，系统<b>自动带出国内段+海运段全部费用</b>，以便快速报价。</td></tr>
+          <tr><td>销售 / 客户</td><td>作为销售，我希望向客户展示<b>清晰分项</b>（含国内段）的报价单，以便提升专业度。</td></tr>
+          <tr><td>ERP 开发者</td><td>作为 ERP 开发者，我希望拿到标准数据模型与原型，以便按统一结构落地。</td></tr>
         </table>
       </div>
 
-      <div class="card" data-page-node-id="Ko73AOQoQdVCTHSN6OM9lf">
-        <h2 class="sec" data-page-node-id="ejESgikGF3vNmSXxWYLO6r">五、功能需求（按优先级）</h2>
-        <h3 class="sec" data-page-node-id="5JzFruyos3dnvFOSGPa0Hp">P0 · 必须满足</h3>
-        <table data-page-node-id="5oWe0HU4pFyhP7FGANyDWz">
-          <tr data-page-node-id="my5GEuUhDhnISpe7oaOMsS"><th style="width:34%" data-page-node-id="7ZdrHcXrgBIwLggnrpCCJ5">需求</th><th data-page-node-id="rTU5axepLT7NXiXz9CCTQP">验收标准</th></tr>
-          <tr data-page-node-id="6xarsV02wyAW3WZXuIyjit"><td data-page-node-id="GsBaSKNdJeXATGtEUnWd8w">费用项目主数据 CRUD <span class="seg" data-page-node-id="UdOKEKWm99YGjwYFD4PAPE">含弹窗</span></td><td data-page-node-id="25QcyTN4U37NZM9X7BqLZt">弹窗新增/编辑；字段含编码/分类/名称/说明/计费方式(8种)/是否必选/默认币种/状态。</td></tr>
-          <tr data-page-node-id="ii9JLqXxoUGbb4TXNNlbi2"><td data-page-node-id="afxFQla8YfFjTxwCHfy0Cj">基础数据管理</td><td data-page-node-id="AHA42sTmCGb5Iwrd5Oj23i">维护起运港、目的港、船公司、柜型、币种、计费方式枚举。</td></tr>
-          <tr data-page-node-id="dqrrsNIjAvCRbgq0qtrVHu"><td data-page-node-id="N2dUXOW2EVnOacrfyUcQXZ">厂址主数据管理 <span class="seg" data-page-node-id="6B0G27hCjsQQ4wMiMfl6D3">新增</span></td><td data-page-node-id="T2XJXW3gQcdjbItnimEIbf">维护集团多厂址：编码/名称/城市/地址/默认起运港/状态。</td></tr>
-          <tr data-page-node-id="6XYphrTM3FpT7QfGpo6d3o"><td data-page-node-id="hBRHI3KxJJyJmy9IJ45i3A">厂址→起运港运费设定 <span class="seg" data-page-node-id="9NJM2YuePA6coLkxSGzbtO">新增</span></td><td data-page-node-id="mwLweckkfM6Cset6oh7Gqd">按 厂址×起运港×柜型 配置国内段运费（按柜/按CBM等），计入报价。</td></tr>
-          <tr data-page-node-id="i4XFHX4kzBd5L4QDHJseMC"><td data-page-node-id="zb3RCa9Oi4X86NWosrPP8U">运费明细配置</td><td data-page-node-id="Yh89qLSN6WwgkknxkxNBYq">按多维度录入每条费用金额，可扩展新航线/公司/柜型。</td></tr>
-          <tr data-page-node-id="XXpcsirRRqumMpKXAvDTce"><td data-page-node-id="wGYVYUvrDRyTByfC6JwSDE">报价单生成</td><td data-page-node-id="nxJnFov3Pja8aDjomhA4KQ">选择 厂址/起运港/目的港/船公司/柜型 → 自动聚合（含国内段）明细+小计+总价。</td></tr>
+      <div class="card">
+        <h2 class="sec">五、功能需求（按优先级）</h2>
+        <h3 class="sec">P0 · 必须满足</h3>
+        <table>
+          <tr><th style="width:34%">需求</th><th>验收标准</th></tr>
+          <tr><td>费用项目主数据 CRUD <span class="seg">含弹窗</span></td><td>弹窗新增/编辑；字段含编码/分类/名称/说明/计费方式(8种)/是否必选/默认币种/状态。</td></tr>
+          <tr><td>基础数据管理</td><td>维护起运港、目的港、船公司、柜型、币种、计费方式枚举。</td></tr>
+          <tr><td>厂址主数据管理 <span class="seg">新增</span></td><td>维护集团多厂址：编码/名称/城市/地址/默认起运港/状态。</td></tr>
+          <tr><td>厂址→起运港运费设定 <span class="seg">新增</span></td><td>按 厂址×起运港×柜型 配置国内段运费（按柜/按CBM等），计入报价。</td></tr>
+          <tr><td>运费明细配置</td><td>按多维度录入每条费用金额，可扩展新航线/公司/柜型。</td></tr>
+          <tr><td>报价单生成</td><td>选择 厂址/起运港/目的港/船公司/柜型 → 自动聚合（含国内段）明细+小计+总价。</td></tr>
         </table>
-        <h3 class="sec" data-page-node-id="1HS1atfCaUxkoDDa9AAtwV">P1 · 重要</h3>
-        <table data-page-node-id="RBnK7ToysBcsRTAr3etwkz">
-          <tr data-page-node-id="ZijEnAIFywFhD9t3eNmBMu"><th style="width:34%" data-page-node-id="n0S5Rf7UsZijgLvBegQ1Sc">需求</th><th data-page-node-id="WgWT8hmZCtfSX6jMeo7yb3">验收标准</th></tr>
-          <tr data-page-node-id="Y62rZWsXrw8nQ7Gy3T9HPp"><td data-page-node-id="ZBbzXGNSgWUwGg1xgyMW6l">有效期管理</td><td data-page-node-id="XvoihFFhGDFeBeWC5YmqaE">每条运费明细有生效起止日期，按日期取有效报价。</td></tr>
-          <tr data-page-node-id="WWhypY5QcEoP7hf6pC8EV1"><td data-page-node-id="BgV5gE8BqGY2hKx8Jwgpvh">必选/可选区分</td><td data-page-node-id="ICzmGUHAUbumRoDAo0DEcl">报价单分别给出"必选合计"与"全部合计"。</td></tr>
-          <tr data-page-node-id="7BI7oNQasdiF0bT3oPK8ce"><td data-page-node-id="tRJSbAq4qxidZeqNg3tkmM">多币种</td><td data-page-node-id="G3J5ZH8AfrDd6qxTyEl159">海运费 USD、国内段 CNY，金额按币种存储与展示。</td></tr>
-          <tr data-page-node-id="vSHa31dF5plwXiSOVBSGki"><td data-page-node-id="lA8RWgaPJ51OmQS7gEm0QW">报价单预览/打印</td><td data-page-node-id="4WuAvAbo0GZduCLtPRbY81">对外报价单展示分项（含国内段）、小计、总价、不含费用声明，可打印。</td></tr>
+        <h3 class="sec">P1 · 重要</h3>
+        <table>
+          <tr><th style="width:34%">需求</th><th>验收标准</th></tr>
+          <tr><td>有效期管理</td><td>每条运费明细有生效起止日期，按日期取有效报价。</td></tr>
+          <tr><td>必选/可选区分</td><td>报价单分别给出"必选合计"与"全部合计"。</td></tr>
+          <tr><td>多币种</td><td>海运费 USD、国内段 CNY，金额按币种存储与展示。</td></tr>
+          <tr><td>报价单预览/打印</td><td>对外报价单展示分项（含国内段）、小计、总价、不含费用声明，可打印。</td></tr>
         </table>
-        <h3 class="sec" data-page-node-id="MVpE0KAHNgVnnds4Vu07uo">P2 · 后续</h3>
-        <p data-page-node-id="YXAdFPDYJUv6xMFMpA7XED"><span class="pill" data-page-node-id="kuyreMAzUq7tpaf4KSQH6f">批量导入/导出</span><span class="pill" data-page-node-id="DfSGGdEs8jTh9FYAIrGZgj">运价变更历史</span><span class="pill" data-page-node-id="gHczXzRyuSP1esjrZGGNnE">报价版本对比</span><span class="pill" data-page-node-id="CRGvodMB69ExrSyFJcmBEB">审批流接入</span><span class="pill" data-page-node-id="KZ904dBeu5yC83hiYkC1qr">多币种换算</span><span class="pill" data-page-node-id="pCHjuUSZxKAL8FKFSkOCPL">关税/报关接口</span></p>
+        <h3 class="sec">P2 · 后续</h3>
+        <p><span class="pill">批量导入/导出</span><span class="pill">运价变更历史</span><span class="pill">报价版本对比</span><span class="pill">审批流接入</span><span class="pill">多币种换算</span><span class="pill">关税/报关接口</span></p>
       </div>
 
-      <div class="card" data-page-node-id="MvwWOlENqZ1GzTVK8t1SFt">
-        <h2 class="sec" data-page-node-id="CgDJG4rNf1mDKzc8loCkom">六、成功指标</h2>
-        <div class="grid3" data-page-node-id="Z5yMYddd6KivGEIxqEYiTP">
-          <div class="metric" data-page-node-id="CKv9LY28ovp1gPchAknLDs"><div class="v" data-page-node-id="wOAqWN5T73GvrrptbKZD0t">&lt;5 分钟</div><div class="l" data-page-node-id="l0jz9kCIsyX1AlqcEyHHph">新航线报价配置时长</div></div>
-          <div class="metric" data-page-node-id="ywyyaTmLCe6i8K0SIzRjD6"><div class="v" data-page-node-id="A64RY2C5uhNGUVqNWgUmhN">100%</div><div class="l" data-page-node-id="NpygNxXtnjAQEkf2xpI2yc">历史报价可迁移率</div></div>
-          <div class="metric" data-page-node-id="lEBmPoTCHriqrAVzY4dhnk"><div class="v" data-page-node-id="zrWCoBhBlc8AStIevNgF7D">↓ 错误率</div><div class="l" data-page-node-id="i7j0eubDPKTVAHDH6RUMDf">人工加总 → 自动聚合</div></div>
+      <div class="card">
+        <h2 class="sec">六、成功指标</h2>
+        <div class="grid3">
+          <div class="metric"><div class="v">&lt;5 分钟</div><div class="l">新航线报价配置时长</div></div>
+          <div class="metric"><div class="v">100%</div><div class="l">历史报价可迁移率</div></div>
+          <div class="metric"><div class="v">↓ 错误率</div><div class="l">人工加总 → 自动聚合</div></div>
         </div>
       </div>
 
-      <div class="card" data-page-node-id="55dXq6dG2H9LMb58nmiZpp">
-        <h2 class="sec" data-page-node-id="ZNgRLAuUSKM8VpXYDTMxx0">七、演示约定（Demo Conventions）</h2>
-        <p data-page-node-id="arHw0TJITUCbQe0NR26Wlw">本原型用于向开发团队与业务方演示配置与估价流程，部分数据非真实报价，遵循以下约定：</p>
-        <table data-page-node-id="265ScP37AgDKUheaM2ZJeV">
-          <thead data-page-node-id="oAk75WZUlvHCTkmUwcnmON"><tr data-page-node-id="cJt74SMwHCQLea92xjkG7w"><th data-page-node-id="rCTNEb7zL5pyV3hUWFL5tr">约定项</th><th data-page-node-id="r3rDTHsMACSJ4KzUA7Z3Jg">规则</th><th data-page-node-id="qIFZxH7pSaWsvW0RkzDLcf">原型中的体现</th></tr></thead>
-          <tbody data-page-node-id="YtpZcNPMsbWeyYd8NaVeIt">
-            <tr data-page-node-id="qUbBAKL2qwpJiKJMfzDj3T"><td data-page-node-id="iFC9ddFuMQaY8ElP74hcxr">起运港缺失</td><td data-page-node-id="SdFDPrLUeZSOE8E1NSNGDD">原始 68 条报价起运港均未注明，统一标记为「（待补充）」；筛选时按软匹配处理（选真实港口也能带出对应海运费）。</td><td data-page-node-id="f5kxDDzDFBMItu3Kq1e3L9">明细「说明」列标注「起运港待补充」。</td></tr>
-            <tr data-page-node-id="qCw5ovmIm9qNihWMR5R1BC"><td data-page-node-id="ZOlMAknunDyNiP4wrLFHWE">国内段默认档</td><td data-page-node-id="e8wMfBrmThRsuUKIYt6VDq">厂址→起运港运费若所选组合未配置，自动套用默认档 <b data-page-node-id="uu2eyc5DFnhTGnEZ2AD4pZ">F001 → 深圳(盐田) → 20GP = 950 CNY</b>。</td><td data-page-node-id="clnB7OT4B44h1401Qa7JNm">国内段卡、明细、预览均标注「默认档」。</td></tr>
-            <tr data-page-node-id="3ClaqLyuvE00AcLVMIpuCP"><td data-page-node-id="LQ3CtOqk9e44MXiTvQLUc0">柜型示例数据</td><td data-page-node-id="RxKosxPymCPAVDAwhmmHYP">原报价仅有 20GP / 40HQ；为演示其余整柜柜型，基于 20GP 按比例生成：<b data-page-node-id="wRlHyWIWT8gSzXhU5FYN6Z">40GP 海运费×1.1、45HQ 海运费×1.2</b>（港口费/附加费等固定费保持原值）。</td><td data-page-node-id="BZ8r71olhHT0IVHcOS2rJh">该柜型明细行标注「示例」标签。</td></tr>
-            <tr data-page-node-id="CaZsqG8NiGbsfKeUrjP9EA"><td data-page-node-id="NwaOEtTpnAK0yfX5lWzT9e">柜型兜底回退</td><td data-page-node-id="caHgWiqGIJ3lzzR6HOxOEZ">即便示例数据仍未覆盖的柜型（如散货 LCL），海运段自动回退到同航线 20GP 价格并标注「默认档」，确保演示永不空白。</td><td data-page-node-id="6yKWpn7tCcU1O8zau96JOm">明细「说明」列标注「柜型默认参考 20GP」。</td></tr>
-            <tr data-page-node-id="EnUmGmWUEAiBG3w5DtNlCn"><td data-page-node-id="F5q9u1ilGVXkYF5D9jMdj9">数据持久化</td><td data-page-node-id="qksWhfALmT9VopgVkLfO3O">「新增」操作经本地服务写入 <code data-page-node-id="tSzXGvKnsVs9ZjMGgpqgwy">freight_data.txt</code>；服务未启动则回退内嵌种子数据（仅演示，新增不落盘）。</td><td data-page-node-id="G1OoHcG5vHt7e9AFv7D5SE">保存时 toast 提示「已保存到 freight_data.txt」。</td></tr>
+      <div class="card">
+        <h2 class="sec">七、演示约定（Demo Conventions）</h2>
+        <p>本原型用于向开发团队与业务方演示配置与估价流程，部分数据非真实报价，遵循以下约定：</p>
+        <table>
+          <thead><tr><th>约定项</th><th>规则</th><th>原型中的体现</th></tr></thead>
+          <tbody>
+            <tr><td>起运港缺失</td><td>原始 68 条报价起运港均未注明，统一标记为「（待补充）」；筛选时按软匹配处理（选真实港口也能带出对应海运费）。</td><td>明细「说明」列标注「起运港待补充」。</td></tr>
+            <tr><td>国内段默认档</td><td>厂址→起运港运费若所选组合未配置，自动套用默认档 <b>F001 → 深圳(盐田) → 20GP = 950 CNY</b>。</td><td>国内段卡、明细、预览均标注「默认档」。</td></tr>
+            <tr><td>柜型示例数据</td><td>原报价仅有 20GP / 40HQ；为演示其余整柜柜型，基于 20GP 按比例生成：<b>40GP 海运费×1.1、45HQ 海运费×1.2</b>（港口费/附加费等固定费保持原值）。</td><td>该柜型明细行标注「示例」标签。</td></tr>
+            <tr><td>柜型兜底回退</td><td>即便示例数据仍未覆盖的柜型（如散货 LCL），海运段自动回退到同航线 20GP 价格并标注「默认档」，确保演示永不空白。</td><td>明细「说明」列标注「柜型默认参考 20GP」。</td></tr>
+            <tr><td>数据持久化</td><td>「新增」操作经本地服务写入 <code>freight_data.txt</code>；服务未启动则回退内嵌种子数据（仅演示，新增不落盘）。</td><td>保存时 toast 提示「已保存到 freight_data.txt」。</td></tr>
           </tbody>
         </table>
-        <p class="note" style="margin-top:10px;" data-page-node-id="vnw2MBhxPIDVESQef7EM4F">⚠️ 以上「默认档 / 示例 / 待补充」数据仅供演示，正式上线前需由业务在「运费明细配置」「厂址→起运港运费」页录入真实报价并校对比例系数。</p>
+        <p class="note" style="margin-top:10px;">⚠️ 以上「默认档 / 示例 / 待补充」数据仅供演示，正式上线前需由业务在「运费明细配置」「厂址→起运港运费」页录入真实报价并校对比例系数。</p>
       </div>
     </section>
 
     <!-- ============ DATA MODEL ============ -->
-    <section class="page" id="datamodel" data-page-node-id="JoGXgGHlTHlvwHuebUGwMB">
-      <h1 class="doc" data-page-node-id="gn3e3dadXJcH2ZHI57AuEn">数据模型</h1>
-      <p class="doc-lead" data-page-node-id="qlike8VGm29YojG66qCojm">六张核心实体 + 关系，分层：<b data-page-node-id="kHmCysFUqFntAAn8Bki6GI">主数据</b>（稳定） → <b data-page-node-id="QEYweSO4Fa0MzlXb2gns0J">运费明细</b>（配置） → <b data-page-node-id="UWGUWTubWAix7POgC5qePi">报价单</b>（计算/展示）。</p>
+    <section class="page" id="datamodel">
+      <h1 class="doc">数据模型</h1>
+      <p class="doc-lead">六张核心实体 + 关系，分层：<b>主数据</b>（稳定） → <b>运费明细</b>（配置） → <b>报价单</b>（计算/展示）。</p>
 
-      <div class="card" data-page-node-id="7mf3vWtognHP7M0WyE6AYR">
-        <h2 class="sec" data-page-node-id="KGrhT5YhxF3TAGnsCemctH">实体关系</h2>
-        <div class="er" data-page-node-id="RMpYHgVHQrdBj5fPUQjQaM">
-          <div class="er-card" data-page-node-id="cGsQOfLWw2pcrpK4CGrHsW"><div class="h" data-page-node-id="wDHtJgZOM3V0vveohiPaUp">费用项目主数据</div><div class="b" data-page-node-id="ochJyTE7K3CPMHdOLBySsr">code · 分类 · 名称 · 说明<br data-page-node-id="5bE6hgBOyuKUyXYY7UdxUJ">计费方式(8种) · 是否必选</div></div>
-          <div class="er-rel" data-page-node-id="ECLDO0KHCcnjAPFxxpOYpf">1 — *</div>
-          <div class="er-card" data-page-node-id="bCxVCPi3mvZfdBxw6izYkP"><div class="h" data-page-node-id="I5i2hsMQA9hu3nE3jcdzlK">运费明细</div><div class="b" data-page-node-id="wZFe5m54BkhEV0brDt2Q3S">起运港 · 目的港 · 船公司<br data-page-node-id="VRkPd7NKsdWfTZYKBwWqTC">柜型 · 费用项目 · 金额</div></div>
-          <div class="er-rel" data-page-node-id="fwidjYEhGrcnjmx8KgC8qL">* — 1</div>
-          <div class="er-card" data-page-node-id="xiIddvv5aKruvSM6RXulkn"><div class="h" data-page-node-id="MEX3s5w8mHyTDe4uPeqz4e">报价单</div><div class="b" data-page-node-id="CxjXmYm5OtZdJ0d1PVG3A1">条件筛选<br data-page-node-id="KBeFSIoQR88NBXNsE7EcYE">聚合明细 · 小计 · 总价</div></div>
+      <div class="card">
+        <h2 class="sec">实体关系</h2>
+        <div class="er">
+          <div class="er-card"><div class="h">费用项目主数据</div><div class="b">code · 分类 · 名称 · 说明<br>计费方式(8种) · 是否必选</div></div>
+          <div class="er-rel">1 — *</div>
+          <div class="er-card"><div class="h">运费明细</div><div class="b">起运港 · 目的港 · 船公司<br>柜型 · 费用项目 · 金额</div></div>
+          <div class="er-rel">* — 1</div>
+          <div class="er-card"><div class="h">报价单</div><div class="b">条件筛选<br>聚合明细 · 小计 · 总价</div></div>
         </div>
-        <div class="er" data-page-node-id="7iNwCswYloCQcSrN4kHpYu">
-          <div class="er-card" data-page-node-id="uU42sXGH1FrSSu1EK85tY2"><div class="h" data-page-node-id="qZASgPPjEXwymThv5x78Bp">厂址主数据</div><div class="b" data-page-node-id="0JdtoKS8YHnvYbTtwdZMdq">code · 名称 · 城市<br data-page-node-id="SG38D3ETrEHspVHwplxaVf">地址 · 默认起运港 · 状态</div></div>
-          <div class="er-rel" data-page-node-id="yZYsKE1pXjMzygW0Ye4FXQ">1 — *</div>
-          <div class="er-card" data-page-node-id="pRq8Dj9VFYKh3iHyIrZdiA"><div class="h" data-page-node-id="iAnQPx2RFrJzHHjsj3nUp3">厂址运费明细</div><div class="b" data-page-node-id="o8eiH0dQW0A2RXBiYMlPI1">厂址 · 起运港 · 柜型<br data-page-node-id="DkGiMg2FzBsPCf7LdEcs5k">金额 · 计费方式 · 有效期</div></div>
+        <div class="er">
+          <div class="er-card"><div class="h">厂址主数据</div><div class="b">code · 名称 · 城市<br>地址 · 默认起运港 · 状态</div></div>
+          <div class="er-rel">1 — *</div>
+          <div class="er-card"><div class="h">厂址运费明细</div><div class="b">厂址 · 起运港 · 柜型<br>金额 · 计费方式 · 有效期</div></div>
         </div>
       </div>
 
-      <div class="card" data-page-node-id="Yc8agAoKx7Af4d4zGic4D8">
-        <h2 class="sec" data-page-node-id="X44AT1j54sd6G7TYPZrTc2">① 费用项目主数据（freight_fee_item）</h2>
-        <table data-page-node-id="t0vJe9yP079LxgUsBr2NcA">
-          <tr data-page-node-id="FhZQaTYV8mWVcACWvAGaGO"><th data-page-node-id="LF09SvT8FZmSCHDdH8QPom">字段</th><th data-page-node-id="uCxJBmXcLpFeukd4QeHQ3R">类型</th><th data-page-node-id="sIShdDSrtKKvOFvjJFptg2">说明</th></tr>
-          <tr data-page-node-id="11Np5AcewSO4NYYaVPimji"><td data-page-node-id="eLglQXaNGIXlcEaSmlpqKZ">code</td><td data-page-node-id="15Dkreo5XrOSgDgXsDN8xC">string(PK)</td><td data-page-node-id="ocD9N4NjBANxkHOvxl2gHm">费用编码，如 SEA-01 / ORI-02</td></tr>
-          <tr data-page-node-id="FDvctdWk5p3AHwk8Ha0qCO"><td data-page-node-id="FMUUpKHuz3x2RmAYA4uHZA">category</td><td data-page-node-id="1a6iAYbYTqViFtzqaJy0Fz">enum</td><td data-page-node-id="iUTMFwJt1km1FG5fl4L6cW">海运费/起运港费用/目的港费用/附加费/关税/其他费用</td></tr>
-          <tr data-page-node-id="tHNgwOMzgreHNDGChsFnCP"><td data-page-node-id="MozfYYsoR0EXyHiMJg0Rev">name</td><td data-page-node-id="x3SFrOu1gVHQbgLiZjVNAs">string</td><td data-page-node-id="ngjMzoLLD4wxXBBJBHtaoj">费用项目名</td></tr>
-          <tr data-page-node-id="n5Qpwpdf40sP4R1NUnFbAX"><td data-page-node-id="4vOqDN2Y8bAfT5oEfYBSXV">description</td><td data-page-node-id="SnnpGAgrlgmR1LxzsI3e0m">string</td><td data-page-node-id="pZeeuIPvcWcCrAncqRrOg0">含义说明</td></tr>
-          <tr data-page-node-id="Gk7DlnK6X15bquFlGHuq89"><td data-page-node-id="0ldqiQaIrQBvlc4CZXGvgb">charge_method</td><td data-page-node-id="tK4adA5O1U3FmtDZmp8Ftj">enum</td><td data-page-node-id="30dZRAgqMR3l3mCna02zAs"><b data-page-node-id="q3xtWBt5fACSVApgby17l9">按柜/按票/按次/按KG/按CBM/按金额比例/按吨/按天</b></td></tr>
-          <tr data-page-node-id="W8GG84EwnrhtKvlJnqM4wP"><td data-page-node-id="SHwXDYOlCAdSMqaF3liXPG">mandatory</td><td data-page-node-id="PwopdNwhVpFwXwRm5ZwV6m">enum</td><td data-page-node-id="pO3VQJwDdhJTrnIztyuGcP">是/否/视情况</td></tr>
-          <tr data-page-node-id="qu4HnkEBAHjJClLOGKIeKr"><td data-page-node-id="ZhdFZVVZ8kc4vHh4sgMDOH">default_currency</td><td data-page-node-id="4naXlyANVLhVPgpJ2HJ83I">enum</td><td data-page-node-id="pqT5L8mBAAb8Jy1tAbIIJ9">默认币种</td></tr>
-          <tr data-page-node-id="4GCsKqDjeiqBHjpuc4sZm2"><td data-page-node-id="kzKr6VGnWuFLiKc3AkE5Ab">status</td><td data-page-node-id="ZLJuiHnwBRVEH3XPXbBHpo">enum</td><td data-page-node-id="vOvVHEO91yGdJjvCblw7Mz">启用/停用</td></tr>
+      <div class="card">
+        <h2 class="sec">① 费用项目主数据（freight_fee_item）</h2>
+        <table>
+          <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+          <tr><td>code</td><td>string(PK)</td><td>费用编码，如 SEA-01 / ORI-02</td></tr>
+          <tr><td>category</td><td>enum</td><td>海运费/起运港费用/目的港费用/附加费/关税/其他费用</td></tr>
+          <tr><td>name</td><td>string</td><td>费用项目名</td></tr>
+          <tr><td>description</td><td>string</td><td>含义说明</td></tr>
+          <tr><td>charge_method</td><td>enum</td><td><b>按柜/按票/按次/按KG/按CBM/按金额比例/按吨/按天</b></td></tr>
+          <tr><td>mandatory</td><td>enum</td><td>是/否/视情况</td></tr>
+          <tr><td>default_currency</td><td>enum</td><td>默认币种</td></tr>
+          <tr><td>status</td><td>enum</td><td>启用/停用</td></tr>
         </table>
       </div>
 
-      <div class="card" data-page-node-id="6QmXPYArYEqVFGELsNBRP2">
-        <h2 class="sec" data-page-node-id="FqqjFFwjy3xwvzs0Mob5k6">② 厂址主数据（factory）— 集团多厂址</h2>
-        <table data-page-node-id="dNHyFrpxrSTAEp32MYuYeD">
-          <tr data-page-node-id="H2crG7dBcoyWV3GrOaa3hz"><th data-page-node-id="4QCJOeL9AOYjdgsvewDEBF">字段</th><th data-page-node-id="XMC0TrlGRCAelbPYDI6KV0">类型</th><th data-page-node-id="nmIuhHEsyobahT96yirjTt">说明</th></tr>
-          <tr data-page-node-id="jSLO8KFqSA0OHpK9VQZ4Fm"><td data-page-node-id="jSqLxNeH0qLrkCbK9eDMTY">code</td><td data-page-node-id="ng7bnTJh4fVeu5uTC7r644">string(PK)</td><td data-page-node-id="vp3LiG7kFtkGHOuyiDMHae">厂址编码，如 F001</td></tr>
-          <tr data-page-node-id="4GJBFP2ZHzez3CMkuPMUui"><td data-page-node-id="lnqDmzafHmen4tzZP1ss9I">name</td><td data-page-node-id="4n1hK07wTB5MYioLsuDCYl">string</td><td data-page-node-id="mH0SIJjnQMOtF8w6Mk0czi">厂址名称</td></tr>
-          <tr data-page-node-id="uEk8n4HLAQG9AFo9xTOTVq"><td data-page-node-id="KPbq7hAA6HHhw2ctrs9zEh">city</td><td data-page-node-id="l5D2ZVZuAdQW4IRn40AdHI">string</td><td data-page-node-id="5eBR4yERCNoLVrsiFuUfCG">所属城市</td></tr>
-          <tr data-page-node-id="Pa0fHTv9YSvEps3PzyOtRN"><td data-page-node-id="19OPAGxJENnzjHuY4iWs9i">address</td><td data-page-node-id="iAqk1WcraZ88qifIty60qg">string</td><td data-page-node-id="XsBrpMhSCV2N70or3n7Hhe">详细地址</td></tr>
-          <tr data-page-node-id="xKEAEtYn6sJ9mSAWuZH3U3"><td data-page-node-id="4JqOgbshAiKqysAOulketd">def_origin_port</td><td data-page-node-id="qT12qX1cSps1QNrrbb7hAf">fk</td><td data-page-node-id="rFvuvWdg6D5y3sazeWJtk0">默认起运港（引用基础数据）</td></tr>
-          <tr data-page-node-id="HKCOLCGYcYVjHKE5IVnjLe"><td data-page-node-id="JMFiHR2iC7ecNGqGCNwwBu">status</td><td data-page-node-id="xl9Z9MauLEzCmjF6jy5GmR">enum</td><td data-page-node-id="KoBcFh1a95dC5TtP9uNpux">启用/停用</td></tr>
+      <div class="card">
+        <h2 class="sec">② 厂址主数据（factory）— 集团多厂址</h2>
+        <table>
+          <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+          <tr><td>code</td><td>string(PK)</td><td>厂址编码，如 F001</td></tr>
+          <tr><td>name</td><td>string</td><td>厂址名称</td></tr>
+          <tr><td>city</td><td>string</td><td>所属城市</td></tr>
+          <tr><td>address</td><td>string</td><td>详细地址</td></tr>
+          <tr><td>def_origin_port</td><td>fk</td><td>默认起运港（引用基础数据）</td></tr>
+          <tr><td>status</td><td>enum</td><td>启用/停用</td></tr>
         </table>
       </div>
 
-      <div class="card" data-page-node-id="KZUYdzqW4BPD6EdhgHKkCg">
-        <h2 class="sec" data-page-node-id="BbGkc2vmblbw6JHF96griO">③ 厂址运费明细（factory_freight_rate）— 国内段</h2>
-        <table data-page-node-id="uUKi9KKhjMjXWJOqdWg9Fa">
-          <tr data-page-node-id="kwKoydX3sAOpenHixUFlj8"><th data-page-node-id="mPQG8ilSDlT4KFH3gcrmm5">字段</th><th data-page-node-id="9dJGWV1tGk2tNCnRKJ1Bto">类型</th><th data-page-node-id="5RAXp2qYvjABy1soLeogDS">说明</th></tr>
-          <tr data-page-node-id="ddc51RsGXi3b29UIKHXQcE"><td data-page-node-id="xKRJlDueAuyUABDeJII1zB">id</td><td data-page-node-id="3TnOWzmLBn5Gy4yqvOMjIh">bigint(PK)</td><td data-page-node-id="pVDzuYxA4XICInR6hkWHre">主键</td></tr>
-          <tr data-page-node-id="SM9Rju3NMckz0xYK4eURz0"><td data-page-node-id="dX7AUZfArGOaMOiRomPnwF">factory_code</td><td data-page-node-id="yGZHjfjmtdGiBeG5yjVsP8">fk</td><td data-page-node-id="r2DFN7glJOAivCxf7lTR39">厂址（引用厂址主数据）</td></tr>
-          <tr data-page-node-id="SEntzjvgqYyGUWgz20dqB0"><td data-page-node-id="ts3fz8rMCJc5jQOWI8TlFE">origin_port</td><td data-page-node-id="eceUgFEjKnXrscRre5Vpfc">fk</td><td data-page-node-id="rdF5EQKqjKNv9SeG5Bz6f5">起运港</td></tr>
-          <tr data-page-node-id="r5AZaPhjJNGXPWrgEhJbUc"><td data-page-node-id="E0BanNUJDTiDznhX1mkzeu">container_type</td><td data-page-node-id="157oSggrvsF4vES4lXySmY">fk</td><td data-page-node-id="5K8XA0I9mPDClv98BJgQ6e">柜型</td></tr>
-          <tr data-page-node-id="mGUKeLbVzAolXiloxf1PDf"><td data-page-node-id="6danHiv9hOElYivBFXCQL4">amount</td><td data-page-node-id="ZVQs8JjMPu7zCUKxb4JyGU">decimal</td><td data-page-node-id="41NuTsTiHOEHECWrkMKJjJ">国内段运费金额</td></tr>
-          <tr data-page-node-id="L7fGPdN5CE4CVMQ3ACCSn8"><td data-page-node-id="C7ZCFRsFCpv6PUS7TljstU">charge_method</td><td data-page-node-id="0vXZhGRKgaLe0xAOpOY94n">enum</td><td data-page-node-id="Z5omJ5VKFrbFe2NOEgPw8W">按柜 / 按CBM(散货) / 按KG 等</td></tr>
-          <tr data-page-node-id="uOKHfE0EUELarbNXD52uNR"><td data-page-node-id="PUTEs8E3IyZmBrAhFkIBvx">currency</td><td data-page-node-id="5mhaWRyU7pTGLZLcP3jerB">enum</td><td data-page-node-id="FXJd6TivGUGJW1EpXnh5Ln">默认 CNY</td></tr>
-          <tr data-page-node-id="81sWpuiSl1aKyElkZ4Hn3p"><td data-page-node-id="Rv5lETacEovPPNjvAThWRn">effective_from / effective_to</td><td data-page-node-id="cG7OhdDCLRkZ2QR4Ihahcs">date</td><td data-page-node-id="cJFmjYOrDAsZoxQt2nFHAb">生效起止</td></tr>
+      <div class="card">
+        <h2 class="sec">③ 厂址运费明细（factory_freight_rate）— 国内段</h2>
+        <table>
+          <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+          <tr><td>id</td><td>bigint(PK)</td><td>主键</td></tr>
+          <tr><td>factory_code</td><td>fk</td><td>厂址（引用厂址主数据）</td></tr>
+          <tr><td>origin_port</td><td>fk</td><td>起运港</td></tr>
+          <tr><td>container_type</td><td>fk</td><td>柜型</td></tr>
+          <tr><td>amount</td><td>decimal</td><td>国内段运费金额</td></tr>
+          <tr><td>charge_method</td><td>enum</td><td>按柜 / 按CBM(散货) / 按KG 等</td></tr>
+          <tr><td>currency</td><td>enum</td><td>默认 CNY</td></tr>
+          <tr><td>effective_from / effective_to</td><td>date</td><td>生效起止</td></tr>
         </table>
       </div>
 
-      <div class="card" data-page-node-id="o75GPikQSrSQVO0m7t9EnE">
-        <h2 class="sec" data-page-node-id="CSttESCG8zNREVpB5HWjbR">④ 基础数据（枚举表）</h2>
-        <table data-page-node-id="ptyaJfon0x4VfVLX1rn8FO">
-          <tr data-page-node-id="cBcVp1i2R1EYxZ51svUmK3"><th data-page-node-id="KpPAiTbb37d69gWlAE5jeS">配置项</th><th data-page-node-id="PZGqqwMY4hyn9N1Is0ZvC2">示例值</th></tr>
-          <tr data-page-node-id="jGrl7rqhXAJ3wcCN0ZVTPn"><td data-page-node-id="zPxaupuZ6GqEE4FnBciTnj">origin_port 起运港</td><td data-page-node-id="ilAIrcYAtMQhOFAQMDF7C3">深圳(盐田)/深圳(蛇口)/广州(南沙)/上海(洋山)/宁波(北仑)…</td></tr>
-          <tr data-page-node-id="qqBnE2figRQIAQQQLcJdBJ"><td data-page-node-id="Dc6cRhp34Ys9hCFfr3GlYw">dest_port 目的港</td><td data-page-node-id="BsXgaCY8QC00B0hAjNIiBI">曼萨尼约/格兰杰默斯/洛杉矶/汉堡/鹿特丹…</td></tr>
-          <tr data-page-node-id="CmDH7GND35CmzKaBdlGbF6"><td data-page-node-id="fLQAqQllFCkLbMcZIjol87">carrier 船公司</td><td data-page-node-id="RcaILtafYry68iFBI4Pc0a">恒荣达/晨崴/马士基/MSC/达飞/中远…</td></tr>
-          <tr data-page-node-id="zvdXHzMME9egFDnU9zJOXC"><td data-page-node-id="wTCFgpdaiUGaFU62fSxdAW">container 柜型</td><td data-page-node-id="KcpCHXBYh9xuNl0tpRoojQ">20GP/40GP/40HQ/45HQ/冷藏/开顶/框架/LCL</td></tr>
-          <tr data-page-node-id="zviF9n5IqGbrHIVcEbLdTh"><td data-page-node-id="vNz7Job1GiSuaKqKuNXtMT">charge_method 计费方式</td><td data-page-node-id="PxHtAp2tLJUgqOUQURJDmj"><b data-page-node-id="AFRBS0XoAQMzn0cZZbW0vZ">按柜/按票/按次/按KG/按CBM/按金额比例/按吨/按天</b></td></tr>
+      <div class="card">
+        <h2 class="sec">④ 基础数据（枚举表）</h2>
+        <table>
+          <tr><th>配置项</th><th>示例值</th></tr>
+          <tr><td>origin_port 起运港</td><td>深圳(盐田)/深圳(蛇口)/广州(南沙)/上海(洋山)/宁波(北仑)…</td></tr>
+          <tr><td>dest_port 目的港</td><td>曼萨尼约/格兰杰默斯/洛杉矶/汉堡/鹿特丹…</td></tr>
+          <tr><td>carrier 船公司</td><td>恒荣达/晨崴/马士基/MSC/达飞/中远…</td></tr>
+          <tr><td>container 柜型</td><td>20GP/40GP/40HQ/45HQ/冷藏/开顶/框架/LCL</td></tr>
+          <tr><td>charge_method 计费方式</td><td><b>按柜/按票/按次/按KG/按CBM/按金额比例/按吨/按天</b></td></tr>
         </table>
       </div>
 
-      <div class="card" data-page-node-id="dMfA9CuWJVzJOWC1ASmvVZ">
-        <h2 class="sec" data-page-node-id="xngSVYQMs1uHuyWJISSVly">⑤ 运费明细（freight_rate_detail）— 单一数据源(海运段)</h2>
-        <table data-page-node-id="uyTvv7HkHD4u0YIJVSQO86">
-          <tr data-page-node-id="oCZ8eH0C0jLnvRd2ZoBdCC"><th data-page-node-id="53K7Y18RELpAhYnuMGHlOs">字段</th><th data-page-node-id="3zYAqd1tMQ6IoCk9HFBLLC">类型</th><th data-page-node-id="DU3sXyF7RIpjkze2LyA7rZ">说明</th></tr>
-          <tr data-page-node-id="DgehNDHP3GJpeaM9EwAoxU"><td data-page-node-id="S44BYKXj7OlFwsW83fduAH">origin_port / dest_port / carrier / container_type / fee_code</td><td data-page-node-id="Zif9UI0h1M3EwTvlJrqFZ3">fk</td><td data-page-node-id="mV7ucgCmCbpXSUTIUW4Ff0">多维度引用</td></tr>
-          <tr data-page-node-id="FLfoRDdJDeTbJHLyxRS6rP"><td data-page-node-id="9BPD4FZaKA1TWu6mESDjxB">amount</td><td data-page-node-id="ymRbVfnXoK6H6COPQWNv8u">decimal</td><td data-page-node-id="sCpRyFz25SKCiFbdCOEeKc">金额</td></tr>
-          <tr data-page-node-id="7NkBISXQFXiDU34EWUB8Cc"><td data-page-node-id="WyDORWf1unjDqnVRTkp5HW">effective_from / effective_to</td><td data-page-node-id="5kcuYdE9Ox7SSXXgyMKEA0">date</td><td data-page-node-id="9dzR3Alhm4KE80faBG1HZP">生效起止</td></tr>
+      <div class="card">
+        <h2 class="sec">⑤ 运费明细（freight_rate_detail）— 单一数据源(海运段)</h2>
+        <table>
+          <tr><th>字段</th><th>类型</th><th>说明</th></tr>
+          <tr><td>origin_port / dest_port / carrier / container_type / fee_code</td><td>fk</td><td>多维度引用</td></tr>
+          <tr><td>amount</td><td>decimal</td><td>金额</td></tr>
+          <tr><td>effective_from / effective_to</td><td>date</td><td>生效起止</td></tr>
         </table>
-        <p class="note" data-page-node-id="aba0ROZjgplPqEoINl7VQU">报价单总额 = 海运段(freight_rate_detail 聚合) + 国内段(factory_freight_rate 按厂址/起运港/柜型 取值)。</p>
+        <p class="note">报价单总额 = 海运段(freight_rate_detail 聚合) + 国内段(factory_freight_rate 按厂址/起运港/柜型 取值)。</p>
       </div>
     </section>
 
     <!-- ============ ③ 费用项目明细设定 ============ -->
-    <section class="page" id="p_feeitem" data-page-node-id="AdKBskxHp622fRlOeFEhaV">
-      <h1 class="doc" data-page-node-id="bgAwCIlH4QSy6bu9V559hS">③ 费用项目明细设定 <span class="badge-ver" data-page-node-id="GdoctuyEUD7DcZT0ESPa06">主数据</span></h1>
-      <p class="doc-lead" data-page-node-id="u1C51JA8AcLu3QArCfHZan">维护所有可报费用项目的标准定义。点击"新增费用项目"弹出录入窗口；计费方式支持按次/按KG/按CBM/按金额等 8 种。</p>
-      <div class="btnrow" data-page-node-id="UKFvfvUXgKTn1BIrc368lM">
-        <button onclick="openFeeModal()" data-page-node-id="TpDr7E7USqU9vUxKFvSPJ2">+ 新增费用项目</button>
-        <button class="ghost" onclick="alert('导出 CSV / Excel 对接 ERP')" data-page-node-id="FGZCz5Lr2bDsmTJc7KJOW4">导出</button>
+    <section class="page" id="p_feeitem">
+      <h1 class="doc">③ 费用项目明细设定 <span class="badge-ver">主数据</span></h1>
+      <p class="doc-lead">维护所有可报费用项目的标准定义。点击"新增费用项目"弹出录入窗口；计费方式支持按次/按KG/按CBM/按金额等 8 种。</p>
+      <div class="btnrow">
+        <button onclick="openFeeModal()">+ 新增费用项目</button>
+        <button class="ghost" onclick="alert('导出 CSV / Excel 对接 ERP')">导出</button>
       </div>
-      <div class="tbl-wrap" data-page-node-id="teR0rGsYjD233pshtWZBiq">
-        <table id="tblFeeItem" data-page-node-id="xqGGN9uyW5JA0nhrsoweqT">
-          <thead data-page-node-id="4DJHwUiRgbbiEvuVS7MKOd"><tr data-page-node-id="sPkuzwtdD1JQ8DCkzdrz3S"><th data-page-node-id="C2f8dBNdMF636j1FYhrLpx">编码</th><th data-page-node-id="b95yO9KqDWetB7J4Mg0He2">费用分类</th><th data-page-node-id="MOdH7QpBdmFwyEKDowGp2y">费用项目</th><th data-page-node-id="tEruzNC8bcpsu2IR3IbF1a">说明</th><th data-page-node-id="tyfCCNndkXd0HvH3LPjzDN">计费方式</th><th data-page-node-id="LSOJ6pQhG5OQUmOpCkGeVd">是否必选</th><th data-page-node-id="8BKnjx8dB7CpKhSmIrCxv5">状态</th><th data-page-node-id="K7wZxWbhigssgTOFKGfVvN">操作</th></tr></thead>
-          <tbody data-page-node-id="rHmHzUb9z39riGoBk5VtfJ"></tbody>
+      <div class="tbl-wrap">
+        <table id="tblFeeItem">
+          <thead><tr><th>编码</th><th>费用分类</th><th>费用项目</th><th>说明</th><th>计费方式</th><th>是否必选</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody></tbody>
         </table>
       </div>
     </section>
 
     <!-- ============ ⑧ 厂址主数据 ============ -->
-    <section class="page" id="p_factory" data-page-node-id="DEPOsQBQd6vMMn6UK2CU0D">
-      <h1 class="doc" data-page-node-id="O7AW0bCKk7oTfYDcVioain">⑧ 厂址主数据 <span class="badge-ver" data-page-node-id="A56M6OMQDTEbTiMUBz3smw">集团多厂址</span></h1>
-      <p class="doc-lead" data-page-node-id="NttDcJ3RgUmMEYXDE78Emk">维护集团各工厂/仓库信息。每个厂址可指定默认起运港，用于自动带出国内段运费。</p>
-      <div class="btnrow" data-page-node-id="DzO7u1GnwwBzUffiolgCqS">
-        <button onclick="openFactoryModal()" data-page-node-id="4eKDPU9G3sSmn4Mk6ekWot">+ 新增厂址</button>
-        <button class="ghost" onclick="alert('导出厂址主数据')" data-page-node-id="zWvgbrHvd7BoQkiN025iWI">导出</button>
+    <section class="page" id="p_factory">
+      <h1 class="doc">⑧ 厂址主数据 <span class="badge-ver">集团多厂址</span></h1>
+      <p class="doc-lead">维护集团各工厂/仓库信息。每个厂址可指定默认起运港，用于自动带出国内段运费。</p>
+      <div class="btnrow">
+        <button onclick="openFactoryModal()">+ 新增厂址</button>
+        <button class="ghost" onclick="alert('导出厂址主数据')">导出</button>
       </div>
-      <div class="tbl-wrap" data-page-node-id="oRGcG1TzgJoKN038oI798t">
-        <table id="tblFactory" data-page-node-id="AOQKYL3BdVcQRTzWT7khQG">
-          <thead data-page-node-id="9VyRVflGXiR9h0igi3ugj1"><tr data-page-node-id="8VNFZdKUCziG0Jj46wNVwW"><th data-page-node-id="1JGm5RDrn0zipNkDt0K8G9">厂址编码</th><th data-page-node-id="aNriI2NJ36cK5eRZShOZYS">厂址名称</th><th data-page-node-id="VTM5mEXht4pwdAviPdCQDd">城市</th><th data-page-node-id="auAq66lFch0BU3v9ZvmQ2e">详细地址</th><th data-page-node-id="raPCYUx6yg9uvA5HQm9x0t">默认起运港</th><th data-page-node-id="sdORbeX3t6qFoFmZ61hphX">状态</th><th data-page-node-id="iukIpMu4fF1EXC3vG79Yjw">操作</th></tr></thead>
-          <tbody data-page-node-id="uExcVRlC08DV3FcNicGbqE"></tbody>
+      <div class="tbl-wrap">
+        <table id="tblFactory">
+          <thead><tr><th>厂址编码</th><th>厂址名称</th><th>城市</th><th>详细地址</th><th>默认起运港</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody></tbody>
         </table>
       </div>
     </section>
 
     <!-- ============ ⑨ 厂址→起运港运费 ============ -->
-    <section class="page" id="p_factoryrate" data-page-node-id="IJuu2BTyPxj6ueLSwNgQIf">
-      <h1 class="doc" data-page-node-id="YQGSqS9QEXlHyBKI7ABEgy">⑨ 厂址→起运港运费设定 <span class="badge-ver" data-page-node-id="mvTZGBtUc8CacoUlBxoPI9">国内段</span></h1>
-      <p class="doc-lead" data-page-node-id="hmXEU4G5GXZTAiWRARhRVW">按 厂址 × 起运港 × 柜型 配置国内段运费（拖车/散货）。计费方式按柜或按CBM；生成报价单时自动计入。</p>
-      <div class="toolbar" data-page-node-id="UWrv07h1lpkkkSm00I6tBB">
-        <div class="field" data-page-node-id="W4T5XmSexcjndpYTmsrQ7D"><label data-page-node-id="qqOnWHWHQIO3HGC63dHSAT">厂址</label><select id="fr_factory" data-page-node-id="NSgyIRP1a3rkJvl9GISUFw"></select></div>
-        <div class="field" data-page-node-id="6OrmewjTfPXYqB43eqT0k7"><label data-page-node-id="9C6AJCePk5yMGeRcKLqIdx">起运港</label><select id="fr_origin" data-page-node-id="c8kqPJTg6hOU5YJKEKBwlH"></select></div>
-        <div class="field" data-page-node-id="2gMzKfNbPQc8yGRkau9vcX"><label data-page-node-id="FTHQQpDoVUEB28MNDwbtE8">柜型</label><select id="fr_ct" data-page-node-id="IrxsZydqf6rD4FL2j3H3bU"></select></div>
-        <button onclick="renderFactoryRate()" data-page-node-id="gvGWhBGqMc009gYBOq7myG">筛选</button>
-        <button class="ghost" onclick="openFactoryRateModal()" data-page-node-id="7JGxu8VniEORpPZkmOEPeX">+ 新增运费行</button>
+    <section class="page" id="p_factoryrate">
+      <h1 class="doc">⑨ 厂址→起运港运费设定 <span class="badge-ver">国内段</span></h1>
+      <p class="doc-lead">按 厂址 × 起运港 × 柜型 配置国内段运费（拖车/散货）。计费方式按柜或按CBM；生成报价单时自动计入。</p>
+      <div class="toolbar">
+        <div class="field"><label>厂址</label><select id="fr_factory"></select></div>
+        <div class="field"><label>起运港</label><select id="fr_origin"></select></div>
+        <div class="field"><label>柜型</label><select id="fr_ct"></select></div>
+        <button onclick="renderFactoryRate()">筛选</button>
+        <button class="ghost" onclick="openFactoryRateModal()">+ 新增运费行</button>
       </div>
-      <div class="tbl-wrap" data-page-node-id="VqDRhdiDP2Wbk1bQsLuwoX">
-        <table id="tblFactoryRate" data-page-node-id="NMpsLwzuDYpQ4uknHQLAXc">
-          <thead data-page-node-id="scTrVvsfmpC43OPC01jAiA"><tr data-page-node-id="YF6x0xLajZALiqR2Re2CxE"><th data-page-node-id="46eaYelyKSLV0qH0on0oUl">厂址</th><th data-page-node-id="w7rtPEyQyDdQ9I9CQgV7W2">起运港</th><th data-page-node-id="qpcU4BDOeS5LB03OmBDtkZ">柜型</th><th data-page-node-id="x8qzYYvM9OtdKnO8XmYGJU">金额</th><th data-page-node-id="sE6uCSVFHcEXBAf0DM6TVX">币种</th><th data-page-node-id="pRwoudB75r0040Du0AIzMn">计费方式</th><th data-page-node-id="fLjpjgZ6loLyTugfHDzEB9">有效期</th><th data-page-node-id="sldb9A5nQygWOsbDNKKB7B">操作</th></tr></thead>
-          <tbody data-page-node-id="9rTKyBXfSgZCa1gOzm5o0S"></tbody>
+      <div class="tbl-wrap">
+        <table id="tblFactoryRate">
+          <thead><tr><th>厂址</th><th>起运港</th><th>柜型</th><th>金额</th><th>币种</th><th>计费方式</th><th>有效期</th><th>操作</th></tr></thead>
+          <tbody></tbody>
         </table>
       </div>
     </section>
 
     <!-- ============ ④ 基础数据管理 ============ -->
-    <section class="page" id="p_basedata" data-page-node-id="1IQp3ece1cPcVdbzFABvtF">
-      <h1 class="doc" data-page-node-id="LXkKXiK87BwOH5HJ3B1Ha6">④ 基础数据管理</h1>
-      <p class="doc-lead" data-page-node-id="Sp7Bw3dGHwS8QCUc7TxdXR">维护各维度枚举值。下表为只读演示，实际可编辑。</p>
-      <div class="btnrow" data-page-node-id="25fmRR2sivIvbHpxljZfhe">
-        <button class="ghost" data-tab="origin" data-page-node-id="8AWeMnbE5hlYDt1u03An8e">起运港</button>
-        <button class="ghost" data-tab="dest" data-page-node-id="0MuEoqWFXE1Kd9VCDLBkhW">目的港</button>
-        <button class="ghost" data-tab="carrier" data-page-node-id="R7RHEenoKk86T4blg4FO2E">船公司</button>
-        <button class="ghost" data-tab="ct" data-page-node-id="CtCT4iKDjS7BWFFX2rJplk">柜型</button>
-        <button class="ghost" data-tab="method" data-page-node-id="PoHd9qMbc6MOs6q5RI5MPX">计费方式</button>
+    <section class="page" id="p_basedata">
+      <h1 class="doc">④ 基础数据管理</h1>
+      <p class="doc-lead">维护各维度枚举值。下表为只读演示，实际可编辑。</p>
+      <div class="btnrow">
+        <button class="ghost" data-tab="origin">起运港</button>
+        <button class="ghost" data-tab="dest">目的港</button>
+        <button class="ghost" data-tab="carrier">船公司</button>
+        <button class="ghost" data-tab="ct">柜型</button>
+        <button class="ghost" data-tab="method">计费方式</button>
       </div>
-      <div class="tbl-wrap" data-page-node-id="4BRhDPr5szwMbOvMgNPYFH">
-        <table id="tblBase" data-page-node-id="kFsfth2R0vHb9evxJtzo8S"><thead data-page-node-id="tubqm71IwsTtI7p31mqTfx"></thead><tbody data-page-node-id="GbYbH7HZuzavuqpGA4nndS"></tbody></table>
+      <div class="tbl-wrap">
+        <table id="tblBase"><thead></thead><tbody></tbody></table>
       </div>
-      <div class="card" style="margin-top:14px;background:#F3F0FF;border:1px solid #D6C2F0" data-page-node-id="OOMS9fivfSVJHFZlRpohAj">
-        <h3 class="sec" data-page-node-id="GICyxt65hYbwcTslj2UaMA">默认管理费率（按费用分类）· 仅作"新增运费明细"预填</h3>
-        <p class="note" style="margin:0 0 8px" data-page-node-id="xXzrEKN92PD2Ml9JzeWO7E">报价单（卖价）= 成本费率表(买价) 中<b data-page-node-id="TVERpfjulEbdCRMlJF80C9">每个费用项目自身的管理费率</b>逐行计算：<b data-page-node-id="K1LbCJU2xAiLuQ6c9Zn8Qm">卖价 = 买价 × (1 + 管理费率)</b>。下表为<b data-page-node-id="WGFb77c9gbaLqmuw8ukUpW">按费用分类的默认值</b>——在「⑤ 新增运费明细」时自动带入该分类的默认管理费率，可<b data-page-node-id="x8YFiZMCXolezXPiUyK7wb">逐行改写</b>，实现比"按分类一刀切"更细的毛利管控。代垫类（如关税 / THC）设 0 即不赚。</p>
-        <table id="tblMarkup" data-page-node-id="LoU42BA9vKDXAdIhkrwu1I">
-          <thead data-page-node-id="XN7CFsITVXF5QEWsWjWXOd"><tr data-page-node-id="qIv6WED4EwBVI8iMPXazQc"><th data-page-node-id="GNOUGodGiN2EoL6jlc2Ggx">费用分类</th><th data-page-node-id="lfjG9GiiPBZFw1aJbnnm3X">默认管理费率</th><th data-page-node-id="cbZfP63YlLvZjrCaGTFEa9">示例（买价 100 → 卖价）</th></tr></thead>
-          <tbody data-page-node-id="T3e4wBqHAOQWBUruOTwLDn">
-            <tr data-page-node-id="mibXXfEEikBXoAAJDGxOtx"><td data-page-node-id="7e9XFhlX88cEYogQDOaANm">海运费</td><td data-page-node-id="WsmSL7BvbbMCQiGQHidTBI">8%</td><td data-page-node-id="PfUMtei4uShUt1mlEceFuY">108.0</td></tr>
-            <tr data-page-node-id="Omlm0ihsobRIsvF0bfYJOh"><td data-page-node-id="x2bIWK6aBLHKBCzDWDCB1E">起运港费用</td><td data-page-node-id="QnPvfB1cQkglHTFah3pymH">10%</td><td data-page-node-id="eDnwkM1jd3VQNFQW5wWqo4">110.0</td></tr>
-            <tr data-page-node-id="DOhWObemMimyOdmafds95V"><td data-page-node-id="Wb0eRolZ2AgdVOWKZ17Ewr">目的港费用</td><td data-page-node-id="Mm0yS6AeASq607F5Ty2QYH">10%</td><td data-page-node-id="4SYMLuexRmTnBVTfiM6pjK">110.0</td></tr>
-            <tr data-page-node-id="rNBMKm0xFaOBzkzRoajtS0"><td data-page-node-id="bLEftgxVw0CNJQApKUxAU4">报关费用</td><td data-page-node-id="C7JPSCFSDKzaq9CQbK5aNi">固定 +50（物流对账单侧）</td><td data-page-node-id="2SEbESbewM9zPpZwVmjM3t">150.0</td></tr>
-            <tr data-page-node-id="KRbVRo1zczEHH9lwGmj8X8"><td data-page-node-id="g9FzxoOdZ8Sh5EwGqspXg1">国内段(拖车)</td><td data-page-node-id="moLnHuELdRYCZ1TAuNy80t">5%</td><td data-page-node-id="6soi4ZdLz2slpSBooucWhJ">105.0</td></tr>
-            <tr data-page-node-id="V51uYdKEFhtn8gvb1GtCEY"><td data-page-node-id="CpGI0YloE0vwPeNknGBX1f">附加费</td><td data-page-node-id="B0giNLHUYkX1tbSrNJOSWm">8%</td><td data-page-node-id="X6iRSh6aFFWYwVKThVsC41">108.0</td></tr>
-            <tr data-page-node-id="SFUUEljDlAZEovCox2MyGr"><td data-page-node-id="8zGDlDGadUtCBof9wf6sSD">关税</td><td data-page-node-id="uE85mgAAEDIqQKohjg9KiN">0（代垫）</td><td data-page-node-id="76MEVbKbnEQFJcmDkJd7AI">100.0（不赚）</td></tr>
+      <div class="card" style="margin-top:14px;background:#F3F0FF;border:1px solid #D6C2F0">
+        <h3 class="sec">默认管理费率（按费用分类）· 仅作"新增运费明细"预填</h3>
+        <p class="note" style="margin:0 0 8px">报价单（卖价）= 成本费率表(买价) 中<b>每个费用项目自身的管理费率</b>逐行计算：<b>卖价 = 买价 × (1 + 管理费率)</b>。下表为<b>按费用分类的默认值</b>——在「⑤ 新增运费明细」时自动带入该分类的默认管理费率，可<b>逐行改写</b>，实现比"按分类一刀切"更细的毛利管控。代垫类（如关税 / THC）设 0 即不赚。</p>
+        <table id="tblMarkup">
+          <thead><tr><th>费用分类</th><th>默认管理费率</th><th>示例（买价 100 → 卖价）</th></tr></thead>
+          <tbody>
+            <tr><td>海运费</td><td>8%</td><td>108.0</td></tr>
+            <tr><td>起运港费用</td><td>10%</td><td>110.0</td></tr>
+            <tr><td>目的港费用</td><td>10%</td><td>110.0</td></tr>
+            <tr><td>国内段(拖车)</td><td>5%</td><td>105.0</td></tr>
+            <tr><td>附加费</td><td>8%</td><td>108.0</td></tr>
+            <tr><td>关税</td><td>0（代垫）</td><td>100.0（不赚）</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <!-- ============ ⑤ 运费明细配置 ============ -->
-    <section class="page" id="p_detail" data-page-node-id="EvBP7fGW4jMjLCQa4Soo76">
-      <h1 class="doc" data-page-node-id="ADbEWfVP6gXMoFIWsL8Nv1">⑤ 成本费率表（买价）· 运费明细配置 <span class="badge-ver" data-page-node-id="xl13x4h7NH3EdYznQQvJiV">单一数据源</span></h1>
-      <p class="doc-lead" data-page-node-id="hW7sRAnUbtX82N0XNPE2No">本表是<b data-page-node-id="IUJaj7RRcjd1ACF1EkbAfv">费用唯一数据源（买价 / 成本价）</b>：记录你向车队、货代、码头实际支付的成本。下例按"墨西哥-曼萨尼约 / 恒荣达 / 20GP"筛选（当前起运港为待补充）。每行自带<b data-page-node-id="hpBFGiKleZsDLN3xjdRCNz">管理费率</b>列。<br data-page-node-id="rn0uTgjQ3mjDsrYA6bFfca"><b data-page-node-id="RMXZwobSG7V1omCYecHmbU">报价（卖价）= 买价 ×(1 + 该项目自身管理费率)</b>：「⑥ 报价单生成」按本表每行管理费率逐行推导卖价（分类默认值见「④ 默认管理费率」，可逐行改写）；「⑯ 海运对账单」「⑭ 派车单→物流对账单」直接读本表买价（不叠加管理费）。买价与卖价分离，互不污染。</p>
-      <div class="toolbar" data-page-node-id="yYMwBx58d7lX79CRy7Bonm">
-        <div class="field" data-page-node-id="KOriFx7iYfnM2I7dYOQToz"><label data-page-node-id="DFowZrHwFTPav4LZQLRMEz">起运港</label><select id="d_origin" data-page-node-id="J5zs2UoyS2F81gnqwbp9xa"></select></div>
-        <div class="field" data-page-node-id="AFAJMKA4IXPsvvuNkRiPW1"><label data-page-node-id="0tLUQBvCfsHIkmjsNeiEsw">目的港</label><select id="d_dest" data-page-node-id="HfPGSHYItn79Zqaxqg61B2"></select></div>
-        <div class="field" data-page-node-id="TdLiERuqF1OkPS4YGBAyAX"><label data-page-node-id="bgQy1YXOkEjMADHqlEH7cz">船公司</label><select id="d_carrier" data-page-node-id="laiTAvbMyUqtaFDV7P2xHJ"></select></div>
-        <div class="field" data-page-node-id="BVDgykG3xnwZCSXCBuFLwq"><label data-page-node-id="y8X2xHTgx1TssXiHjmoUAm">柜型</label><select id="d_ct" data-page-node-id="X8B44DWT6cykF0lYH7yA3w"></select></div>
-        <button onclick="renderDetail()" data-page-node-id="sD0EuwnoPBxCM5yBuXqO0x">筛选</button>
-        <button class="ghost" onclick="openRateModal()" data-page-node-id="FdJvfGRsXfhKJHmsJgpc8Y">+ 新增运费明细</button>
-        <span class="hint" id="rateHint" style="font-size:12px;color:var(--muted)" data-page-node-id="t82DM1AglDA5F9PRCL0CkJ"></span>
+    <section class="page" id="p_detail">
+      <h1 class="doc">⑤ 成本费率表（买价）· 运费明细配置 <span class="badge-ver">单一数据源</span></h1>
+      <p class="doc-lead">本表是<b>费用唯一数据源（买价 / 成本价）</b>：记录你向车队、货代、码头实际支付的成本。下例按"墨西哥-曼萨尼约 / 恒荣达 / 20GP"筛选（当前起运港为待补充）。每行自带<b>管理费率</b>列。<br><b>报价（卖价）= 买价 ×(1 + 该项目自身管理费率)</b>：「⑥ 报价单生成」按本表每行管理费率逐行推导卖价（分类默认值见「④ 默认管理费率」，可逐行改写）；「⑯ 海运对账单」「⑭ 派车单→物流对账单」直接读本表买价（不叠加管理费）。买价与卖价分离，互不污染。</p>
+      <div class="toolbar">
+        <div class="field"><label>起运港</label><select id="d_origin"></select></div>
+        <div class="field"><label>目的港</label><select id="d_dest"></select></div>
+        <div class="field"><label>船公司</label><select id="d_carrier"></select></div>
+        <div class="field"><label>柜型</label><select id="d_ct"></select></div>
+        <button onclick="renderDetail()">筛选</button>
+        <button class="ghost" onclick="openRateModal()">+ 新增运费明细</button>
+        <span class="hint" id="rateHint" style="font-size:12px;color:var(--muted)"></span>
       </div>
-      <div class="tbl-wrap" data-page-node-id="Y7TES8gwa6aiOA4XbJNHV8">
-        <table id="tblDetail" data-page-node-id="onkvG1Nar1hwsPCUCED4HH">
-          <thead data-page-node-id="9HK2Weico8PVsw3UerXWlR"><tr data-page-node-id="8vFuQxtDrruCLaAEm0BlH8"><th data-page-node-id="ywt7ESQ0vU1FzPh5LiYW9p">序号</th><th data-page-node-id="wpy48Jmpat7WwMoeNJaDAO">费用分类</th><th data-page-node-id="tUACYr0QUCKrMBmWvPHnCJ">费用项目</th><th data-page-node-id="58j9bUFGrfvOKH5iUyfKlm">金额(USD)</th><th data-page-node-id="NeVbGtTmOUD5sSrwUIHeYZ">管理费率</th><th data-page-node-id="T6qfHMUNBTFAqEGNDclIVt">是否必选</th><th data-page-node-id="Fi4bxmkOq4NZquIOjXxPnU">计费方式</th><th data-page-node-id="kIrzjmZn7f8QHswcBZJEmE">备注</th></tr></thead>
-          <tbody data-page-node-id="0FltZix5PiUnsTwORiZXAB"></tbody>
+      <div class="tbl-wrap">
+        <table id="tblDetail">
+          <thead><tr><th>序号</th><th>费用分类</th><th>费用项目</th><th>金额(USD)</th><th>管理费率</th><th>是否必选</th><th>计费方式</th><th>备注</th></tr></thead>
+          <tbody></tbody>
         </table>
       </div>
     </section>
 
     <!-- ============ ⑥ 报价单生成 ============ -->
-    <section class="page" id="p_quote" data-page-node-id="b0BCmWjQUAoWBBhbj1FjHh">
-      <h1 class="doc" data-page-node-id="6fq5dm4KhwlQoRt2TyxEzl">⑥ 报价单生成 <span class="badge-ver" data-page-node-id="MAQEmjZuX1K3tyIvCqvnI7">自动聚合</span></h1>
-      <p class="doc-lead" data-page-node-id="m12MAH7PUeKWTgmqBwJ7K1">选择条件即<b data-page-node-id="upJUkpBTj6qQk4iYAKhYkw">实时聚合</b>：上方动态展示"厂址→起运港"国内段运费，下方明细表汇总国内段 + 海运段全部费用（分类小计 + 分币种总价）。可切换"必选/全部"。</p>
-      <div class="toolbar" data-page-node-id="D28FMiRJ5qt81QaExhXRaa">
-        <div class="field" data-page-node-id="pQg5WTHvKz9oDRJ7XmcSUH"><label data-page-node-id="SuUzo6YGQMaNOAgnFkUMbh">起运厂址</label><select id="q_factory" onchange="renderQuote()" data-page-node-id="AU7rw4mHB8AknvChxVBbjY"></select></div>
-        <div class="field" data-page-node-id="BeWCZRWJ8DtsYOyskIs0ql"><label data-page-node-id="7rowK4oyCVgQFWkrFoKtZU">起运港</label><select id="q_origin" onchange="renderQuote()" data-page-node-id="qmDxQS1gFQe74FzE3niq5N"></select></div>
-        <div class="field" data-page-node-id="vx5Grw46WT43JGTpNcGzF2"><label data-page-node-id="czP1rtJFNFPuDzZJXZGorr">目的港</label><select id="q_dest" onchange="renderQuote()" data-page-node-id="bBdG0uAXf0TidcMalP2844"></select></div>
-        <div class="field" data-page-node-id="CFFdpgyDwiq6sr5vEKUI0g"><label data-page-node-id="hq0xkLAdHnhJlkuBmaPxem">船公司</label><select id="q_carrier" onchange="renderQuote()" data-page-node-id="NnHSf4t7Q8TGeEg2Ads1FD"></select></div>
-        <div class="field" data-page-node-id="HA2uYKVjS3q6XTlpZrso95"><label data-page-node-id="eCPT61Tkf1w6iNVc4qN3RX">柜型</label><select id="q_ct" onchange="renderQuote()" data-page-node-id="s9AJpUElCjDvDmyFEdoCnp"></select></div>
-        <div class="field" data-page-node-id="6L9bDMoFnMEuAir4dXr7Uk"><label data-page-node-id="cC8ulAXKFwTQw2G2em9QA6">费用范围</label>
-          <select id="q_scope" onchange="renderQuote()" data-page-node-id="HUStFmAMVMjAYzJo8Ux5vg"><option value="all" data-page-node-id="ZhObhekWMYKE5TStDHVenw">全部费用</option><option value="mand" data-page-node-id="DGNTdhGFa3VGE3hLRtZi9C">仅必选</option></select>
+    <section class="page" id="p_quote">
+      <h1 class="doc">⑥ 报价单生成 <span class="badge-ver">自动聚合</span></h1>
+      <p class="doc-lead">选择条件即<b>实时聚合</b>：上方动态展示"厂址→起运港"国内段运费，下方明细表汇总国内段 + 海运段全部费用（分类小计 + 分币种总价）。可切换"必选/全部"。</p>
+      <div class="toolbar">
+        <div class="field"><label>起运厂址</label><select id="q_factory" onchange="renderQuote()"></select></div>
+        <div class="field"><label>起运港</label><select id="q_origin" onchange="renderQuote()"></select></div>
+        <div class="field"><label>目的港</label><select id="q_dest" onchange="renderQuote()"></select></div>
+        <div class="field"><label>船公司</label><select id="q_carrier" onchange="renderQuote()"></select></div>
+        <div class="field"><label>柜型</label><select id="q_ct" onchange="renderQuote()"></select></div>
+        <div class="field"><label>费用范围</label>
+          <select id="q_scope" onchange="renderQuote()"><option value="all">全部费用</option><option value="mand">仅必选</option></select>
         </div>
-        <div class="field" data-page-node-id="9smR6waiEt39WOGjGYQGNx"><label data-page-node-id="n8pEuiPEn8OB2raNx6tNR7">货量(CBM)</label><input id="q_cbm" type="number" min="0" step="0.5" placeholder="如 12" style="width:80px" oninput="renderRecommend()" data-page-node-id="8H2LEeewsbxCV6kBTlrUnQ"></div>
-        <div class="field" data-page-node-id="zbhHpLPmrY4dotW4hQt94S"><label data-page-node-id="839nCIyy6hnx8Y2HKHxgKz">重量(KG)</label><input id="q_kg" type="number" min="0" step="100" placeholder="如 8000" style="width:90px" oninput="renderRecommend()" data-page-node-id="sqYC8l6xRXMcx7134L0sRl"></div>
-        <div class="field" style="min-width:auto;align-self:flex-end" data-page-node-id="bIo4dNSdzRkzSqJXS64vUq"><label style="font-size:11px" data-page-node-id="9m3x3gpS19DNAf9wFwlw6b">&nbsp;</label><label style="font-size:12px;color:#666;display:flex;align-items:center;gap:4px" data-page-node-id="i7M6xNogJcAMJxDDAUYCcQ"><input id="q_lcl" type="checkbox" checked onchange="renderRecommend()" data-page-node-id="MdfI2AqaH0syu2ZOkRq1hO"> 含散货(LCL)对比</label></div>
-        <button onclick="renderQuote()" data-page-node-id="n0WZcJoexP55cxnDrbbD6N">刷新报价</button>
-        <button class="ghost" onclick="renderPreview()" data-page-node-id="alBaTy9GVM8KjlwJuTOxO3">预览对外报价单</button>
+        <div class="field"><label>货量(CBM)</label><input id="q_cbm" type="number" min="0" step="0.5" placeholder="如 12" style="width:80px" oninput="renderRecommend()"></div>
+        <div class="field"><label>重量(KG)</label><input id="q_kg" type="number" min="0" step="100" placeholder="如 8000" style="width:90px" oninput="renderRecommend()"></div>
+        <div class="field" style="min-width:auto;align-self:flex-end"><label style="font-size:11px">&nbsp;</label><label style="font-size:12px;color:#666;display:flex;align-items:center;gap:4px"><input id="q_lcl" type="checkbox" checked onchange="renderRecommend()"> 含散货(LCL)对比</label></div>
+        <button onclick="renderQuote()">刷新报价</button>
+        <button class="ghost" onclick="renderPreview()">预览对外报价单</button>
       </div>
       <!-- 国内段即时展示：随厂址/起运港/柜型选择动态出现 -->
-      <div id="domesticPreview" class="card" style="display:none;background:#EAF4EA;border:1px solid #9CC99C;" data-page-node-id="SjDfJ20mVUeP8mHjtnAGl5"></div>
+      <div id="domesticPreview" class="card" style="display:none;background:#EAF4EA;border:1px solid #9CC99C;"></div>
       <!-- 智能柜型推荐：决策辅助，输入货量/重量自动对比散货/20GP/40HQ并推荐最省方案 -->
-      <div id="recoPanel" class="card" style="display:none;background:#FFF7E6;border:1px solid #E0C089;margin-top:12px;" data-page-node-id="wrSgHl7ied3G2OxOy8OmYZ">
-        <h3 class="sec" style="margin:4px 0 8px;color:#8A5A00" data-page-node-id="GEdPVlKRb71YKkLxR2AkGl">💡 智能柜型推荐（决策辅助）</h3>
-        <div id="recoBody" data-page-node-id="yDIRBmapsoqHC0yAImAd3b"></div>
-        <p class="note" style="margin:8px 0 0;color:#7a5a16" data-page-node-id="DrLzLH1LJaU7PvTGB4jMKb">说明：折算合计按演示汇率 <b data-page-node-id="4zjEGxRTKaN33lluv6Mk18">1 USD = 7.2 CNY</b> 将国内段(CNY)折算为 USD 后相加，仅用于三档横向比较。散货(LCL)海运价当前无真实数据，按「20GP 海运总价 ÷ 15CBM」<b data-page-node-id="4KxzkrvksyGrvTLAnf30fN">示例推导</b>（≈行业 15CBM 盈亏平衡点），待在「⑤ 运费明细配置」补录柜型=LCL、计费方式=按CBM 的真实海运价后即自动替换为真实值。重量校验依据柜型最大载重（海运用；公路限重更低需另行核对）。</p>
+      <div id="recoPanel" class="card" style="display:none;background:#FFF7E6;border:1px solid #E0C089;margin-top:12px;">
+        <h3 class="sec" style="margin:4px 0 8px;color:#8A5A00">💡 智能柜型推荐（决策辅助）</h3>
+        <div id="recoBody"></div>
+        <p class="note" style="margin:8px 0 0;color:#7a5a16">说明：折算合计按演示汇率 <b>1 USD = 7.2 CNY</b> 将国内段(CNY)折算为 USD 后相加，仅用于三档横向比较。散货(LCL)海运价当前无真实数据，按「20GP 海运总价 ÷ 15CBM」<b>示例推导</b>（≈行业 15CBM 盈亏平衡点），待在「⑤ 运费明细配置」补录柜型=LCL、计费方式=按CBM 的真实海运价后即自动替换为真实值。重量校验依据柜型最大载重（海运用；公路限重更低需另行核对）。</p>
       </div>
-      <div class="tbl-wrap" data-page-node-id="cwPgg0jhrN28kbtWiArbWH">
-        <table id="tblQuote" data-page-node-id="in0BLP22TjHuwJTiwgWtJU">
-          <thead data-page-node-id="Ohpme12ZNMRMgrR5WSmqAT"><tr data-page-node-id="lD6AxDgN1tRK6ZGox3ycnj"><th data-page-node-id="DEpeTroCmZ2p4H4GGSt7OK">费用分类</th><th data-page-node-id="HbvDAiRZtfnyJOJ2WzOpIa">费用项目</th><th data-page-node-id="F78xS4MHZq5otldVXHap0R">买价</th><th data-page-node-id="J3E4pklCxjC2lJsXg6TI3W">管理费率</th><th data-page-node-id="8Nree4hFR78B0WFqSy4NKn">管理费额</th><th data-page-node-id="8uRNkhIhZUIwSb7JzDMMUF">卖价(含管理费)</th><th data-page-node-id="E1IlnAlHHsDSaovqTjBjmC">是否必选</th><th data-page-node-id="sMfP481z1U8TDXiENjus8z">计费方式</th><th data-page-node-id="aayXSXvoeZK5am042o5Ww4">备注</th></tr></thead>
-          <tbody data-page-node-id="FbcAHemtdUy0tHKCzSTFiP"></tbody>
-          <tfoot data-page-node-id="mujqoVOw7QDyAvM41fDW0s"></tfoot>
+      <div class="tbl-wrap">
+        <table id="tblQuote">
+          <thead><tr><th>费用分类</th><th>费用项目</th><th>买价</th><th>管理费率</th><th>管理费额</th><th>卖价(含管理费)</th><th>是否必选</th><th>计费方式</th><th>备注</th></tr></thead>
+          <tbody></tbody>
+          <tfoot></tfoot>
         </table>
       </div>
-      <p class="note" style="margin-top:10px;" data-page-node-id="RMQsX1L3DUoR24RXe26Wa6">本报价为<b data-page-node-id="OOZHL3K9Qj074V3HV5TwSR">事前估价（卖价）</b> = 「⑤ 成本费率表(买价)」中<b data-page-node-id="F8pFlK7Zfz8zTQ9ycPx998">每个费用项目自身的管理费率逐行计算</b>：卖价 = 买价 ×(1 + 管理费率)；分类默认管理费率见「④ 默认管理费率」，可逐行改写，粒度比"按分类一刀切"更细。不含报关费/关税/目的港费的项目是否报出由运输条款决定；这些费用的<b data-page-node-id="vKmVPsFGAH1ZflyUvamSmY">实际发生</b>在「⑯ 海运对账单」「⑭ 派车单→物流对账单」归集后，于「⑮ 费用汇总与分摊」结算。国内段运费按所选厂址与起运港计。</p>
+      <p class="note" style="margin-top:10px;">本报价为<b>事前估价（卖价）</b> = 「⑤ 成本费率表(买价)」中<b>每个费用项目自身的管理费率逐行计算</b>：卖价 = 买价 ×(1 + 管理费率)；分类默认管理费率见「④ 默认管理费率」，可逐行改写，粒度比"按分类一刀切"更细。不含报关费/关税/目的港费的项目是否报出由运输条款决定；这些费用的<b>实际发生</b>在「⑯ 海运对账单」「⑭ 派车单→物流对账单」归集后，于「⑮ 费用汇总与分摊」结算。国内段运费按所选厂址与起运港计。</p>
     </section>
 
     <!-- ============ ⑦ 报价单预览 ============ -->
-    <section class="page" id="p_preview" data-page-node-id="RLQbWHqha0msBbTOh63UIg">
-      <h1 class="doc" data-page-node-id="BRgmDBvC0xK6Zq8PJZBZv7">⑦ 报价单预览（对外）</h1>
-      <p class="doc-lead" data-page-node-id="BVHaPZDE28g5KWnSC8LYXh">客户视角的清晰分项报价单（含国内段），可直接打印。先在"⑥ 报价单生成"点击"预览对外报价单"。</p>
-      <div class="preview-box" id="previewBox" data-page-node-id="HIixtB7ikdNd9fyFZP9wZA"><div class="empty" data-page-node-id="96m7rj5nvqhbed9ZLZZ1rQ">尚未生成。请先到"报价单生成"选择条件并点击"预览对外报价单"。</div></div>
-      <div class="btnrow" data-page-node-id="KNYX10jePeE6D9tUKm3aI7"><button class="ghost" onclick="window.print()" data-page-node-id="NN0twbFiv5ZL4rVBnFAt1o">打印 / 导出 PDF</button></div>
+    <section class="page" id="p_preview">
+      <h1 class="doc">⑦ 报价单预览（对外）</h1>
+      <p class="doc-lead">客户视角的清晰分项报价单（含国内段），可直接打印。先在"⑥ 报价单生成"点击"预览对外报价单"。</p>
+      <div class="preview-box" id="previewBox"><div class="empty">尚未生成。请先到"报价单生成"选择条件并点击"预览对外报价单"。</div></div>
+      <div class="btnrow"><button class="ghost" onclick="window.print()">打印 / 导出 PDF</button></div>
     </section>
 
     <!-- ============ 🔄 海运流程图 ============ -->
-    <section class="page" id="p_flow" data-page-node-id="CN9dj6jHQaZ8Wun7HgaqI3">
-      <h1 class="doc" data-page-node-id="14EET3Ue2VZ6qQjw0D5iHI">🔄 海运出口全流程图</h1>
-      <p class="doc-lead" data-page-node-id="xKXsr4Icb2v9sYCb1tATYk">本模块当前聚焦「工厂装柜 + 封条 → 出口装箱单 → 派车单拉柜到港 → 海运运费 → 订舱/报关」主线，暂不涉及目的国进口报关。</p>
-      <div class="card" data-page-node-id="3K2q2MAdzqgE1CdjnEZh0G">
-        <svg viewBox="0 0 900 520" style="width:100%;max-width:900px;display:block;margin:0 auto;font-family:'Microsoft YaHei',sans-serif;" data-page-node-id="dAqkVdgoUw8wg35U3u0pdx">
-          <defs data-page-node-id="qvXlGDqE6EDRFSRiFCvMBo">
-            <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth" data-page-node-id="gf0cpZiNTEhscUikMbJLM9"><path d="M0,0 L0,6 L9,3 z" fill="#4472C4" data-page-node-id="HETB4LFQxg1Oe3ot5u9Ubz"/></marker>
-            <marker id="arrDashed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth" data-page-node-id="rl5aDOYFAQPKw6RO9Xj9RL"><path d="M0,0 L0,6 L9,3 z" fill="#9CA3AF" data-page-node-id="rBal3T4CDMBXRTAZnIZpSE"/></marker>
+    <section class="page" id="p_flow">
+      <h1 class="doc">🔄 海运出口全流程图</h1>
+      <p class="doc-lead">本模块当前聚焦「工厂装柜 + 封条 → 出口装箱单 → 派车单拉柜到港 → 海运运费 → 订舱/报关」主线，暂不涉及目的国进口报关。</p>
+      <div class="card">
+        <svg viewBox="0 0 900 520" style="width:100%;max-width:900px;display:block;margin:0 auto;font-family:'Microsoft YaHei',sans-serif;">
+          <defs>
+            <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#4472C4"/></marker>
+            <marker id="arrDashed" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#9CA3AF"/></marker>
           </defs>
-          <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="#1F3864" data-page-node-id="mts9XITAOYmgSxk5sM2OWz">海运出口作业流程（一期范围）</text>
+          <text x="450" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="#1F3864">海运出口作业流程（一期范围）</text>
 
           <!-- ① ERP 销售订单 -->
-          <rect x="40" y="70" width="140" height="58" rx="8" fill="#E2EFDA" stroke="#2E5E1E" stroke-width="2" data-page-node-id="XfQhKsOVPLOa0I62Ba9AMe"/>
-          <text x="110" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864" data-page-node-id="3BtXFy1HCXmTsAkngTomjb">① 出货通知单 Shipment</text>
-          <text x="110" y="108" text-anchor="middle" font-size="11" fill="#555" data-page-node-id="XOiMY4ExannHaTf9xCfMTJ">销售订单确认后·跟单创建</text>
-          <text x="110" y="123" text-anchor="middle" font-size="11" fill="#555" data-page-node-id="HnVUwEGSvRtdcS4VeLXhOW">生成 出货通知单号</text>
+          <rect x="40" y="70" width="140" height="58" rx="8" fill="#E2EFDA" stroke="#2E5E1E" stroke-width="2"/>
+          <text x="110" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">① 出货通知单 Shipment</text>
+          <text x="110" y="108" text-anchor="middle" font-size="11" fill="#555">销售订单确认后·跟单创建</text>
+          <text x="110" y="123" text-anchor="middle" font-size="11" fill="#555">生成 出货通知单号</text>
 
           <!-- ② 出口装箱单（源头） -->
-          <rect x="200" y="70" width="165" height="58" rx="8" fill="#FFF2CC" stroke="#B7791F" stroke-width="2" data-page-node-id="dAGTANforagELjW1wskMbp"/>
-          <text x="282" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864" data-page-node-id="vN4ORgfiiDvrsYetOARwuw">② 出口装箱单</text>
-          <text x="282" y="110" text-anchor="middle" font-size="11" fill="#555" data-page-node-id="k0wAEtI3uEbOlI4KWZ3zYf">工厂装柜 + 封条(PL)</text>
-          <text x="282" y="125" text-anchor="middle" font-size="11" fill="#555" data-page-node-id="x8sYOesiwzFDgZYDYAyBJl">柜型×数量推荐</text>
+          <rect x="200" y="70" width="165" height="58" rx="8" fill="#FFF2CC" stroke="#B7791F" stroke-width="2"/>
+          <text x="282" y="92" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">② 出口装箱单</text>
+          <text x="282" y="110" text-anchor="middle" font-size="11" fill="#555">工厂装柜 + 封条(PL)</text>
+          <text x="282" y="125" text-anchor="middle" font-size="11" fill="#555">柜型×数量推荐</text>
 
           <!-- ③ 派车单 -->
-          <rect x="375" y="70" width="140" height="58" rx="8" fill="#DDEBF7" stroke="#1F3864" stroke-width="2" data-page-node-id="eFU9soAgBDyEFY5lkrBkHe"/>
-          <text x="445" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864" data-page-node-id="pgvzxhwI27Bv5YPSvDxak5">③ 派车单</text>
-          <text x="445" y="115" text-anchor="middle" font-size="11" fill="#555" data-page-node-id="7Zaf6HnTV0M6wA0BmZ6sCc">选PL拉柜到港</text>
+          <rect x="375" y="70" width="140" height="58" rx="8" fill="#DDEBF7" stroke="#1F3864" stroke-width="2"/>
+          <text x="445" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">③ 派车单</text>
+          <text x="445" y="115" text-anchor="middle" font-size="11" fill="#555">选PL拉柜到港</text>
 
           <!-- ④ 厂址→起运港 -->
-          <rect x="525" y="70" width="160" height="58" rx="8" fill="#E2EFDA" stroke="#2E5E1E" stroke-width="2" data-page-node-id="EfYIyvNofGpaRp7w2wwfNM"/>
-          <text x="605" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864" data-page-node-id="M1pBBb6gS4LlgdfaD4F5WN">④ 厂址→起运港</text>
-          <text x="605" y="115" text-anchor="middle" font-size="11" fill="#555" data-page-node-id="2QRAomDAcWPhAA12UdkaHD">拖车到货确认</text>
+          <rect x="525" y="70" width="160" height="58" rx="8" fill="#E2EFDA" stroke="#2E5E1E" stroke-width="2"/>
+          <text x="605" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">④ 厂址→起运港</text>
+          <text x="605" y="115" text-anchor="middle" font-size="11" fill="#555">拖车到货确认</text>
 
           <!-- ⑤ 海运运费报价 -->
-          <rect x="695" y="70" width="160" height="58" rx="8" fill="#E0ECFF" stroke="#1E40AF" stroke-width="2" data-page-node-id="6AZ7jDTFMzCFMKiYeV394i"/>
-          <text x="775" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864" data-page-node-id="RCxXkupN4reETKXFlYppYc">⑤ 海运运费报价</text>
-          <text x="775" y="115" text-anchor="middle" font-size="11" fill="#555" data-page-node-id="ZBhcF4n5St5MhAhuMKcBBx">国内+海运段</text>
+          <rect x="695" y="70" width="160" height="58" rx="8" fill="#E0ECFF" stroke="#1E40AF" stroke-width="2"/>
+          <text x="775" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">⑤ 海运运费报价</text>
+          <text x="775" y="115" text-anchor="middle" font-size="11" fill="#555">国内+海运段</text>
 
           <!-- ⑥ 订舱/派船 -->
-          <rect x="525" y="230" width="160" height="58" rx="8" fill="#FCE4D6" stroke="#9C4221" stroke-width="2" data-page-node-id="zwNiJkZFU8ij8kLA0UoGJr"/>
-          <text x="605" y="256" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864" data-page-node-id="dnCMoqDiuH6vCN9aCXCHYk">⑥ 订舱 / 派船</text>
-          <text x="605" y="275" text-anchor="middle" font-size="11" fill="#555" data-page-node-id="pbn5KzFTsWj30JjdbFWwjG">确认船司/柜型</text>
+          <rect x="525" y="230" width="160" height="58" rx="8" fill="#FCE4D6" stroke="#9C4221" stroke-width="2"/>
+          <text x="605" y="256" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">⑥ 订舱 / 派船</text>
+          <text x="605" y="275" text-anchor="middle" font-size="11" fill="#555">确认船司/柜型</text>
 
           <!-- ⑦ 出口报关单 -->
-          <rect x="695" y="230" width="160" height="58" rx="8" fill="#F2F2F2" stroke="#6B7280" stroke-width="2" data-page-node-id="b4uPKNwF0aBY4EPPCxKpOM"/>
-          <text x="775" y="256" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864" data-page-node-id="3GdPTGMHi8JsLJoFnhZfGh">⑦ 出口报关单</text>
-          <text x="775" y="275" text-anchor="middle" font-size="11" fill="#555" data-page-node-id="kJPEHWTucjqDZSzbsMd2hr">由装箱单生成</text>
+          <rect x="695" y="230" width="160" height="58" rx="8" fill="#F2F2F2" stroke="#6B7280" stroke-width="2"/>
+          <text x="775" y="256" text-anchor="middle" font-size="13" font-weight="700" fill="#1F3864">⑦ 出口报关单</text>
+          <text x="775" y="275" text-anchor="middle" font-size="11" fill="#555">由装箱单生成</text>
 
           <!-- ⑧ 目的国进口报关(二期) -->
-          <rect x="695" y="390" width="160" height="58" rx="8" fill="#EDEDED" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6,4" data-page-node-id="E9RDLlwvEjAnGdOADR7axv"/>
-          <text x="775" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#6B7280" data-page-node-id="ZQXMpXSkYTICfjqWFkGHYc">⑧ 目的国进口报关</text>
-          <text x="775" y="435" text-anchor="middle" font-size="11" fill="#6B7280" data-page-node-id="iXErEDP4tSk4DqaoZqwnCg">（二期单独处理）</text>
+          <rect x="695" y="390" width="160" height="58" rx="8" fill="#EDEDED" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6,4"/>
+          <text x="775" y="416" text-anchor="middle" font-size="13" font-weight="700" fill="#6B7280">⑧ 目的国进口报关</text>
+          <text x="775" y="435" text-anchor="middle" font-size="11" fill="#6B7280">（二期单独处理）</text>
 
           <!-- 连接线（主线） -->
-          <line x1="180" y1="99" x2="200" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)" data-page-node-id="XGEpE5hVI1mQKCBh6d8xLQ"/>
-          <text x="190" y="91" text-anchor="middle" font-size="10" fill="#9C4221" data-page-node-id="ELzF5x1EkRQ9WMM4UEgJOD">↓ 出货通知单号</text>
-          <line x1="365" y1="99" x2="375" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)" data-page-node-id="NtcOpdNr9SIzd23P27RH4T"/>
-          <line x1="515" y1="99" x2="525" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)" data-page-node-id="tWJh71g7vzyH3mBEEl41fl"/>
-          <line x1="685" y1="99" x2="695" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)" data-page-node-id="WR3iO2og5OKua4Yhb2ghUw"/>
-          <polyline points="775,128 775,200 605,200 605,230" fill="none" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)" data-page-node-id="xNNKq2g27ccPgEEVouzBaB"/>
-          <line x1="685" y1="259" x2="695" y2="259" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)" data-page-node-id="A34BFhzhwoo7T0AMI9chZE"/>
-          <line x1="775" y1="288" x2="775" y2="390" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrDashed)" data-page-node-id="FieypHnr5IwLJH4n4UNzCX"/>
+          <line x1="180" y1="99" x2="200" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <text x="190" y="91" text-anchor="middle" font-size="10" fill="#9C4221">↓ 出货通知单号</text>
+          <line x1="365" y1="99" x2="375" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="515" y1="99" x2="525" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="685" y1="99" x2="695" y2="99" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <polyline points="775,128 775,200 605,200 605,230" fill="none" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="685" y1="259" x2="695" y2="259" stroke="#4472C4" stroke-width="2" marker-end="url(#arr)"/>
+          <line x1="775" y1="288" x2="775" y2="390" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrDashed)"/>
 
           <!-- 连接线：② 装箱单 → ⑦ 报关（数据来源） -->
-          <polyline points="282,128 282,170 775,170 775,230" fill="none" stroke="#9CA3AF" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrDashed)" data-page-node-id="nSp2zH8FGcO4eEmv8skSOc"/>
+          <polyline points="282,128 282,170 775,170 775,230" fill="none" stroke="#9CA3AF" stroke-width="1.6" stroke-dasharray="5,4" marker-end="url(#arrDashed)"/>
 
           <!-- 数据/单据标注 -->
-          <text x="190" y="88" font-size="11" fill="#6B7280" data-page-node-id="ZgX69fOXlgvGgvDvBTteZT">出货计划</text>
-          <text x="368" y="88" font-size="11" fill="#6B7280" data-page-node-id="nH3qpCVxWeZRzwt5IbCqlp">箱/货数据</text>
-          <text x="518" y="88" font-size="11" fill="#6B7280" data-page-node-id="TdFxHKSuryUpIBX0CeHzuu">装柜拖车到港</text>
-          <text x="688" y="88" font-size="11" fill="#6B7280" data-page-node-id="4rH1Boh3JH2qhCgD1hFl35">起运港+柜型</text>
-          <text x="648" y="218" font-size="11" fill="#6B7280" data-page-node-id="UUUAXT8ZagKqSd5ZTev9Yh">报价单/柜型</text>
-          <text x="688" y="278" font-size="11" fill="#6B7280" data-page-node-id="DaazgRor1KRF0lNOjXt5zc">Booking/SO</text>
-          <text x="430" y="162" font-size="11" fill="#9CA3AF" data-page-node-id="DHCDrJNsf45lfuKR07IyH3">装箱单(PL)→报关</text>
+          <text x="190" y="88" font-size="11" fill="#6B7280">出货计划</text>
+          <text x="368" y="88" font-size="11" fill="#6B7280">箱/货数据</text>
+          <text x="518" y="88" font-size="11" fill="#6B7280">装柜拖车到港</text>
+          <text x="688" y="88" font-size="11" fill="#6B7280">起运港+柜型</text>
+          <text x="648" y="218" font-size="11" fill="#6B7280">报价单/柜型</text>
+          <text x="688" y="278" font-size="11" fill="#6B7280">Booking/SO</text>
+          <text x="430" y="162" font-size="11" fill="#9CA3AF">装箱单(PL)→报关</text>
         </svg>
       </div>
-      <div class="card" data-page-node-id="C8ukA9wLKRseo2GDPR390f">
-        <h2 class="sec" data-page-node-id="VgpplAWntvfkw3Tne6uvtS">流程说明</h2>
-        <table data-page-node-id="kT0YUGcg8zwiHsbhrrIHB5">
-          <tr data-page-node-id="f0ES56TAA809HdP4BHEe0s"><th data-page-node-id="itxNVahrgswarATMEBxeZb">步骤</th><th data-page-node-id="DsBVsWgm03LnmL3ueCFZHt">负责模块</th><th data-page-node-id="MLto9Rol30Gc3LrAu5ScoU">输入</th><th data-page-node-id="UkE7e8PgRDoPgDMsC2eQBm">输出</th><th data-page-node-id="kxVlPj7Iz7wxfXdoeBoQTf">备注</th></tr>
-          <tr data-page-node-id="FTbHmoxZGWItBuPyTpQk4G"><td data-page-node-id="6Yf9shjzdxrsBpZCDVGjt9">① ERP 销售订单</td><td data-page-node-id="dXVMyofMBdU4jfmpx6i0qu">ERP 销售/出货计划</td><td data-page-node-id="eRgV82b9PyF74cSNzfDZFS">客户订单</td><td data-page-node-id="FDORYeIodNOiDth2KGVKrp">出货计划</td><td data-page-node-id="jVPkNH8sabs6HB6WcwhHKE">本模块不改造；确认后由跟单/业务建<b data-page-node-id="xiBqbf7PSPurCrkqRxv8me">出货通知单</b>（流程起点）。</td></tr>
-          <tr data-page-node-id="T5z9AKL2HmfdLfgermwKmm"><td data-page-node-id="DgbtgYoLC7sUVvHfk3NTSS">② 出货通知单 Shipment</td><td data-page-node-id="yQUjn40nOnQHvL0h8BOrkl">本系统（跟单/业务/单证）</td><td data-page-node-id="lPkEyOFG3AkDLFrK6GXDkB">已确认销售订单</td><td data-page-node-id="hYYoIQ1leKTOqXmfwkOVuw">出货通知单号 + 起运/目的港/运输条款</td><td data-page-node-id="oZ1Vu7UVFSRa5ND99UI9qP"><b data-page-node-id="AgEhnKuVsTCZIMRP2aNAHq">流程起点，本模块最先创建</b>；下游装箱单/送货单/派车单/费用汇总均引用此号（FK），不新建。</td></tr>
-          <tr data-page-node-id="a7agHsg5ECJ90t6AvFKYef"><td data-page-node-id="2BA1Aim9w5B3yMzG7K2JSJ">③ 送货单</td><td data-page-node-id="EfILu16soFQoeQh8H4GC1T">⑫ 送货单(Delivery Order)</td><td data-page-node-id="bWS1FCE7fKxBQLBWBoSRD4">出货通知单号 / 备货</td><td data-page-node-id="xeJzHHCKAq2hRBtcta09Uq">送货单（客户×料号×PO）</td><td data-page-node-id="0jhJguxA7PrOL07TkABE16">仓库放行+拖车依据，与装箱单平级、无强制先后；其体积/重量为「⑮ 分摊」基准。</td></tr>
-          <tr data-page-node-id="YCBO7XRbr8hpTFTSFbv55w"><td data-page-node-id="GcB2Odw3K1QI3f3UO03prt">④ 出口装箱单</td><td data-page-node-id="OeTttCyotrdXIoITFSmn2k">⑪ 装箱单(Packing List)</td><td data-page-node-id="C4uRUr2sEOAkfmJKYi27Kn">出货通知单号 / 装柜记录</td><td data-page-node-id="KyGPLcPZfD5AC9RpPSkJGA">PL + 柜型推荐 + 封条号</td><td data-page-node-id="XZXPvKSaeziESSBHsaAHAO">工厂装柜封条后生成，是后续单据的数据源头。</td></tr>
-          <tr data-page-node-id="meNOeznlz6ud5GVas6nzVZ"><td data-page-node-id="DHSxV2E07sotWW6APNtJr7">⑤ 派车单</td><td data-page-node-id="vIErEGYKJIrES7GD7NVHCP">⑭ 派车单（国内拖车）</td><td data-page-node-id="BS615Oj0oWeeaycplMbMdF">装箱单号（选 PL）</td><td data-page-node-id="liKW2R2H0DFL8G48CAd1eI">派车单 + 国内运费 + <b data-page-node-id="Lg94S9wYF9FagG8rVurXBa">物流对账单</b>(Stage A)</td><td data-page-node-id="tiJ8dPffawbFAwePpxbheo">选装箱单带出承运体积/重量/货款项数/数量，按公里/运价算运费；物流对账单为 Stage A 成本单据。</td></tr>
-          <tr data-page-node-id="uW3PEjGVtvzylz7NIUGkcX"><td data-page-node-id="KtWOIOtmljfeUcEdpghXaE">⑥ 厂址→起运港</td><td data-page-node-id="1ntxEwEPNqnQzDHexosFvG">⑨ 厂址→起运港运费</td><td data-page-node-id="8iwNvEaY6BBgUjUpJKZD5U">派车单 / 厂址</td><td data-page-node-id="QM4NmabIoJknJLFD9zJBDd">到货确认</td><td data-page-node-id="q0yppBU01BcKNgqdIvr3ne">运费已在报价单中聚合。</td></tr>
-          <tr data-page-node-id="JRtgA43GBOH5y0ByRvrpKt"><td data-page-node-id="kjdpbiJMXAgSkQLFCGthh8">⑦ 海运运费报价</td><td data-page-node-id="j1bpKEvAuAQjAUj6u7ZBu1">⑥ 报价单生成</td><td data-page-node-id="MSuNmGN5wJurQo0tLXaslL">起运港/目的港/船公司/柜型 + 各项目管理费率</td><td data-page-node-id="M2TGEAKafbFG0PIpTgWd4U">报价单（<b data-page-node-id="KposQiHXcw7F13WGUr8gtD">卖价</b>=买价×(1+管理费率)，逐行）</td><td data-page-node-id="ecqAYVaNObsdJVyOHrYxEw">含国内段+海运段；数字来自「⑤ 成本费率表(买价)」按每行管理费率推导卖价（默认见④）。智能柜型推荐。</td></tr>
-          <tr data-page-node-id="cwpIahqA2GfH9AmUffHysZ"><td data-page-node-id="SwEkCfasqafhDb7AIhXFQW">⑧ 订舱 / 派船</td><td data-page-node-id="YKjPKxgL4WhKvRGiMMBZz6">ERP 物流/货代模块</td><td data-page-node-id="DCAs9EUjHAmapWJ93P5Hb3">报价单 / 柜型</td><td data-page-node-id="DfLT9zVZBQBdHoTRHxBTmJ">Booking / SO</td><td data-page-node-id="3z6M6f6ZQPTqaO3Fhcdv4P">本模块输出柜型×数量供参考。</td></tr>
-          <tr data-page-node-id="5PyaLYbifP6sH2U3DBdKsC"><td data-page-node-id="OrwrOnZZx6zMFhiFX4yQGO">⑨ 出口报关单</td><td data-page-node-id="pOsTjUmtj9XfVBtH5hGsQC">ERP 报关模块</td><td data-page-node-id="KTRCXiVQ7zzUqGl0ANuYMY">装箱单</td><td data-page-node-id="z0sCYF1l0nFMX67YXZh2FG">出口报关单草稿</td><td data-page-node-id="VltOmUv5GMF2W166LmEnw5">由装箱单按 HS 合并生成。</td></tr>
-          <tr data-page-node-id="rFImvbbRxF9gllCTN8U0DJ"><td data-page-node-id="7rQ1guIYZRDiCF11AKKLFB">⑩ 目的国进口报关</td><td data-page-node-id="wJSVW4SjOiJIVXPTENEh5T">二期</td><td data-page-node-id="IZLh9jCEvMb3AVmfuGLaqm">—</td><td data-page-node-id="wSCxxZzgIOhEUsCy0xMNiR">—</td><td data-page-node-id="asOT5PWfLNkIDx3X4mbm4C">单独处理，不在当前范围。</td></tr>
-          <tr data-page-node-id="g2VGHHcLuQd96vSWRmeFff"><td data-page-node-id="kqcEfEJZGTjCxDDaGafSkx">⑪ 海运对账单（成本）</td><td data-page-node-id="l4LPW4nY9Lnpe4ojGCRRCS">⑯ 海运对账单</td><td data-page-node-id="4TFwY8ve4KOmO0zefPJBBi">出口装箱单号</td><td data-page-node-id="WGC8kSFWaAxgCTtz95pTfn">海运对账单(批核锁定) Stage B+C</td><td data-page-node-id="FB6AjKvdpPNqIAo2KzN1wv">选出口装箱单→按「⑤ 成本费率表(买价)」生成海运费+起运港+目的港；必选自动勾/可选勾选+开单批核锁定。买价侧，与报价单(卖价)分离。</td></tr>
-          <tr data-page-node-id="IdzQ5Bbg4gQHgoQoxtgzll"><td data-page-node-id="XoW3dPMl5ijCPonvaSYXeq">⑫ 费用汇总与分摊</td><td data-page-node-id="LsdrIDIB21GX1xR5Gru58S">⑮ 费用汇总与分摊</td><td data-page-node-id="bkpY43TBMiRZ3I9gqf0AXr">物流对账单 + 海运对账单 + 送货单</td><td data-page-node-id="dPPLUWHQpd1SglitjAitQT">按客户PO/料号分摊 + 估实差异</td><td data-page-node-id="J8VvRxXRvPebjLCAdf8RMN">事后实际结算：<b data-page-node-id="vFPCd81jX2ZtcPuw9dG849">引用</b>两对账单（不重算）按运输条款过滤阶段，再经送货单权重分摊，闭环回灌报价。</td></tr>
+      <div class="card">
+        <h2 class="sec">流程说明</h2>
+        <table>
+          <tr><th>步骤</th><th>负责模块</th><th>输入</th><th>输出</th><th>备注</th></tr>
+          <tr><td>① ERP 销售订单</td><td>ERP 销售/出货计划</td><td>客户订单</td><td>出货计划</td><td>本模块不改造；确认后由跟单/业务建<b>出货通知单</b>（流程起点）。</td></tr>
+          <tr><td>② 出货通知单 Shipment</td><td>本系统（跟单/业务/单证）</td><td>已确认销售订单</td><td>出货通知单号 + 起运/目的港/运输条款</td><td><b>流程起点，本模块最先创建</b>；下游装箱单/送货单/派车单/费用汇总均引用此号（FK），不新建。</td></tr>
+          <tr><td>③ 送货单</td><td>⑫ 送货单(Delivery Order)</td><td>出货通知单号 / 备货</td><td>送货单（客户×料号×PO）</td><td>仓库放行+拖车依据，与装箱单平级、无强制先后；其体积/重量为「⑮ 分摊」基准。</td></tr>
+          <tr><td>④ 出口装箱单</td><td>⑪ 装箱单(Packing List)</td><td>出货通知单号 / 装柜记录</td><td>PL + 柜型推荐 + 封条号</td><td>工厂装柜封条后生成，是后续单据的数据源头。</td></tr>
+          <tr><td>⑤ 派车单</td><td>⑭ 派车单（国内拖车）</td><td>装箱单号（选 PL）</td><td>派车单 + 国内运费 + <b>物流对账单</b>(Stage A)</td><td>选装箱单带出承运体积/重量/货款项数/数量，按公里/运价算运费；物流对账单为 Stage A 成本单据。</td></tr>
+          <tr><td>⑥ 厂址→起运港</td><td>⑨ 厂址→起运港运费</td><td>派车单 / 厂址</td><td>到货确认</td><td>运费已在报价单中聚合。</td></tr>
+          <tr><td>⑦ 海运运费报价</td><td>⑥ 报价单生成</td><td>起运港/目的港/船公司/柜型 + 各项目管理费率</td><td>报价单（<b>卖价</b>=买价×(1+管理费率)，逐行）</td><td>含国内段+海运段；数字来自「⑤ 成本费率表(买价)」按每行管理费率推导卖价（默认见④）。智能柜型推荐。</td></tr>
+          <tr><td>⑧ 订舱 / 派船</td><td>ERP 物流/货代模块</td><td>报价单 / 柜型</td><td>Booking / SO</td><td>本模块输出柜型×数量供参考。</td></tr>
+          <tr><td>⑨ 出口报关单</td><td>ERP 报关模块</td><td>装箱单</td><td>出口报关单草稿</td><td>由装箱单按 HS 合并生成。</td></tr>
+          <tr><td>⑩ 目的国进口报关</td><td>二期</td><td>—</td><td>—</td><td>单独处理，不在当前范围。</td></tr>
+          <tr><td>⑪ 海运对账单（成本）</td><td>⑯ 海运对账单</td><td>出口装箱单号</td><td>海运对账单(批核锁定) Stage B+C</td><td>选出口装箱单→按「⑤ 成本费率表(买价)」生成海运费+起运港+目的港；必选自动勾/可选勾选+开单批核锁定。买价侧，与报价单(卖价)分离。</td></tr>
+          <tr><td>⑫ 费用汇总与分摊</td><td>⑮ 费用汇总与分摊</td><td>物流对账单 + 海运对账单 + 送货单</td><td>按客户PO/料号分摊 + 估实差异</td><td>事后实际结算：<b>引用</b>两对账单（不重算）按运输条款过滤阶段，再经送货单权重分摊，闭环回灌报价。</td></tr>
         </table>
       </div>
     </section>
 
     <!-- ============ ⑭ 派车单（国内拖车） ============ -->
-    <section class="page" id="p_dispatch" data-page-node-id="l7pN9ZviW4TA3AZgnh8kc1">
-      <h1 class="doc" data-page-node-id="BYMplqau1CINZcj9CNWDqS">⑭ 派车单（国内拖车）</h1>
-      <p class="doc-lead" data-page-node-id="W3KeFSSoOPVaUZPqZgyH4n">派车单是「工厂装柜封条后 → 拉柜到起运港」的执行单据。<b data-page-node-id="T7lxgdQyhFRi1HndHWZiPp">先有装箱单</b>：在此<b data-page-node-id="37kt5W9pEhncDeBV6hB1sn">选择装箱单号</b>即自动带出该柜的承运体积 / 重量 / 货物款数 / 数量；再录入车牌、司机、公里数与运价，自动计算国内运费。</p>
-      <div class="toolbar" style="align-items:flex-end" data-page-node-id="CZz8Ibf1XT5MEMOrAkeDEW">
-        <div class="field" data-page-node-id="uG8f4cn7CRGtTICRWEC3RL"><label data-page-node-id="6CF4MaPQOF6WuHpcy8ZDhO">派车单号</label><input id="dp_no" value="DP-2026-0826-01" data-page-node-id="jDpO905fycvbgLgOKibZqv"></div>
-        <div class="field" data-page-node-id="nScAENsSGvddDWikZDMGi8"><label data-page-node-id="WzfXvHUkLpKwaWiGIPEQoM">派车日期</label><input id="dp_date" type="date" value="2026-08-26" data-page-node-id="uC9aRc0bTopueE6I9JbHUr"></div>
-        <div class="field" data-page-node-id="PGTRrz7HaosZdw9LjrmRs8"><label data-page-node-id="EHqEPCokPEWnDRhAKxOeie">车牌号码</label><input id="dp_plate" value="粤S·G7962" data-page-node-id="96MYLUmQHC5qaVKk5QMVSh"></div>
-        <div class="field" data-page-node-id="czuiTCibvAtmRuW0U4087a"><label data-page-node-id="5mDKglaA2X07UZIqtSxVrL">司机 / 电话</label><input id="dp_driver" value="黄利方 / 13717185588" data-page-node-id="s9KyvFzZLHwKEkmvPCFcV9"></div>
-        <div class="field" data-page-node-id="Zznww8YoFxqel3jAR4TItz"><label data-page-node-id="xb2xDiV0C9xvDBEYCC2Qvh">物流公司</label><input id="dp_logistics" value="WULIU" data-page-node-id="M78tWcDKbvCOJtrZrOX4KG"></div>
-        <div class="field" data-page-node-id="9v7T51H3hs8vBQuRWUqIfT"><label data-page-node-id="5ZlnX7amIXU6kIWE0xhViV">车辆来源</label><select id="dp_source" data-page-node-id="qCiGGI1oPmhiT2p49AsnAK"><option data-page-node-id="QyETAWtXT6089LU6K4vFXF">自有车辆</option><option data-page-node-id="DJjKDhTHJ6txceNnxt6Sae">外租车</option><option data-page-node-id="uEJnw2N5Z1xCGnQPinwZXP">第三方物流</option></select></div>
+    <section class="page" id="p_dispatch">
+      <h1 class="doc">⑭ 派车单（国内拖车）</h1>
+      <p class="doc-lead">派车单是「工厂装柜封条后 → 拉柜到起运港」的执行单据。<b>先有装箱单</b>：在此<b>选择装箱单号</b>即自动带出该柜的承运体积 / 重量 / 货物款数 / 数量；再录入车牌、司机、公里数与运价，自动计算国内运费。</p>
+      <div class="toolbar" style="align-items:flex-end">
+        <div class="field"><label>派车单号</label><input id="dp_no" value="DP-2026-0826-01"></div>
+        <div class="field"><label>派车日期</label><input id="dp_date" type="date" value="2026-08-26"></div>
+        <div class="field"><label>车牌号码</label><input id="dp_plate" value="粤S·G7962"></div>
+        <div class="field"><label>司机 / 电话</label><input id="dp_driver" value="黄利方 / 13717185588"></div>
+        <div class="field"><label>物流公司</label><input id="dp_logistics" value="WULIU"></div>
+        <div class="field"><label>车辆来源</label><select id="dp_source"><option>自有车辆</option><option>外租车</option><option>第三方物流</option></select></div>
       </div>
-      <div class="toolbar" style="align-items:flex-end" data-page-node-id="Wf3p3k1ZIHnPBBNl6T5HBN">
-        <div class="field" data-page-node-id="QISvAhnEsF4CBjlsNRoiu8"><label data-page-node-id="6lGOx18TqivQnLWz9O30ng">装箱单号（选 PL）</label><select id="dp_pk" onchange="onPickPacking()" data-page-node-id="voHUgJ5cecKiJAwTLoE11Z"></select></div>
-        <div class="field" data-page-node-id="GlBbsmpOngfIUDtd3zEMUg"><label data-page-node-id="D6c2GdeYkiwQe9GdzEqU8u">发货厂址</label><select id="dp_factory" data-page-node-id="7ToeugeWRTFtUIR8YDPaB4"></select></div>
-        <div class="field" data-page-node-id="JntcmJQFxxqCmgAsFKc29A"><label data-page-node-id="2MICOCfWRxEY0NrL5NQ1Bd">起运港</label><select id="dp_origin" data-page-node-id="ClmaGNaEthO1MuELo3Kqri"></select></div>
-        <div class="field" data-page-node-id="yTR1mH22ZzHicPWllRhhUA"><label data-page-node-id="9SqPjtsVHzNk0DlLM84zKl">计划柜型</label><select id="dp_ct" data-page-node-id="yF2lI82TtT6dIf4KONiDMD"><option value="" data-page-node-id="4IDz4NbYDcBeArEKH5uepm">按货量自动</option></select></div>
-        <div class="field" data-page-node-id="z5hAOEVa6f9y8BdfUUjqdf"><label data-page-node-id="uL3GPuypwcnu2C5GDPoLUm">总公里数</label><input id="dp_km" type="number" value="7284" style="width:90px" data-page-node-id="UBqKWWX8TrdOiPYQhsmaS2"></div>
-        <div class="field" data-page-node-id="bFvF1GybT9BYxQAV0TJi8L"><label data-page-node-id="uo1B00PbxaN95fbJ4r6CVk">运价(RMB/公里)</label><input id="dp_rate" type="number" step="0.001" value="5.356" style="width:90px" data-page-node-id="p9VfnML9doNTWQxMV5VXs2"></div>
-        <button onclick="calcDispatch()" data-page-node-id="5nZFzALHGSs1LVGvH5MMRN">重新计算运费</button>
+      <div class="toolbar" style="align-items:flex-end">
+        <div class="field"><label>装箱单号（选 PL）</label><select id="dp_pk" onchange="onPickPacking()"></select></div>
+        <div class="field"><label>发货厂址</label><select id="dp_factory"></select></div>
+        <div class="field"><label>起运港</label><select id="dp_origin"></select></div>
+        <div class="field"><label>计划柜型</label><select id="dp_ct"><option value="">按货量自动</option></select></div>
+        <div class="field"><label>总公里数</label><input id="dp_km" type="number" value="7284" style="width:90px"></div>
+        <div class="field"><label>运价(RMB/公里)</label><input id="dp_rate" type="number" step="0.001" value="5.356" style="width:90px"></div>
+        <button onclick="calcDispatch()">重新计算运费</button>
       </div>
-      <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089" data-page-node-id="f6xhSoxgtgcAdTX7H1dXwH">
-        <h3 class="sec" style="margin:4px 0 10px;color:#8A5A00" data-page-node-id="7qy2A1qATqy1O1Yq7L0SOJ">承运指标（由所选装箱单自动带入）</h3>
-        <div style="display:flex;gap:30px;flex-wrap:wrap" data-page-node-id="EdUFPgh8wOhg1aMnh8FwF6">
-          <div data-page-node-id="brWXPA181nJqydsWtIDyVd"><div style="font-size:12px;color:#666" data-page-node-id="Q6fR4esNcSAUrI62CHqgT7">承运体积(CBM)</div><div id="dp_cbm" style="font-size:22px;font-weight:700;color:#1E40AF" data-page-node-id="gAXqRQzgC6L9Uy4mf85moa">—</div></div>
-          <div data-page-node-id="JFl0RO44Yuz7zzTGt9VtSn"><div style="font-size:12px;color:#666" data-page-node-id="16F8qkGl80p1tIZ6MSUFOF">承运总重量(KG)</div><div id="dp_kg" style="font-size:22px;font-weight:700" data-page-node-id="RdGjaQU3qx6j4qQd1gsu8S">—</div></div>
-          <div data-page-node-id="TDnIbFhAJWA0CZpOArUWok"><div style="font-size:12px;color:#666" data-page-node-id="bniQNpX17cveFCvaPygy3b">货物款数(料号种类)</div><div id="dp_types" style="font-size:22px;font-weight:700" data-page-node-id="VMGoKRzMywXjlTHNmCXL43">—</div></div>
-          <div data-page-node-id="fqMyJiplQd9HCqVIPuYYYU"><div style="font-size:12px;color:#666" data-page-node-id="xT0TUmyagd2HaBFNPeN1YY">承运总数量</div><div id="dp_qty" style="font-size:22px;font-weight:700" data-page-node-id="Bl3yJYxFYB2OcF9ttWrxe5">—</div></div>
+      <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089">
+        <h3 class="sec" style="margin:4px 0 10px;color:#8A5A00">承运指标（由所选装箱单自动带入）</h3>
+        <div style="display:flex;gap:30px;flex-wrap:wrap">
+          <div><div style="font-size:12px;color:#666">承运体积(CBM)</div><div id="dp_cbm" style="font-size:22px;font-weight:700;color:#1E40AF">—</div></div>
+          <div><div style="font-size:12px;color:#666">承运总重量(KG)</div><div id="dp_kg" style="font-size:22px;font-weight:700">—</div></div>
+          <div><div style="font-size:12px;color:#666">货物款数(料号种类)</div><div id="dp_types" style="font-size:22px;font-weight:700">—</div></div>
+          <div><div style="font-size:12px;color:#666">承运总数量</div><div id="dp_qty" style="font-size:22px;font-weight:700">—</div></div>
         </div>
-        <p class="note" style="margin:8px 0 0" data-page-node-id="EjhvTFGGW6d0WZqtppormC">选好装箱单号后，以上四项自动从「⑪ 出口装箱单」汇总带出；如未选则显示「—」，请先到装箱单录入装柜数据。</p>
+        <p class="note" style="margin:8px 0 0">选好装箱单号后，以上四项自动从「⑪ 出口装箱单」汇总带出；如未选则显示「—」，请先到装箱单录入装柜数据。</p>
       </div>
-      <div class="card" style="margin-top:12px;background:#EAF4EA;border:1px solid #9CC99C" data-page-node-id="Yfe155qE89HmHiGyD2iRyF">
-        <h3 class="sec" style="margin:4px 0 10px;color:#2E5E1E" data-page-node-id="K1XjGGrLHX8uuTBgNQBvSc">派车单运费汇总</h3>
-        <div id="dpSummary" data-page-node-id="KAjTiHnH6qBLNf0MrgFipD"></div>
+      <div class="card" style="margin-top:12px;background:#EAF4EA;border:1px solid #9CC99C">
+        <h3 class="sec" style="margin:4px 0 10px;color:#2E5E1E">派车单运费汇总</h3>
+        <div id="dpSummary"></div>
       </div>
-      <div class="card" style="margin-top:12px" data-page-node-id="VPYR9cH0bWFv4FZO9e7cej">
-        <h3 class="sec" data-page-node-id="BAbjwNzkKDLctPKk1EUXzF">承运明细（按送货单 / 料号，由所选装箱单自动生成，只读）</h3>
-        <div class="tbl-wrap" style="overflow:auto" data-page-node-id="FjJDTYWNk5HQJTeyNY9d5i">
-          <table id="tblDispatch" data-page-node-id="GMeNnfrVBrNnzr7fDaD4Dl">
-            <thead data-page-node-id="mnRR53ejxFh8WHqLjITSxG"><tr data-page-node-id="2I9h4qOdiLvllUVT3gx3R0">
-              <th data-page-node-id="GxHp1wUWTzFehHmHEnheLk">#</th><th data-page-node-id="kzmq5i4A80x7wR7MPSxWYQ">送货单号</th><th data-page-node-id="sosRcHjaJYeVrjBaKYdYPm">料号</th><th data-page-node-id="w3oNDH4jWPRZEU5lMlWGgM">品名</th><th data-page-node-id="rj5Oe0D4JaVIMw3MhPevNP">数量</th><th data-page-node-id="04GEFpkbVGC8cuewXeCQrW">单位</th><th data-page-node-id="CcJmYx2jRc9e0EkaPClqFf">体积(CBM)</th><th data-page-node-id="zmBnsNbAxsY6bBuWxSsDjT">重量(KG)</th><th data-page-node-id="9wwTuAIWiljEhPee1sab3E">件数</th>
+      <div class="card" style="margin-top:12px">
+        <h3 class="sec">承运明细（按送货单 / 料号，由所选装箱单自动生成，只读）</h3>
+        <div class="tbl-wrap" style="overflow:auto">
+          <table id="tblDispatch">
+            <thead><tr>
+              <th>#</th><th>送货单号</th><th>料号</th><th>品名</th><th>数量</th><th>单位</th><th>体积(CBM)</th><th>重量(KG)</th><th>件数</th>
             </tr></thead>
-            <tbody data-page-node-id="2Rvio5QcRac1d47A7aBk5v"></tbody>
+            <tbody></tbody>
           </table>
         </div>
-        <p class="note" style="margin:6px 0 0" data-page-node-id="NLjXNs0NEbAl1BGiKPzPtH">承运明细来自所选装箱单的明细行，与装箱单保持一致（装箱单是源头）；国内运费按「公里数 × 运价」或「厂址→起运港协议价」取较高值预估。</p>
+        <p class="note" style="margin:6px 0 0">承运明细来自所选装箱单的明细行，与装箱单保持一致（装箱单是源头）；国内运费按「公里数 × 运价」或「厂址→起运港协议价」取较高值预估。</p>
       </div>
     </section>
 
     <!-- ============ ⑫ 送货单（Delivery Order） ============ -->
-    <section class="page" id="p_delivery" data-page-node-id="ZDx3ryfAEyzEnT5RRl6A0o">
-      <h1 class="doc" data-page-node-id="Fe5TOPrqA8zSMaAdlTEzd7">⑫ 送货单（Delivery Order）</h1>
-      <p class="doc-lead" data-page-node-id="psfcndg6FowndSS6Vw4ENr">送货单是<b data-page-node-id="mh5ADm6D0p5GirWKjUmSZ8">仓库放行 + 拖车执行依据</b>（内部物流视角），与装箱单（报关/装船视角）平级、都挂在<b data-page-node-id="uZRMGPFWEHHjjojzBCAJ0X">出货通知单号</b>下，无强制先后。明细按 <b data-page-node-id="e5CAIDITKQCAzoDGEGV8A9">客户 × 料号 × 客户PO</b> 分行（客户要按 PO 追溯），体积/重量作为后续「⑮ 费用汇总与分摊」的<b data-page-node-id="JfNuIJm0hYFsdaPChPDEO5">分摊基准</b>。</p>
-      <div class="toolbar" style="align-items:flex-end" data-page-node-id="BQgQ1HAicLBAxFXr5sDHuJ">
-        <div class="field" data-page-node-id="HrB2X93eQGt0AfI4IkHMw6"><label data-page-node-id="sev7fGirwfJukiEQgS9ZWS">出货通知单号</label><input id="do_ship" value="SH-2026-0812" data-page-node-id="VWbAmrNCTCBrZhEN5BeJFf"></div>
-        <p class="note" style="margin:-6px 0 10px;color:#9C4221" data-page-node-id="d3CVpXt3EabVXXqyHF62Id">引用「出货通知单/发运单」流程起点生成的委托号（见流程图①），本屏不新建。</p>
-        <div class="field" data-page-node-id="4tETrp63KWMEiXR4hm3Xp2"><label data-page-node-id="WyfSAKc0Qe0QmopE1pOOvB">送货单号</label><input id="do_no" value="DO-2026-0810-01" data-page-node-id="df26VNZDoIgWTWgsVG13jg"></div>
-        <div class="field" data-page-node-id="XOR6MG38yAXKutTTQpDBUc"><label data-page-node-id="qSbAEEnTEkocQIreZ0A8gC">发货厂址</label><select id="do_factory" data-page-node-id="OoHTzaI931stucZSVR0DRJ"></select></div>
-        <div class="field" data-page-node-id="QP9XW9kpEScV59Ewa71KC0"><label data-page-node-id="JBxz1P7n8VuCFuMEMC8QFV">起运港</label><select id="do_origin" data-page-node-id="w6pNE8agUl5bby3scsXlwM"></select></div>
-        <div class="field" data-page-node-id="2RutDeMelJduicqrlXuyT0"><label data-page-node-id="jYvj4EvrVC52hYPrpZM9Gs">关联装箱单号</label><input id="do_pk" value="PK-2026-0812-01" placeholder="确认/封板时填" data-page-node-id="Jvn2dZL2aDXdqq2DwV6g3N"></div>
-        <div class="field" data-page-node-id="hsKWSIJDW14by91sJktsD8"><label data-page-node-id="06dxspij57MpzkqohmAsH1">状态</label><select id="do_status" data-page-node-id="jXqqV3uGs0Ii34z4E7nKaA"><option data-page-node-id="C8kF2Fk68OeUNU7A9kMOrI">草稿</option><option data-page-node-id="xMoxR44dqkihzOsLSrXm2S">已发货</option><option data-page-node-id="OYVGqrIlP0MHROhSJiBji4">已签收</option></select></div>
-        <button class="ghost" onclick="seedDeliveryDemo()" data-page-node-id="mU6X9WJYKwDd7lJD2onU6E">载入示例</button>
+    <section class="page" id="p_delivery">
+      <h1 class="doc">⑫ 送货单（Delivery Order）</h1>
+      <p class="doc-lead">送货单是<b>仓库放行 + 拖车执行依据</b>（内部物流视角），与装箱单（报关/装船视角）平级、都挂在<b>出货通知单号</b>下，无强制先后。明细按 <b>客户 × 料号 × 客户PO</b> 分行（客户要按 PO 追溯），体积/重量作为后续「⑮ 费用汇总与分摊」的<b>分摊基准</b>。</p>
+      <div class="toolbar" style="align-items:flex-end">
+        <div class="field"><label>出货通知单号</label><input id="do_ship" value="SH-2026-0812"></div>
+        <p class="note" style="margin:-6px 0 10px;color:#9C4221">引用「出货通知单/发运单」流程起点生成的委托号（见流程图①），本屏不新建。</p>
+        <div class="field"><label>送货单号</label><input id="do_no" value="DO-2026-0810-01"></div>
+        <div class="field"><label>发货厂址</label><select id="do_factory"></select></div>
+        <div class="field"><label>起运港</label><select id="do_origin"></select></div>
+        <div class="field"><label>关联装箱单号</label><input id="do_pk" value="PK-2026-0812-01" placeholder="确认/封板时填"></div>
+        <div class="field"><label>状态</label><select id="do_status"><option>草稿</option><option>已发货</option><option>已签收</option></select></div>
+        <button class="ghost" onclick="seedDeliveryDemo()">载入示例</button>
       </div>
-      <p class="note" style="margin:-8px 0 10px" data-page-node-id="MWE47i6AJwQvftC3GEydN9">「关联装箱单号」在确认时填、可选；系统优先用共同<b data-page-node-id="ew4fj1SEiYDZCvctQx43Va">出货通知单号/柜号</b>自动匹配。无论先送货单还是先装箱单，都能互相对账（见 PRD 软关联规则）。</p>
-      <div class="card" style="margin-top:12px" data-page-node-id="J42qTPleP4qZOscK38syqJ">
-        <h3 class="sec" data-page-node-id="0catqVcZ9ny2XXIkfcF7a7">送货单明细（客户 × 料号 × 客户PO）</h3>
-        <div class="tbl-wrap" style="overflow:auto" data-page-node-id="BAKAmi8Cig6ZaEd68dX5j5">
-          <table id="tblDelivery" data-page-node-id="ACihH4dlZSSQSZZ3MrvLrW">
-            <thead data-page-node-id="gTqa1cXtYFCMLbHZto9LFp"><tr data-page-node-id="wKdY1OoZFMdl2AkB2QY4In">
-              <th data-page-node-id="5PDm4tLuUcUAVHBpuCEEWQ">#</th><th data-page-node-id="nDMD3zsbUaq6keUAiHUcqH">委托方客户</th><th data-page-node-id="csWI8jLE624ov6XrTiZKEB">客户PO</th><th data-page-node-id="Ik1RWCXMrdVWHTz7WFwQOA">料号</th><th data-page-node-id="h1qFhofIBiMaS3HCpUkIqM">品名/规格</th><th data-page-node-id="isVFcLHzHP6PCXBAeIT5XI">数量</th><th data-page-node-id="AmRA2NZHKkdXU67Avow9on">单位</th>
-              <th data-page-node-id="0hEZwZ0i8FovoX6ACXOVP0">件数</th><th data-page-node-id="nGDHybxBE887FnWCmz1dWe">毛重(KG)</th><th data-page-node-id="a3uhCZd01BtA8bmZ2QUBFf">净重(KG)</th><th data-page-node-id="QydeYO2LB24xJ9IxEBjaJa">体积(CBM)</th>
+      <p class="note" style="margin:-8px 0 10px">「关联装箱单号」在确认时填、可选；系统优先用共同<b>出货通知单号/柜号</b>自动匹配。无论先送货单还是先装箱单，都能互相对账（见 PRD 软关联规则）。</p>
+      <div class="card" style="margin-top:12px">
+        <h3 class="sec">送货单明细（客户 × 料号 × 客户PO）</h3>
+        <div class="tbl-wrap" style="overflow:auto">
+          <table id="tblDelivery">
+            <thead><tr>
+              <th>#</th><th>委托方客户</th><th>客户PO</th><th>料号</th><th>品名/规格</th><th>数量</th><th>单位</th>
+              <th>件数</th><th>毛重(KG)</th><th>净重(KG)</th><th>体积(CBM)</th>
             </tr></thead>
-            <tbody data-page-node-id="oAGsYGfOZSneH6keis07FO"></tbody>
+            <tbody></tbody>
           </table>
         </div>
-        <p class="note" style="margin:6px 0 0" data-page-node-id="C5ECWv7fcgCOvoPADSCwFw">同一料号按不同<b data-page-node-id="L6lGJgnkEHv0sRQkMsXLBF">客户PO</b>分行（客户按 PO 对账）；体积/重量 = 件数 × 单件，与装箱单口径一致。下方汇总即「按客户 / 按客户PO」分摊运费所需的基准。</p>
+        <p class="note" style="margin:6px 0 0">同一料号按不同<b>客户PO</b>分行（客户按 PO 对账）；体积/重量 = 件数 × 单件，与装箱单口径一致。下方汇总即「按客户 / 按客户PO」分摊运费所需的基准。</p>
       </div>
-      <div class="card" style="margin-top:12px;background:#F3F8FF;border:1px solid #BCD4F0" data-page-node-id="4vZzAJRLQBhIP01ArlSpjp">
-        <h3 class="sec" data-page-node-id="mbzpXv1YxeOxpqEpFDNbzO">自动汇总（分摊基准）</h3>
-        <div id="doSummary" data-page-node-id="rc4Jx3D3ibmjAoJuphbG4Y"></div>
+      <div class="card" style="margin-top:12px;background:#F3F8FF;border:1px solid #BCD4F0">
+        <h3 class="sec">自动汇总（分摊基准）</h3>
+        <div id="doSummary"></div>
       </div>
     </section>
 
     <!-- ============ ⑪ 装箱单 ============ -->
-    <section class="page" id="p_packing" data-page-node-id="RETM8kB7vCYHpNspdiOzCH">
-      <h1 class="doc" data-page-node-id="BY2UB3PREq0xBmcXNl8hqk">⑪ 出口装箱单（Packing List）</h1>
-      <p class="doc-lead" data-page-node-id="ClJTkwqIYd9QjpDs59hhJq">装箱单是运费与报关的<b data-page-node-id="4xbq8GPABQ75jC8Zt4QpIO">输入层</b>：录入明细行后系统自动汇总总件数 / 总毛重 / 总净重 / 总体积，并据此推荐 <b data-page-node-id="No5glQJqFb2ASSbv7crXTB">柜型 × 数量</b>；同时标出直接用于报关尚缺的字段（HS编码 / 单价 / 原产国 / 贸易术语等）。</p>
-      <div class="toolbar" style="align-items:flex-end" data-page-node-id="HBKAjm1CoGxz7xon9MJAeT">
-        <div class="field" data-page-node-id="LvcOcdGJrX57uGOMLT1Cmd"><label data-page-node-id="WQpFHWh6YLRulFTCItMr5w">装箱单号</label><input id="pk_no" value="PK-2026-0812-01" data-page-node-id="0AwL7JOsjCQ3YFQD2HV4HL"></div>
-        <div class="field" data-page-node-id="NDD0oXvHwqnC9Xw4LGuz8H"><label data-page-node-id="nSvpV9ekYGhUZoC3oz3xFt">封条号(Seal)</label><input id="pk_seal" value="SEAL-2026-0812-A1" placeholder="装柜封条号" data-page-node-id="AOPYwwLfje9MljVRSUNfyK"></div>
-        <div class="field" data-page-node-id="is5BdSfr2xdzdun7kh50s8"><label data-page-node-id="Dgp3jfc8wlCRAw3zHFE4N7">客户 / 收货人</label><input id="pk_cust" value="ABC Trading Ltd." data-page-node-id="S8GtFuhzILz2r6cv046bDN"></div>
-        <div class="field" data-page-node-id="hYLi51RyEzDKuU00qC8oPo"><label data-page-node-id="eyCdWX4snTFGj6iwx8XgF7">境内货源地</label><input id="pk_origin" value="深圳特区" data-page-node-id="2s237uLBB78Sq1Au2GTeyk"></div>
-        <div class="field" data-page-node-id="YiYDfG08izYROMMFHhjJnB"><label data-page-node-id="JNRAkYUhlHQUjdMDsITiV8">起运厂址</label><select id="pk_factory" data-page-node-id="VjtjNjCLUL1oi6vPi3ZFzO"></select></div>
-        <div class="field" data-page-node-id="QZ2zJdLdSC50pbROdhCeor"><label data-page-node-id="TeLS6yHAdywcGCL8qmtWUE">目的港</label><select id="pk_dest" data-page-node-id="pFvAqBEI94f6Q7LaRcakUH"></select></div>
-        <div class="field" data-page-node-id="UxcYmH6JjUTGTtmIeYWCOH"><label data-page-node-id="Ox7CM9OdY4D97llXC48uHD">运输条款</label><select id="pk_term" data-page-node-id="a5fJhPBqsjEDO18pwuNAha"><option data-page-node-id="WGdG8WZTTBg2Oe4fPxaaTD">FOB</option><option data-page-node-id="vcngAAsg2xBEb2kjgdyWiM">CIF</option><option data-page-node-id="q1QN2aQsyRDGuklpQkSfX1">CFR</option><option data-page-node-id="Kby91VsZn7aoNZsaiITXgK">EXW</option></select></div>
-        <div class="field" data-page-node-id="rGZwZgzWf1OVWK9P26NORJ"><label data-page-node-id="NtfqsL1rnHLhuurRN2ODXp">状态</label><select id="pk_status" data-page-node-id="HxViApCoQu8eabA4FZpZQV"><option data-page-node-id="ef6rCOrmTOj4KIFXdOa2nJ">草稿</option><option data-page-node-id="WVuKh7pL2BreOP7DgwuQjb">已确认</option><option data-page-node-id="oCcMfVMuTHKSsddmcFJ6HI">已报关</option></select></div>
+    <section class="page" id="p_packing">
+      <h1 class="doc">⑪ 出口装箱单（Packing List）</h1>
+      <p class="doc-lead">装箱单是运费与报关的<b>输入层</b>：录入明细行后系统自动汇总总件数 / 总毛重 / 总净重 / 总体积，并据此推荐 <b>柜型 × 数量</b>；同时标出直接用于报关尚缺的字段（HS编码 / 单价 / 原产国 / 贸易术语等）。</p>
+      <div class="toolbar" style="align-items:flex-end">
+        <div class="field"><label>装箱单号</label><input id="pk_no" value="PK-2026-0812-01"></div>
+        <div class="field"><label>封条号(Seal)</label><input id="pk_seal" value="SEAL-2026-0812-A1" placeholder="装柜封条号"></div>
+        <div class="field"><label>客户 / 收货人</label><input id="pk_cust" value="ABC Trading Ltd."></div>
+        <div class="field"><label>境内货源地</label><input id="pk_origin" value="深圳特区"></div>
+        <div class="field"><label>起运厂址</label><select id="pk_factory"></select></div>
+        <div class="field"><label>目的港</label><select id="pk_dest"></select></div>
+        <div class="field"><label>运输条款</label><select id="pk_term"><option>FOB</option><option>CIF</option><option>CFR</option><option>EXW</option></select></div>
+        <div class="field"><label>状态</label><select id="pk_status"><option>草稿</option><option>已确认</option><option>已报关</option></select></div>
       </div>
-      <p class="note" style="margin:-8px 0 10px" data-page-node-id="lde8W0Au4Kpt1FBKwMQwdu">装箱单在<b data-page-node-id="NCyXM3vRlZm6AduRzYc4oI">工厂装柜封条后</b>生成，是派车单 / 海运报价 / 出口报关的<b data-page-node-id="DuvQ1efEzVshWFGh12a3Tl">数据源头</b>。封条号记录于本单，便于「柜号—封条—货权」追溯。</p>
-      <div class="card" style="margin-top:12px" data-page-node-id="AfHuiV6XxmVxdwrS8MH2Md">
-        <h3 class="sec" data-page-node-id="6eZmRjDN9hybfsRaFEotLd">装箱单明细
-          <button class="ghost" onclick="addPackRow()" data-page-node-id="kf9Hg1U1Avvgj95OMp7zmV">＋ 新增行</button>
-          <button class="ghost" onclick="seedPackDemo()" data-page-node-id="j6vgegvrpbzDu7z4CFnDE3">载入示例(含报关字段)</button>
+      <p class="note" style="margin:-8px 0 10px">装箱单在<b>工厂装柜封条后</b>生成，是派车单 / 海运报价 / 出口报关的<b>数据源头</b>。封条号记录于本单，便于「柜号—封条—货权」追溯。</p>
+      <div class="card" style="margin-top:12px">
+        <h3 class="sec">装箱单明细
+          <button class="ghost" onclick="addPackRow()">＋ 新增行</button>
+          <button class="ghost" onclick="seedPackDemo()">载入示例(含报关字段)</button>
         </h3>
-        <div class="tbl-wrap" style="overflow:auto" data-page-node-id="IOMBN8SiSAWIozlcbS03K4">
-        <table id="tblPack" data-page-node-id="VIRedJvkQIa4zYaoxMeXpy">
-          <thead data-page-node-id="4uuvCJFNUE9bDt9blhcFEx"><tr data-page-node-id="9VUVFi0c2ptCJAdDjy8rYG">
-            <th data-page-node-id="4YTz0FMX8AnoBjE0YFtcQA">#</th><th data-page-node-id="eIY0kSaNH1JHYS5GDJZewj">送货单号</th><th data-page-node-id="JZ5tKcTCoQHK1ar1HKTFra">订单编号</th><th data-page-node-id="CyQOZLBfwRXxM8qeNjrPiT">料号</th><th data-page-node-id="C5bhsZCaWQ68j8mBAFYBz5">品名/规格</th><th data-page-node-id="GOnc4VQ1suzzOL9hTSMhWE">数量</th><th data-page-node-id="2DEdGGAdSaVQhZkSoEtk87">单位</th><th data-page-node-id="TH5mDO4JSWt6bMZ1CVyWq0">包装种类</th><th data-page-node-id="J8aOtPIPtupLSpAgbpZ6Uu">件数<br data-page-node-id="1tgceFNIZHi0zGDDtCDxME">(箱/卡板)</th>
-            <th data-page-node-id="mEOwSvTz1Dc4V7sE4vBn18">单件毛重<br data-page-node-id="H0E461bERmiY3RDdYMZpDP">KG/件</th><th data-page-node-id="jnuSoOXYB36mCqGnjFQZuH">单件净重<br data-page-node-id="q6S9N8lFSNfQ9rBSyNIbyi">KG/件</th><th data-page-node-id="s42KdSPqNRboybTZgYVYVk">单件体积<br data-page-node-id="3ca2z8gE03efx8nvzBv5Qz">CBM/件</th><th data-page-node-id="kxld8AI6j0MbOSiFLR65jP">箱号/批次</th>
-            <th data-page-node-id="ySDCzxC8ePwvQfDjvjuWrL">HS编码*</th><th data-page-node-id="pb7KIqE162efqGDRXvbqp1">单价*</th><th data-page-node-id="oP2qUBisVPyHpFTT3oRQCc">币制*</th><th data-page-node-id="1TSi2FE8We7RWl0hnwwbYl">原产国*</th><th data-page-node-id="DZwZ3ekD2ZYBaFILZnJ2rF">贸易术语*</th><th data-page-node-id="BKSEzYUwDqAMcGyxkqGHZ2"></th>
+        <div class="tbl-wrap" style="overflow:auto">
+        <table id="tblPack">
+          <thead><tr>
+            <th>#</th><th>送货单号</th><th>订单编号</th><th>料号</th><th>品名/规格</th><th>数量</th><th>单位</th><th>包装种类</th><th>件数<br>(箱/卡板)</th>
+            <th>单件毛重<br>KG/件</th><th>单件净重<br>KG/件</th><th>单件体积<br>CBM/件</th><th>箱号/批次</th>
+            <th>HS编码*</th><th>单价*</th><th>币制*</th><th>原产国*</th><th>贸易术语*</th><th></th>
           </tr></thead>
-          <tbody data-page-node-id="wmyZeNxUvSH8o9r6kzO28R"></tbody>
+          <tbody></tbody>
         </table>
         </div>
-        <p class="note" style="margin:6px 0 0" data-page-node-id="pTpUqpS282xDjvsROlm70v">「送货单号 / 订单编号」已下沉到明细行：一行一来源，支持同一料号跨送货单/订单分行。<b data-page-node-id="33MGNg2bsE3N5iOUcLkUIi">件数</b>＝该「包装种类」的件数（纸箱→箱数，卡板→卡板数）；<b data-page-node-id="j6U9feLX5xRAs02o81gk2u">单件</b>毛重/净重/体积＝<b data-page-node-id="qDMXJ1t2aDH3n1RfVrdTqA">每包装件</b>的重量体积，行总重＝件数×单件。带 <b data-page-node-id="E8HgQixOkVJBj0BqVZoA4r">*</b> 为报关所需字段。</p>
+        <p class="note" style="margin:6px 0 0">「送货单号 / 订单编号」已下沉到明细行：一行一来源，支持同一料号跨送货单/订单分行。<b>件数</b>＝该「包装种类」的件数（纸箱→箱数，卡板→卡板数）；<b>单件</b>毛重/净重/体积＝<b>每包装件</b>的重量体积，行总重＝件数×单件。带 <b>*</b> 为报关所需字段。</p>
       </div>
-      <div class="card" style="margin-top:12px;background:#F3F8FF;border:1px solid #BCD4F0" data-page-node-id="jdjFsL64G21jyJBoweeohz">
-        <h3 class="sec" data-page-node-id="kPWpjcjJgYuTy4vd1FAXye">自动汇总（由明细行计算）</h3>
-        <div id="pkSummary" data-page-node-id="G8HJ8KiEkw1Z9WQLB1wmoE"></div>
+      <div class="card" style="margin-top:12px;background:#F3F8FF;border:1px solid #BCD4F0">
+        <h3 class="sec">自动汇总（由明细行计算）</h3>
+        <div id="pkSummary"></div>
       </div>
-      <div class="card" style="margin-top:12px;background:#F1FBF3;border:1px solid #BFE3C4" data-page-node-id="Kofd3rhK2WEJvibQwFnXVi">
-        <h3 class="sec" data-page-node-id="GC6uvoxCEgW0NfR7CEQJ9m">柜型 × 数量 推荐（总CBM÷柜容 向上取整，并受最大载重约束）</h3>
-        <div id="pkContainer" data-page-node-id="P9b9AlURNzEWibNDItewek"></div>
+      <div class="card" style="margin-top:12px;background:#F1FBF3;border:1px solid #BFE3C4">
+        <h3 class="sec">柜型 × 数量 推荐（总CBM÷柜容 向上取整，并受最大载重约束）</h3>
+        <div id="pkContainer"></div>
       </div>
-      <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089" data-page-node-id="b5X8EkN65KyWMg7KzB6zgb">
-        <h3 class="sec" data-page-node-id="EatOGCCtBjtJsmtxhPNp6U">报关可用性检查</h3>
-        <div id="pkCustoms" data-page-node-id="lM2eLYuN6GFkm75F3EJ0Ou"></div>
+      <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089">
+        <h3 class="sec">报关可用性检查</h3>
+        <div id="pkCustoms"></div>
       </div>
-      <div class="card" style="margin-top:12px;background:#F6F0FF;border:1px solid #D6C2F0" data-page-node-id="nWBacFFELFl5XkAbkiewvH">
-        <h3 class="sec" data-page-node-id="M4y7j9yaRgmv9dXk6s5ILb">报关汇总（按 HS编码+品名+原产国+贸易术语+币制+单位 合并 → 报关单草稿行）</h3>
-        <p class="note" style="margin:0 0 8px" data-page-node-id="LLwiFXRamvINE4qMvVgJl0">装箱单明细行<b data-page-node-id="9POhBpJ44GLIbZ5rCoOZU6">不强制合并</b>（同料号可多行，如实记录物理装箱）；报关时按上方合并键归集为一行申报要素。下方汇总即"报关单草稿"的应填报行。</p>
-        <div id="pkCustomsRoll" data-page-node-id="Tme5xTP34MmlKAWigBE89F"></div>
+      <div class="card" style="margin-top:12px;background:#F6F0FF;border:1px solid #D6C2F0">
+        <h3 class="sec">报关汇总（按 HS编码+品名+原产国+贸易术语+币制+单位 合并 → 报关单草稿行）</h3>
+        <p class="note" style="margin:0 0 8px">装箱单明细行<b>不强制合并</b>（同料号可多行，如实记录物理装箱）；报关时按上方合并键归集为一行申报要素。下方汇总即"报关单草稿"的应填报行。</p>
+        <div id="pkCustomsRoll"></div>
       </div>
     </section>
 
     <!-- ============ ⑮ 费用汇总与分摊（实际结算） ============ -->
-    <section class="page" id="p_settle" data-page-node-id="bB0KStZ2Yhp5mg9vM9CFzA">
-      <h1 class="doc" data-page-node-id="XPAgNjZZrMuQacUCYdsRgP">⑮ 费用汇总与分摊（实际结算）</h1>
-      <p class="doc-lead" data-page-node-id="NCOUvzu9rZlpGGwhXYXFwD">报价单（⑥）是<b data-page-node-id="dYhvSdpO2Iye3hnH2mG1X2">事前估价</b>；本屏是<b data-page-node-id="CicYgTdoCwaNXFC5rOY7en">事后实际结算</b>：把派车单/账单产生的全部海运费用按出货通知单汇总，再经<b data-page-node-id="mFWGxpH30wCDmC6ojfSfSd">送货单明细（客户×料号×PO×体积/重量）</b>分摊到每个订单、客户PO、料号，并做<b data-page-node-id="mGZU522KT1WgBkmthVpGbc">估实差异</b>。与⑥ 是两套（估 vs 结）。</p>
-      <div class="toolbar" style="align-items:flex-end" data-page-node-id="YOzudbX9vVn882GhgSZX9O">
-        <div class="field" data-page-node-id="Y4byGPYAHXvuBqJODueYv7"><label data-page-node-id="UuOeZ7WIsYTA9azbhR0EpV">出货通知单号</label><input id="st_ship" value="SH-2026-0812" data-page-node-id="T5sNVx7a9Y5Hp1IaDpq4oh"></div>
-        <p class="note" style="margin:-6px 0 10px;color:#9C4221" data-page-node-id="cfxR2KWq9e5HJ07VY49L5v">引用「出货通知单/发运单」流程起点生成的委托号（见流程图①），本屏不新建，仅按此号汇总+分摊。</p>
-        <div class="field" data-page-node-id="8euBMLY8IapetoSBAkslAb"><label data-page-node-id="Xg7dvajxfOXVT1Chy43qCi">柜号</label><input id="st_ct" value="MSKU-771234-5" data-page-node-id="x9XhSkrtLwxwBGyi0tzSbv"></div>
-        <div class="field" data-page-node-id="UOiueXhbCXnkYpw092ToDv"><label data-page-node-id="ZLJSTjRN5g2LAtwG2JA7Qt">运输条款</label>
-          <select id="st_term" onchange="renderSettle()" data-page-node-id="FHZVDl7QLQC7DhSMjZtiTw">
-            <option value="FOB" data-page-node-id="ttTQlPlEaVdkzuw7IKm0I2">FOB（仅国内拖车）</option>
-            <option value="CIF" selected data-page-node-id="RwImKO6iPqfOHoHclSgLka">CIF（拖车+海运费+起运港）</option>
-            <option value="CFR" data-page-node-id="Op4BKjvHkQQK9lgFuVsnnj">CFR（拖车+海运费+起运港）</option>
-            <option value="DAP" data-page-node-id="SgpVdRkLVL0iCueOGX1PPw">DAP（再加目的港到仓拖车）</option>
+    <section class="page" id="p_settle">
+      <h1 class="doc">⑮ 费用汇总与分摊（实际结算）</h1>
+      <p class="doc-lead">报价单（⑥）是<b>事前估价</b>；本屏是<b>事后实际结算</b>：把派车单/账单产生的全部海运费用按出货通知单汇总，再经<b>送货单明细（客户×料号×PO×体积/重量）</b>分摊到每个订单、客户PO、料号，并做<b>估实差异</b>。与⑥ 是两套（估 vs 结）。</p>
+      <div class="toolbar" style="align-items:flex-end">
+        <div class="field"><label>出货通知单号</label><input id="st_ship" value="SH-2026-0812"></div>
+        <p class="note" style="margin:-6px 0 10px;color:#9C4221">引用「出货通知单/发运单」流程起点生成的委托号（见流程图①），本屏不新建，仅按此号汇总+分摊。</p>
+        <div class="field"><label>柜号</label><input id="st_ct" value="MSKU-771234-5"></div>
+        <div class="field"><label>运输条款</label>
+          <select id="st_term" onchange="renderSettle()">
+            <option value="FOB">FOB（仅国内拖车）</option>
+            <option value="CIF" selected>CIF（拖车+海运费+起运港）</option>
+            <option value="CFR">CFR（拖车+海运费+起运港）</option>
+            <option value="DAP">DAP（再加目的港到仓拖车）</option>
           </select></div>
-        <div class="field" data-page-node-id="5Rco4ZJEAdJaHzYHG9jCVV"><label data-page-node-id="Ubvw66JWfYD5T4zAkDY2Sb">分摊权重</label>
-          <select id="st_weight" onchange="renderSettle()" data-page-node-id="Jjo3uUrRvqzjFoKIMNS78K">
-            <option value="vol" selected data-page-node-id="txYnzpHEKqhqdsfblLSO7L">体积优先(CBM)</option>
-            <option value="kg" data-page-node-id="VPNm1GjRHssC5XCtuD3wuj">重量优先(KG)</option>
-            <option value="val" data-page-node-id="3SMK0roXLvN7bDSPIOszXr">货值优先(金额)</option>
+        <div class="field"><label>分摊权重</label>
+          <select id="st_weight" onchange="renderSettle()">
+            <option value="vol" selected>体积优先(CBM)</option>
+            <option value="kg">重量优先(KG)</option>
+            <option value="val">货值优先(金额)</option>
           </select></div>
-        <div class="field" data-page-node-id="nhW8MyBvp7tGpUrcc0hxXz"><label data-page-node-id="iC5IF1sjYu4CeEFfFwrVpl">汇率(USD→CNY)</label><input id="st_fx" type="number" step="0.01" value="7.2" style="width:90px" onchange="renderSettle()" data-page-node-id="xstpRJ5B7OQAkgtLTGlBDw"></div>
-        <button class="ghost" onclick="seedSettleDemo()" data-page-node-id="jWXJFNvSI3J7Q3csdzfL4b">载入示例</button>
+        <div class="field"><label>汇率(USD→CNY)</label><input id="st_fx" type="number" step="0.01" value="7.2" style="width:90px" onchange="renderSettle()"></div>
+        <button class="ghost" onclick="seedSettleDemo()">载入示例</button>
       </div>
-      <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089" data-page-node-id="umBh0XFIEfgIRpzSEdh9FG">
-        <h3 class="sec" data-page-node-id="iL0l0iZqIFZDFDbhWcS22F">一、费用明细·实际发生（引用：物流对账单 + 海运对账单）</h3>
-        <p class="note" style="margin:0 0 8px" data-page-node-id="uWkxzuYThh407gIf4G2xWx">本屏<b data-page-node-id="RiYCybpbOXcmXHO205HWqA">不重算、不重复</b>任何费用：金额全部来自上游对账单——<b data-page-node-id="MAKLHH7qrNfs0HJwIV2c0E">物流对账单</b>（派车单算出的 Stage A 国内拖车）与 <b data-page-node-id="wM53Sy6L7bFsG6cdyTRGov">海运对账单</b>（⑯ 按出口装箱单生成、批核锁定的 Stage B+C 海运费/起运港/目的港）。下列按「运输条款」自动过滤本票应计入的成本阶段（FOB→仅A；CIF/CFR→A+B；DAP→A+B+C）。</p>
-        <div class="tbl-wrap" style="overflow:auto" data-page-node-id="oxiQyDon09mehD3n0j8tHQ">
-          <table id="tblCost" data-page-node-id="pD30otQYMNpbTizi0XuGxg">
-            <thead data-page-node-id="OvEZqcrEvvsM5xHfP5nprM"><tr data-page-node-id="wMsAFWQJ4muAOWFe6i0o8B"><th data-page-node-id="1H58HUTCl3ySxCDzP0DAOU">费用分类</th><th data-page-node-id="CBKt1xHb2CWl67EQQbCmXe">费用项目</th><th data-page-node-id="9J0q9NqSjiWt7lAJoxy1sr">金额</th><th data-page-node-id="87hR3WDlxZkAYwuDezTd7R">币种</th><th data-page-node-id="h9KRBPIbHdjPrwpYEScAxZ">来源单</th></tr></thead>
-            <tbody data-page-node-id="eGG8GFif5BeDyKJ7eWEN42"></tbody>
+      <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089">
+        <h3 class="sec">一、费用明细·实际发生（引用：物流对账单 + 海运对账单）</h3>
+        <p class="note" style="margin:0 0 8px">本屏<b>不重算、不重复</b>任何费用：金额全部来自上游对账单——<b>物流对账单</b>（派车单算出的 Stage A 国内拖车）与 <b>海运对账单</b>（⑯ 按出口装箱单生成、批核锁定的 Stage B+C 海运费/起运港/目的港）。下列按「运输条款」自动过滤本票应计入的成本阶段（FOB→仅A；CIF/CFR→A+B；DAP→A+B+C）。</p>
+        <div class="tbl-wrap" style="overflow:auto">
+          <table id="tblCost">
+            <thead><tr><th>费用分类</th><th>费用项目</th><th>金额</th><th>币种</th><th>来源单</th></tr></thead>
+            <tbody></tbody>
           </table>
         </div>
-        <div id="stCostSum" data-page-node-id="m7uG8auFpSGkWMDYAGiB2d"></div>
+        <div id="stCostSum"></div>
       </div>
-      <div class="card" style="margin-top:12px;background:#EAF4EA;border:1px solid #9CC99C" data-page-node-id="2b0uca9CtB6LtIhwNGTDDb">
-        <h3 class="sec" data-page-node-id="JKbGQxsGIIIsvaY9auEKlw">二、按出货通知单汇总（CNY 折算）</h3>
-        <div id="stByShip" data-page-node-id="OBJqKFArAk5vEpIyf2gpXI"></div>
+      <div class="card" style="margin-top:12px;background:#EAF4EA;border:1px solid #9CC99C">
+        <h3 class="sec">二、按出货通知单汇总（CNY 折算）</h3>
+        <div id="stByShip"></div>
       </div>
-      <div class="card" style="margin-top:12px;background:#F3F0FF;border:1px solid #D6C2F0" data-page-node-id="asJjuDwVO222gLvdd227Xd">
-        <h3 class="sec" data-page-node-id="MUFYbG9oY6NMjgpd9uBaSL">三、分摊到送货单明细（按所选权重比例）</h3>
-        <div class="tbl-wrap" style="overflow:auto" data-page-node-id="PzbINN21BJttvdy9N0c5qK">
-          <table id="tblAlloc" data-page-node-id="RpFJE44qUGYLly4akxk8yF">
-            <thead data-page-node-id="Aj0rRYkEH1Bej3PsiyjX0l"><tr data-page-node-id="JA7wdnFfTrZFvOyeyC9ANQ"><th data-page-node-id="mTi7QuGtQY1ekGK5LRjid6">#</th><th data-page-node-id="kCBGOXSpQT8cbtyhfKwY7v">委托方客户</th><th data-page-node-id="XAWFClfj2IZTTT7xmZDkTT">客户PO</th><th data-page-node-id="CQtazyR2TXjTAfKPe89tQh">料号</th><th data-page-node-id="HlALWgAL5YppBCW6fEzFSu">基准值</th><th data-page-node-id="QYDDEKevtZIgEmjH6rWaNH">占比</th><th data-page-node-id="NDH9OuOFt0Tupvn4yJl5cY">分摊运费(CNY)</th></tr></thead>
-            <tbody data-page-node-id="NSRvOeGAnOKDBFhIHuvx5I"></tbody>
+      <div class="card" style="margin-top:12px;background:#F3F0FF;border:1px solid #D6C2F0">
+        <h3 class="sec">三、分摊到送货单明细（按所选权重比例）</h3>
+        <div class="tbl-wrap" style="overflow:auto">
+          <table id="tblAlloc">
+            <thead><tr><th>#</th><th>委托方客户</th><th>客户PO</th><th>料号</th><th>基准值</th><th>占比</th><th>分摊运费(CNY)</th></tr></thead>
+            <tbody></tbody>
           </table>
         </div>
       </div>
-      <div class="card" style="margin-top:12px" data-page-node-id="5aqH4oSzvcmBsdOhpmwqUB">
-        <h3 class="sec" data-page-node-id="peWpDbKv7EIstXfjLy3RyP">四、输出视图</h3>
-        <div style="display:flex;gap:16px;flex-wrap:wrap" data-page-node-id="K0CDz7wW4SoZbpHhHrzBcQ">
-          <div style="flex:1;min-width:280px" data-page-node-id="VC8R5E0WRDQ3S0j1pfraCH"><h4 style="margin:4px 0 6px;color:#1F3864" data-page-node-id="OitdM1PvGZkHNci8rx8jUa">按客户</h4><div id="stByCust" data-page-node-id="MksbBnaQ2jE3u5K2XwHeno"></div></div>
-          <div style="flex:1;min-width:280px" data-page-node-id="hPCfbJPdsK2t1CtNuOstbZ"><h4 style="margin:4px 0 6px;color:#1F3864" data-page-node-id="GFIk5ksbS65MdfADd9j4zI">按客户PO</h4><div id="stByPO" data-page-node-id="lvPCKKczSvZupUC461hBhe"></div></div>
-          <div style="flex:1;min-width:280px" data-page-node-id="kSyYyQybgVvBzf96IT0Ay4"><h4 style="margin:4px 0 6px;color:#1F3864" data-page-node-id="Q3XJ1330f6mHMzVO6hVAGI">按料号（单位运费）</h4><div id="stByPn" data-page-node-id="R3rJvCcE4V649Uq2D3Ba9U"></div></div>
+      <div class="card" style="margin-top:12px">
+        <h3 class="sec">四、输出视图</h3>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <div style="flex:1;min-width:280px"><h4 style="margin:4px 0 6px;color:#1F3864">按客户</h4><div id="stByCust"></div></div>
+          <div style="flex:1;min-width:280px"><h4 style="margin:4px 0 6px;color:#1F3864">按客户PO</h4><div id="stByPO"></div></div>
+          <div style="flex:1;min-width:280px"><h4 style="margin:4px 0 6px;color:#1F3864">按料号（单位运费）</h4><div id="stByPn"></div></div>
         </div>
       </div>
-      <div class="card" style="margin-top:12px;background:#FDECEC;border:1px solid #E8B4B4" data-page-node-id="0uGBUCUjbc65nUSYM9Ujl7">
-        <h3 class="sec" data-page-node-id="ujBC7v9fDjeVCSs5PZ00Yt">五、估实差异分析（报价单预估 vs 实际结算）</h3>
-        <div id="stVar" data-page-node-id="0V9AS9nnkjbSVCHwnCW5i1"></div>
+      <div class="card" style="margin-top:12px;background:#FDECEC;border:1px solid #E8B4B4">
+        <h3 class="sec">五、估实差异分析（报价单预估 vs 实际结算）</h3>
+        <div id="stVar"></div>
       </div>
     </section>
 
     <!-- ============ ⑯ 海运对账单（生成 + 批核） ============ -->
-    <section class="page" id="p_seafreight" data-page-node-id="mE3FVcaHb7rUtkQnPTmRH7">
-      <h1 class="doc" data-page-node-id="Pl9GYhT209HQzdZEVqYayu">⑯ 海运对账单（生成 + 批核）</h1>
-      <p class="doc-lead" data-page-node-id="YueBeu6OvCPWl9zmUVDW1v">类比「⑥ 报价单生成」：选<b data-page-node-id="DaKS4ZUPu5TP0e2Pz5Bxe5">出口装箱单号</b> → 系统按「⑤ 成本费率表(买价)」自动列出 <b data-page-node-id="cI6VAzRV5OBny1a3BKcqkW">海运费 + 起运港费用 + 目的港费用</b>。费用分<b data-page-node-id="4RLNOYDewS7EDEiYNtqhPe">必选</b>（自动勾）与<b data-page-node-id="6QqmEj1hwa4CiHs3o6vsjV">可选</b>（待勾选）；开单人勾选本次适用项 → 提交 → 批核人<b data-page-node-id="87e7E3fAAYpTzEB9QvyD8D">批核锁定</b>。生成的是<b data-page-node-id="Mlgi4B7IQCw8VDKvDildCD">买价（我们付给货代的成本）</b>，不叠加 markup（markup 只在报价单卖价侧）。</p>
-      <div class="toolbar" style="align-items:flex-end" data-page-node-id="6guE3Frgf69OrLpISlERLC">
-        <div class="field" data-page-node-id="q9UQ3EOXxjV44RWw6Pzv4R"><label data-page-node-id="KIkePaO0MtrAHzJMyyb2ak">出口装箱单号</label><select id="sf_pl" onchange="genSeaFreight()" data-page-node-id="5gtxhpik4nGVN3FboFL8Z6"></select></div>
-        <div class="field" data-page-node-id="byAcAN3AIQBSjO0A36i7O0"><label data-page-node-id="Gpdnh62UHumeViC0xs5TXz">柜型</label><input id="sf_ct" value="20GP" style="width:80px" readonly data-page-node-id="1Lz0zZ0sk1O6dnSVE0cbA0"></div>
-        <div class="field" data-page-node-id="6Ym1mbtVCdAVjtTVFEjzQ6"><label data-page-node-id="6ozDtmKwjwCLzeZKwsMILn">起运港→目的港</label><input id="sf_route" value="深圳(盐田)→曼萨尼约" style="width:160px" readonly data-page-node-id="dLgYlbQdtwncsEccU44UXx"></div>
-        <div class="field" data-page-node-id="wyEfDW6bEcINQoPN1yM8S0"><label data-page-node-id="XnAn4TeqCqcXLTkH5syBKq">运输条款</label><input id="sf_term" value="CIF" style="width:60px" readonly data-page-node-id="eJ0zttgGmGzCKat8oYSzmH"></div>
-        <button onclick="genSeaFreight()" data-page-node-id="ILjyvYhqv5dplM9mXGqDMG">生成清单</button>
-        <button class="ghost" onclick="seedSeaFreightDemo()" data-page-node-id="Dn35b2L2UqFaTUXuxgJa01">载入示例</button>
+    <section class="page" id="p_seafreight">
+      <h1 class="doc">⑯ 海运对账单（生成 + 批核）</h1>
+      <p class="doc-lead">类比「⑥ 报价单生成」：选<b>出口装箱单号</b> → 系统按「⑤ 成本费率表(买价)」自动列出 <b>海运费 + 起运港费用 + 目的港费用</b>。费用分<b>必选</b>（自动勾）与<b>可选</b>（待勾选）；开单人勾选本次适用项 → 提交 → 批核人<b>批核锁定</b>。生成的是<b>买价（我们付给货代的成本）</b>，不叠加 markup（markup 只在报价单卖价侧）。</p>
+      <div class="toolbar" style="align-items:flex-end">
+        <div class="field"><label>出口装箱单号</label><select id="sf_pl" onchange="genSeaFreight()"></select></div>
+        <div class="field"><label>柜型</label><input id="sf_ct" value="20GP" style="width:80px" readonly></div>
+        <div class="field"><label>起运港→目的港</label><input id="sf_route" value="深圳(盐田)→曼萨尼约" style="width:160px" readonly></div>
+        <div class="field"><label>运输条款</label><input id="sf_term" value="CIF" style="width:60px" readonly></div>
+        <button onclick="genSeaFreight()">生成清单</button>
+        <button class="ghost" onclick="seedSeaFreightDemo()">载入示例</button>
       </div>
-      <div class="card" style="margin-top:12px;background:#EAF1FB;border:1px solid #9DBBE8" data-page-node-id="PYFCoO7rFsvD10oqm8DpD8">
-        <h3 class="sec" data-page-node-id="2VNQ0ropxjnDOQ2oyQVjbd">对账单明细（必选自动勾 / 可选由你勾选）</h3>
-        <div class="tbl-wrap" style="overflow:auto" data-page-node-id="8eSyIRCHaPTq7sDptNWHEG">
-          <table id="tblSeaFreight" data-page-node-id="HWFieP9AH7OzRFjlJMN4EL">
-            <thead data-page-node-id="VVP9nsXdWqDvn6fbW563tt"><tr data-page-node-id="e9prHD3SZHwRTdh3x81OJJ"><th data-page-node-id="iJq9LEH7UNx8beVxEtQm43">勾选</th><th data-page-node-id="40xqC3AuBjmQMot5CC6AAd">费用分类</th><th data-page-node-id="Ghj1F2aG9oLha30rlEEMZh">费用项目</th><th data-page-node-id="hSK3IFjmJbcDV8ftmea9Lh">金额(买价)</th><th data-page-node-id="miZdaod2HgKIldEYKKElfC">币种</th><th data-page-node-id="BAHshXBM8RYWP34PN7nsTP">必选</th></tr></thead>
-            <tbody data-page-node-id="1wJgaD52Gjcg5JKqjqGEsY"></tbody>
+      <div class="card" style="margin-top:12px;background:#EAF1FB;border:1px solid #9DBBE8">
+        <h3 class="sec">对账单明细（必选自动勾 / 可选由你勾选）</h3>
+        <div class="tbl-wrap" style="overflow:auto">
+          <table id="tblSeaFreight">
+            <thead><tr><th>勾选</th><th>费用分类</th><th>费用项目</th><th>金额(买价)</th><th>币种</th><th>必选</th></tr></thead>
+            <tbody></tbody>
           </table>
         </div>
-        <div id="sfSum" data-page-node-id="OuuC8ZVVhkaclbrTCU5x8g"></div>
-        <div class="btnrow" style="margin-top:10px" data-page-node-id="BgK8QMthCAKjGzFG1YA6if">
-          <label style="font-size:13px" data-page-node-id="HvZ1LP1zQuvP2UMusYWcwW">状态：<b id="sfStatus" style="color:#9C4221" data-page-node-id="mgUwNcOe8TsDdfgG5Wl2mm">草稿</b></label>
-          <button onclick="sfSubmit()" data-page-node-id="xPrxTjf27u29x6pX2Q6i07">开单提交（待批核）</button>
-          <button class="ghost" onclick="sfApprove()" data-page-node-id="k9IgBi8AD2JcOZyhgnu7eK">批核锁定</button>
+        <div id="sfSum"></div>
+        <div class="btnrow" style="margin-top:10px">
+          <label style="font-size:13px">状态：<b id="sfStatus" style="color:#9C4221">草稿</b></label>
+          <button onclick="sfSubmit()">开单提交（待批核）</button>
+          <button class="ghost" onclick="sfApprove()">批核锁定</button>
         </div>
-        <p class="note" style="margin:8px 0 0" data-page-node-id="KeSrcSQbQvdSBUZsCLvCvf">状态机：<b data-page-node-id="ZlfOIWHlt3SyaQvPhKzzzp">草稿 → 待批核 → 已批核(锁定)</b>。"哪些可选费选上了"以批核记录为准、不可随意改，留痕防错。批核后本单明细即作为「⑮ 费用汇总与分摊」Stage B+C 的成本来源。</p>
+        <p class="note" style="margin:8px 0 0">状态机：<b>草稿 → 待批核 → 已批核(锁定)</b>。"哪些可选费选上了"以批核记录为准、不可随意改，留痕防错。批核后本单明细即作为「⑮ 费用汇总与分摊」Stage B+C 的成本来源。</p>
       </div>
-      <div class="card" style="margin-top:12px" data-page-node-id="lHAyseo3GdRt2k6Vril74G">
-        <h3 class="sec" data-page-node-id="P6IYzcjwQJNkcwfAH1Y0de">与另两张成本单据的关系</h3>
-        <table data-page-node-id="wC2AGscoWcbbtp9l2UTvZB">
-          <tr data-page-node-id="fa261nca0Md8wUZn0xaszm"><th data-page-node-id="CxtcXNfkF3qbPjSuyrSO8H">阶段</th><th data-page-node-id="7B706x0KrFEJhDsRGk7bR9">成本单据</th><th data-page-node-id="bR2CLqlo7LHlaNfvlB7V9J">怎么来</th><th data-page-node-id="ejUuPbVBYw0ONYWipgFbmK">性质</th></tr>
-          <tr data-page-node-id="R6EuWRLkCUEWhkn7wgNJsX"><td data-page-node-id="4RwnI2JPBelzLVxDEw2vrK">Stage A 国内拖车</td><td data-page-node-id="Ty385kDiqpseXkt1f71eUC">物流对账单（⑭ 派车单算）</td><td data-page-node-id="Pfb8L1CiQwG7FtabSkmip6">公里×运价 算出来</td><td data-page-node-id="4NLErOqYrijNswri1pcWy9">买价</td></tr>
-          <tr data-page-node-id="hWz8DstLLgsZX6Vjb8l2It"><td data-page-node-id="xEMVO1KA3UyYNU15INLy1I">Stage B+C 海运费/起运港/目的港</td><td data-page-node-id="c7T33PyY7cHNcwIG7HaA4W">海运对账单（本屏）</td><td data-page-node-id="oEFDI2zG0lj5nnoLrOaTga">选出口装箱单生成 + 批核</td><td data-page-node-id="hT7iPjoFi4elqTEgIvrj7s">买价</td></tr>
-          <tr data-page-node-id="ZF96pIBGjXPJdPEzB6ETC4"><td data-page-node-id="gCtSEwWVZnGntmekCmUIWk">汇总分摊</td><td data-page-node-id="s239HbSG5SbouKt91Ch0d8">⑮ 费用汇总与分摊</td><td data-page-node-id="GK48TK81saDIgRz2m67r0S">引用上面两单 + 按送货单权重分摊</td><td data-page-node-id="9MZcvjTeOW3wMMtNVTpe85">纯引用·不重算</td></tr>
+      <div class="card" style="margin-top:12px">
+        <h3 class="sec">与另两张成本单据的关系</h3>
+        <table>
+          <tr><th>阶段</th><th>成本单据</th><th>怎么来</th><th>性质</th></tr>
+          <tr><td>Stage A 国内拖车</td><td>物流对账单（⑭ 派车单算）</td><td>公里×运价 算出来</td><td>买价</td></tr>
+          <tr><td>Stage B+C 海运费/起运港/目的港</td><td>海运对账单（本屏）</td><td>选出口装箱单生成 + 批核</td><td>买价</td></tr>
+          <tr><td>汇总分摊</td><td>⑮ 费用汇总与分摊</td><td>引用上面两单 + 按送货单权重分摊</td><td>纯引用·不重算</td></tr>
         </table>
       </div>
     </section>
 
     <!-- ============ ⑩ 开放问题 ============ -->
-    <section class="page" id="p_notes" data-page-node-id="VkLzerKWGT06UkJ6wycAGe">
-      <h1 class="doc" data-page-node-id="GFwCV9l35GIIRp3p13nL3G">⑩ 开放问题与 ERP 对接</h1>
-      <div class="card" data-page-node-id="0FKSLxpcbMIr381j1Q1BrJ">
-        <h2 class="sec" data-page-node-id="bnSwuqAb4YAA7E8cM7kq05">开放问题（需你确认）</h2>
-        <table data-page-node-id="sdoEQ49S7lNHlk2mBxbL5n">
-          <tr data-page-node-id="3tNxC7AVRNalq8TnlHC8HY"><th data-page-node-id="5QC8ABueHZyUe46OZ0HEhr">问题</th><th data-page-node-id="mWqc6BAvF3zcLa5CZJtixS">影响</th><th data-page-node-id="IVhemRBlEWNKfRbmbZQmtd">建议</th></tr>
-          <tr data-page-node-id="sNTfg7vlHdDqkAjjoafOYC"><td data-page-node-id="iWEJzkCqA9uwU16XvwEPlG">起运港实际值？</td><td data-page-node-id="0NHcUluo8LUKfYRyN0igUg">当前 68 条均为"（待补充）"</td><td data-page-node-id="JfnCWy3B04A91VMLvkEErO">补全后批量更新 origin_port</td></tr>
-          <tr data-page-node-id="6Zf2i7hw8JmBmQtV76k7UD"><td data-page-node-id="UrdrBezIzzROrhF7edAj7a">厂址清单与默认起运港？</td><td data-page-node-id="vBoP1DNe08NCqAIllYEl6g">影响国内段运费取值</td><td data-page-node-id="IPOR4rmtWjwEI3pys1fvYm">以实际集团厂址替换示例 F001~F004</td></tr>
-          <tr data-page-node-id="b2bhnylB9aUaU246mYxDz7"><td data-page-node-id="mMhbjnZUyAKHDobfaHtEDv">国内段是否含散货按CBM/按KG？</td><td data-page-node-id="mWYvlteHp84zkTofB9DbXA">计费方式取值</td><td data-page-node-id="ZukurLr3EyW9OpKUSbd79y">已支持 8 种计费方式，按实际选用</td></tr>
-          <tr data-page-node-id="LfXDxSPXp62xagP7lrFFpl"><td data-page-node-id="v6zIHFqrhAvg8PcYw79Mx2">散货(LCL)海运价？</td><td data-page-node-id="WlR0rqgg05u5ZkuVaONb1r">当前缺失，智能柜型推荐中 LCL 栏为示例推导</td><td data-page-node-id="b2ALe1t3N7S7Ss29DkvG7S">在「⑤ 运费明细配置」补录 柜型=LCL、计费方式=按CBM 的真实海运明细后，推荐自动改用真实值</td></tr>
-          <tr data-page-node-id="P3LHgRx545Gzg6vPvVEO0F"><td data-page-node-id="aYk7S1NAjCVkaUVdL4fPwB">是否对接关税/报关计算？</td><td data-page-node-id="4qVDCMcy0arN5VWjVoZTKM">决定 P2 范围</td><td data-page-node-id="1NgyDOSQQi3xV16fLSOccK">一期仅保留费用项，不计算</td></tr>
-          <tr data-page-node-id="5EHtTtod8XcQExjhHJJEC5"><td data-page-node-id="1kccDr7XFO8tXG35JERKm3">ERP 技术栈 / 接口形式？</td><td data-page-node-id="fQarqDhFnca163NDFN5wAF">决定落地方式</td><td data-page-node-id="iP5U9Vv8hs8Sh729w8tBRq">提供数据模型 + 原型，便于建表</td></tr>
+    <section class="page" id="p_notes">
+      <h1 class="doc">⑩ 开放问题与 ERP 对接</h1>
+      <div class="card">
+        <h2 class="sec">开放问题（需你确认）</h2>
+        <table>
+          <tr><th>问题</th><th>影响</th><th>建议</th></tr>
+          <tr><td>起运港实际值？</td><td>当前 68 条均为"（待补充）"</td><td>补全后批量更新 origin_port</td></tr>
+          <tr><td>厂址清单与默认起运港？</td><td>影响国内段运费取值</td><td>以实际集团厂址替换示例 F001~F004</td></tr>
+          <tr><td>国内段是否含散货按CBM/按KG？</td><td>计费方式取值</td><td>已支持 8 种计费方式，按实际选用</td></tr>
+          <tr><td>散货(LCL)海运价？</td><td>当前缺失，智能柜型推荐中 LCL 栏为示例推导</td><td>在「⑤ 运费明细配置」补录 柜型=LCL、计费方式=按CBM 的真实海运明细后，推荐自动改用真实值</td></tr>
+          <tr><td>是否对接关税/报关计算？</td><td>决定 P2 范围</td><td>一期仅保留费用项，不计算</td></tr>
+          <tr><td>ERP 技术栈 / 接口形式？</td><td>决定落地方式</td><td>提供数据模型 + 原型，便于建表</td></tr>
         </table>
       </div>
-      <div class="card" data-page-node-id="0ah4gZfX3EaJnLMjZ8PpBm">
-        <h2 class="sec" data-page-node-id="fkujVKgiFbCE8dmgI8RMuh">对接建议（给开发）</h2>
-        <ul data-page-node-id="CYwdAlT5b0jShkKKgqcG8i">
-          <li data-page-node-id="gvkyulhtUPUxI3mrOiCUZj"><b data-page-node-id="RaMB8Z4FFl413AOQyR6WgE">建表顺序</b>：config → freight_fee_item → factory → factory_freight_rate → freight_rate_detail → quotation 视图。</li>
-          <li data-page-node-id="pQrsdEiAlCLrkTeRA8JNSE"><b data-page-node-id="E4Fn74KIqUKDrKcW04mOra">聚合逻辑</b>：总价 = Σ(freight_rate_detail 按条件) + Σ(factory_freight_rate 按 厂址/起运港/柜型)。</li>
-          <li data-page-node-id="hKhiMhsfE4P0JN4hkObiv2"><b data-page-node-id="Fb7eB6kcUqwVpJHBH3QSRI">迁移脚本</b>：68 条海运段 + 厂址段示例，补全起运港/厂址即可导入。</li>
+      <div class="card">
+        <h2 class="sec">对接建议（给开发）</h2>
+        <ul>
+          <li><b>建表顺序</b>：config → freight_fee_item → factory → factory_freight_rate → freight_rate_detail → quotation 视图。</li>
+          <li><b>聚合逻辑</b>：总价 = Σ(freight_rate_detail 按条件) + Σ(factory_freight_rate 按 厂址/起运港/柜型)。</li>
+          <li><b>迁移脚本</b>：68 条海运段 + 厂址段示例，补全起运港/厂址即可导入。</li>
         </ul>
       </div>
-      <footer data-page-node-id="xDTQruojDZuDGTvASYnfbC">运费项目明细设定模块 · 原型 v1.1 · 由产品管理专家整理。数据源自恒荣达&amp;晨崴 墨西哥&amp;英国报价（68 条）+ 集团厂址示例。本原型用于需求对齐与开发指导，交互为演示性质。</footer>
+      <footer>运费项目明细设定模块 · 原型 v1.1 · 由产品管理专家整理。数据源自恒荣达&amp;晨崴 墨西哥&amp;英国报价（68 条）+ 集团厂址示例。本原型用于需求对齐与开发指导，交互为演示性质。</footer>
     </section>
   </main>
 </div>
 
 <!-- ============ 弹窗：新增/编辑费用项目 ============ -->
-<div class="mask" id="maskFee" data-page-node-id="pxCfeVmsEV82mPl5RAbH4f">
-  <div class="modal" data-page-node-id="BKoeJGz9hCzeCYaJyISv96">
-    <div class="modal-h" data-page-node-id="1onaBngdmu3qzjXHB48DHV"><span data-page-node-id="6UJjzQvBknqtTs42Fr6ymC">新增 / 编辑费用项目</span><span class="x" onclick="closeModal('maskFee')" data-page-node-id="C7z7AGByKp08pJWepJquAi">×</span></div>
-    <div class="modal-b" data-page-node-id="k0lawGspMx9KvsHw4n27YB">
-      <div class="formrow" data-page-node-id="kNLxBard3FNAJbrhj60Cr2">
-        <div class="field" data-page-node-id="BEd6tisNzwZe1A1g3HxPih"><label data-page-node-id="DImUKThW1N2FIbfFRsJYre">费用编码</label><input id="fee_code" placeholder="留空自动生成，如 SEA-31" data-page-node-id="oJvCFxeFto4dYoku2AAwqO"></div>
-        <div class="field" data-page-node-id="8b0XWPxFKFgouzeB0AA0hY"><label data-page-node-id="iGnJoT5kZOgcVbeAu7EqUn">费用分类 <span style="color:#C00" data-page-node-id="tlYv9VEWqT6UEAE4oEsS50">*</span></label>
-          <select id="fee_cat" data-page-node-id="F1hcoeshBHWlxOX8c6YfCw"></select></div>
+<div class="mask" id="maskFee">
+  <div class="modal">
+    <div class="modal-h"><span>新增 / 编辑费用项目</span><span class="x" onclick="closeModal('maskFee')">×</span></div>
+    <div class="modal-b">
+      <div class="formrow">
+        <div class="field"><label>费用编码</label><input id="fee_code" placeholder="留空自动生成，如 SEA-31"></div>
+        <div class="field"><label>费用分类 <span style="color:#C00">*</span></label>
+          <select id="fee_cat"></select></div>
       </div>
-      <div class="formrow" data-page-node-id="8wqUydLxnPbYHUynUvcQw5">
-        <div class="field" data-page-node-id="QRtKmGXHMlFK6WEZ2tDYeA"><label data-page-node-id="OPNluJOgfTOCDve0XQkfUK">费用项目名称 <span style="color:#C00" data-page-node-id="uHvBFSR1kglBfjLcx1DhAj">*</span></label><input id="fee_name" placeholder="如 燃油附加费(BAF)" data-page-node-id="cF6ln61S3iVaPjs1BMbkYP"></div>
+      <div class="formrow">
+        <div class="field"><label>费用项目名称 <span style="color:#C00">*</span></label><input id="fee_name" placeholder="如 燃油附加费(BAF)"></div>
       </div>
-      <div class="formrow" data-page-node-id="ylQ9tB0lIRw92Wf6xDuVCC">
-        <div class="field" data-page-node-id="byDew2VQtuBpiXrCgzi9iQ"><label data-page-node-id="owjS9rPPKcyotpHYOH2ewW">说明</label><input id="fee_desc" placeholder="含义说明" data-page-node-id="1Kxy7wNcuYabLG3mx5310h"></div>
+      <div class="formrow">
+        <div class="field"><label>说明</label><input id="fee_desc" placeholder="含义说明"></div>
       </div>
-      <div class="formrow" data-page-node-id="TsIo2xZ336aPIF8abCHsY8">
-        <div class="field" data-page-node-id="moO9hUWuBVYCvawwL7UVeE"><label data-page-node-id="4mCO1bUSksOGolLgkMHzeC">计费方式 <span style="color:#C00" data-page-node-id="QZQbQmcQOoVLWEU1z92edk">*</span></label>
-          <select id="fee_method" data-page-node-id="Dnj20sSseVII7haoQ4P5Zq"></select></div>
-        <div class="field" data-page-node-id="YfFMRwE0Pnf0AvFQSJEece"><label data-page-node-id="1EmjBjvdy5hWDoAAikjMei">是否必选</label>
-          <select id="fee_mand" data-page-node-id="lyEVPVF9FiurxPFT6hvk4m"><option data-page-node-id="2QsVTbE6chgiiCiRuH6BqS">是</option><option data-page-node-id="qu3DWLBuB7BbFO7XcauZHp">否</option><option data-page-node-id="CIw2ytmehU64WXelEARuHM">视情况</option></select></div>
+      <div class="formrow">
+        <div class="field"><label>计费方式 <span style="color:#C00">*</span></label>
+          <select id="fee_method"></select></div>
+        <div class="field"><label>是否必选</label>
+          <select id="fee_mand"><option>是</option><option>否</option><option>视情况</option></select></div>
       </div>
-      <div class="formrow" data-page-node-id="GZit5hIa9BP7GpLNR5a0CQ">
-        <div class="field" data-page-node-id="iN8sbdoPq0r6J0Bqdiv3Ac"><label data-page-node-id="Jo1RkLqBxigirDxiMuS5DB">默认币种</label><select id="fee_curr" data-page-node-id="alI1lojp18v75qXHcLSXpw"></select></div>
-        <div class="field" data-page-node-id="ww45UGlSKKZHfuUiAeb0Et"><label data-page-node-id="KtFzoRISu7ff30qbE2wspp">状态</label><select id="fee_status" data-page-node-id="9ddXsAKtyCCHP1ExhXOgJ8"><option data-page-node-id="Okdd7dlMcsby8770jfkBx4">启用</option><option data-page-node-id="13hGggxKw3M4iQcXLgevoL">停用</option></select></div>
+      <div class="formrow">
+        <div class="field"><label>默认币种</label><select id="fee_curr"></select></div>
+        <div class="field"><label>状态</label><select id="fee_status"><option>启用</option><option>停用</option></select></div>
       </div>
     </div>
-    <div class="modal-f" data-page-node-id="XUtcuhwubMbWbInnZFvdKv">
-      <button class="ghost" onclick="closeModal('maskFee')" data-page-node-id="mPhOkbPirDb9sUrpWZ5DkM">取消</button>
-      <button onclick="saveFeeModal()" data-page-node-id="eLCdji6TMeLBhCy2Ce2J4N">保存</button>
+    <div class="modal-f">
+      <button class="ghost" onclick="closeModal('maskFee')">取消</button>
+      <button onclick="saveFeeModal()">保存</button>
     </div>
   </div>
 </div>
 
 <!-- ============ 弹窗：新增/编辑厂址 ============ -->
-<div class="mask" id="maskFactory" data-page-node-id="Sx6094KzOGETtUvFHCkfFM">
-  <div class="modal" data-page-node-id="8QiCuCnHnHpPwEmdOzR5qX">
-    <div class="modal-h" data-page-node-id="s3pgRqUMWTa8QdZpAKIeog"><span data-page-node-id="OKudzPeZNxSRtJ6tD1cdEu">新增 / 编辑厂址</span><span class="x" onclick="closeModal('maskFactory')" data-page-node-id="xUWrLOb17qg5Zs50Ia1AvB">×</span></div>
-    <div class="modal-b" data-page-node-id="EkQx5hTUFgUYRz2nyGWiwU">
-      <div class="formrow" data-page-node-id="aAkfqTANTFF8LCrcmK7bEd">
-        <div class="field" data-page-node-id="gzfE5h49xj7N3vGDc70Kw5"><label data-page-node-id="kY3EkdQjFDcln12AmDCWfD">厂址编码</label><input id="fac_code" placeholder="如 F005" data-page-node-id="bsrlLGZEmmJMgBITPH4I82"></div>
-        <div class="field" data-page-node-id="wCacRFmZN0d4khW7IbEe2M"><label data-page-node-id="TFeMuVWDLmi7pMzK3biFZ3">厂址名称 <span style="color:#C00" data-page-node-id="Iyj4gDAJ0mbftZG7o9RF2Q">*</span></label><input id="fac_name" placeholder="如 中山小榄工厂" data-page-node-id="G7vSHfQdgugURMtvjTMmEB"></div>
+<div class="mask" id="maskFactory">
+  <div class="modal">
+    <div class="modal-h"><span>新增 / 编辑厂址</span><span class="x" onclick="closeModal('maskFactory')">×</span></div>
+    <div class="modal-b">
+      <div class="formrow">
+        <div class="field"><label>厂址编码</label><input id="fac_code" placeholder="如 F005"></div>
+        <div class="field"><label>厂址名称 <span style="color:#C00">*</span></label><input id="fac_name" placeholder="如 中山小榄工厂"></div>
       </div>
-      <div class="formrow" data-page-node-id="gy5mey4iIgj877znmntOJ7">
-        <div class="field" data-page-node-id="LcytaiQ0fJ0LJD9rwco4q9"><label data-page-node-id="1IVLjh2DGNU1NzPXs6ZNlF">所属城市</label><input id="fac_city" placeholder="如 中山" data-page-node-id="ugjY0oU5OAFI3prZZAdYci"></div>
-        <div class="field" data-page-node-id="NGiA9xm7DSnvmV9PfomJD0"><label data-page-node-id="6F1BZu0fMQUBUVLGy8N3iS">默认起运港</label><select id="fac_origin" data-page-node-id="nZ5H6jgn3RwKCaPzqDMUu2"></select></div>
+      <div class="formrow">
+        <div class="field"><label>所属城市</label><input id="fac_city" placeholder="如 中山"></div>
+        <div class="field"><label>默认起运港</label><select id="fac_origin"></select></div>
       </div>
-      <div class="formrow" data-page-node-id="HFEtGUC6nuAOan4DgOHXjz">
-        <div class="field" data-page-node-id="6hQThMz7ew8awnVSmChd1X"><label data-page-node-id="PAJ31CLsLiTOWzevF2t8Y9">详细地址</label><input id="fac_addr" placeholder="街道/园区/门牌" data-page-node-id="yq7BT8ckRErWnL0OxhDVCB"></div>
+      <div class="formrow">
+        <div class="field"><label>详细地址</label><input id="fac_addr" placeholder="街道/园区/门牌"></div>
       </div>
-      <div class="formrow" data-page-node-id="o3ZC1uGW6B6R4CT18QoRX7">
-        <div class="field" data-page-node-id="f6foGKhXF4RpM20TCVnHyJ"><label data-page-node-id="XG4WwW2LIqGN7HkIPhZfLF">状态</label><select id="fac_status" data-page-node-id="KhzbsZc63U40D5WLCvi4aw"><option data-page-node-id="Bns3ufnn4PcXhAvDCMOsrm">启用</option><option data-page-node-id="AWJ7CZ4EbLdpgVWXN6twuH">停用</option></select></div>
+      <div class="formrow">
+        <div class="field"><label>状态</label><select id="fac_status"><option>启用</option><option>停用</option></select></div>
       </div>
     </div>
-    <div class="modal-f" data-page-node-id="8n5fB4BoeID0KLEBeodxPu">
-      <button class="ghost" onclick="closeModal('maskFactory')" data-page-node-id="1kDrqqhe7FhDfOfJh2Guc1">取消</button>
-      <button onclick="saveFactoryModal()" data-page-node-id="jlGOQUiHExTCZ10ZIBk4Qu">保存</button>
+    <div class="modal-f">
+      <button class="ghost" onclick="closeModal('maskFactory')">取消</button>
+      <button onclick="saveFactoryModal()">保存</button>
     </div>
   </div>
 </div>
 
 <!-- ============ 弹窗：新增厂址运费行 ============ -->
-<div class="mask" id="maskFactoryRate" data-page-node-id="zLv20cmNPpBSZU0gvDeBde">
-  <div class="modal" data-page-node-id="usd0WbkKQfBbYHjjoT0z1q">
-    <div class="modal-h" data-page-node-id="b0eUmdQ3lH3udLzog5hmYU"><span data-page-node-id="gHlBB6SanuCIDVCtUl1Xww">新增厂址运费行（国内段）</span><span class="x" onclick="closeModal('maskFactoryRate')" data-page-node-id="2a3GYGVM2oy37wK6vslTly">×</span></div>
-    <div class="modal-b" data-page-node-id="ck4KoVcav3VIOAaDh7jPk7">
-      <div class="formrow" data-page-node-id="xKU5jIVn7DKGXRaRIlq2Dt">
-        <div class="field" data-page-node-id="VjgmlnAZ9w7zSG6EmJZoIo"><label data-page-node-id="5CMru6B2dVyaQjV5ZLNPlV">厂址 <span style="color:#C00" data-page-node-id="CylDSXOQ4ZevTXi1V5NaQA">*</span></label><select id="fr_factory_i" data-page-node-id="UkvEGvul5skVEb9iHbj2Zr"></select></div>
-        <div class="field" data-page-node-id="6tTdNi9r0Fg1olOlW68pZl"><label data-page-node-id="GpDTPcZ5ud2BuYj8jH8IFB">起运港 <span style="color:#C00" data-page-node-id="ekOZiBBxYPsq0DdLBbX22V">*</span></label><select id="fr_origin_i" data-page-node-id="zMe4quDAMAbhtXQqhAALNj"></select></div>
+<div class="mask" id="maskFactoryRate">
+  <div class="modal">
+    <div class="modal-h"><span>新增厂址运费行（国内段）</span><span class="x" onclick="closeModal('maskFactoryRate')">×</span></div>
+    <div class="modal-b">
+      <div class="formrow">
+        <div class="field"><label>厂址 <span style="color:#C00">*</span></label><select id="fr_factory_i"></select></div>
+        <div class="field"><label>起运港 <span style="color:#C00">*</span></label><select id="fr_origin_i"></select></div>
       </div>
-      <div class="formrow" data-page-node-id="fr6Tigu3ycMhcVQ0uyQtug">
-        <div class="field" data-page-node-id="K2iTCTvZlvDSs9ESz5413W"><label data-page-node-id="ery1aSILERXqbBBiRDiEnC">柜型 <span style="color:#C00" data-page-node-id="H7WyNBizY3YOLjlURiXYRm">*</span></label><select id="fr_ct_i" data-page-node-id="qaCW2XgsVS4pekSXW6DSUE"></select></div>
-        <div class="field" data-page-node-id="WnpZIIzdjpDa82eh5WRaCQ"><label data-page-node-id="SNu5wxADkxrP8gJjtYI1WU">计费方式</label><select id="fr_method_i" data-page-node-id="PP1ZOSQgPddRTUUOBRhMYR"></select></div>
+      <div class="formrow">
+        <div class="field"><label>柜型 <span style="color:#C00">*</span></label><select id="fr_ct_i"></select></div>
+        <div class="field"><label>计费方式</label><select id="fr_method_i"></select></div>
       </div>
-      <div class="formrow" data-page-node-id="3wiC0361253lzKK20OvTZV">
-        <div class="field" data-page-node-id="MOiiU6DEH3oQmXaKS6SUhG"><label data-page-node-id="lHWRH9HVWv1tt0kDoAqW43">金额</label><input id="fr_amount_i" type="number" placeholder="如 950" data-page-node-id="m0A6d0FG5GS1CjYQ5c4oRc"></div>
-        <div class="field" data-page-node-id="fjFrp3B1zada9GYrSseZHu"><label data-page-node-id="sc3OxomJDa6Irb4gkrkzj6">币种</label><select id="fr_curr_i" data-page-node-id="ODdc5kP1rd72ecF5yZYy3z"></select></div>
+      <div class="formrow">
+        <div class="field"><label>金额</label><input id="fr_amount_i" type="number" placeholder="如 950"></div>
+        <div class="field"><label>币种</label><select id="fr_curr_i"></select></div>
       </div>
-      <div class="formrow" data-page-node-id="4zECGEJDXALp1WCEnonqm1">
-        <div class="field" data-page-node-id="vPH1u7Z8kqRVrk64PHmqv7"><label data-page-node-id="AJpoEKuhM4qbFhQtIBH3wx">有效期</label><input id="fr_eff_i" placeholder="2026-08-18~2026-08-31" data-page-node-id="KWKgPD6BRhcDL44KbKzcVO"></div>
+      <div class="formrow">
+        <div class="field"><label>有效期</label><input id="fr_eff_i" placeholder="2026-08-18~2026-08-31"></div>
       </div>
     </div>
-    <div class="modal-f" data-page-node-id="MrVeZVJYrU0MhJJZfAXG73">
-      <button class="ghost" onclick="closeModal('maskFactoryRate')" data-page-node-id="qSuXmAdNDCFyQ0Jc8b4iHa">取消</button>
-      <button onclick="saveFactoryRateModal()" data-page-node-id="gxtf7cX3WyhZEayUW6NPvs">保存</button>
+    <div class="modal-f">
+      <button class="ghost" onclick="closeModal('maskFactoryRate')">取消</button>
+      <button onclick="saveFactoryRateModal()">保存</button>
     </div>
   </div>
 </div>
 
 <!-- ============ 弹窗：新增运费明细（海运段） ============ -->
-<div class="mask" id="maskRate" data-page-node-id="ioHePmwp8IiPCiEzxnSG6p">
-  <div class="modal" data-page-node-id="11ES5ItgmhRBRBQSCGqlAH">
-    <div class="modal-h" data-page-node-id="H7r2VwsQ8qfkOmhe9Wq9HT"><span data-page-node-id="DgwL56SihTxUK0vcTno6zA">新增运费明细（海运段 · freight_rate_detail）</span><span class="x" onclick="closeModal('maskRate')" data-page-node-id="TVnuPE1gIIV9XYYlfAosfi">×</span></div>
-    <div class="modal-b" data-page-node-id="Aao4fFCUcxpS4kbRRpkJjK">
-      <div class="formrow" data-page-node-id="YOU1w58VjVxnjOGEJ33v5V">
-        <div class="field" data-page-node-id="RHxihheQEK1fYYKsVJpmTY"><label data-page-node-id="UkqVUHAlIb3lgzecF3KdcQ">起运港 <span style="color:#C00" data-page-node-id="64vuomEBtmYpgN5aprW9UA">*</span></label><select id="rate_origin" data-page-node-id="OLY1PmV2gRgyP7OgYOkVMo"></select></div>
-        <div class="field" data-page-node-id="ujlGPKfjm2FZhe8AAbpOfy"><label data-page-node-id="RVVKpDMxU9Uj7LpaEhM6WQ">目的港 <span style="color:#C00" data-page-node-id="mnGYMEZ2HMFZG7YARkWfK6">*</span></label><select id="rate_dest" data-page-node-id="JdHZJkXc3C1MU2EYRDVDuZ"></select></div>
+<div class="mask" id="maskRate">
+  <div class="modal">
+    <div class="modal-h"><span>新增运费明细（海运段 · freight_rate_detail）</span><span class="x" onclick="closeModal('maskRate')">×</span></div>
+    <div class="modal-b">
+      <div class="formrow">
+        <div class="field"><label>起运港 <span style="color:#C00">*</span></label><select id="rate_origin"></select></div>
+        <div class="field"><label>目的港 <span style="color:#C00">*</span></label><select id="rate_dest"></select></div>
       </div>
-      <div class="formrow" data-page-node-id="iksFmaW55Gz2xEbH6eMpV7">
-        <div class="field" data-page-node-id="k9BQeZy5aWkkwtmxRkGsya"><label data-page-node-id="7cvuwhyZNDHtjYq5fhgfAO">船公司 <span style="color:#C00" data-page-node-id="0mM7vX5IHrdTZWOxCqTHru">*</span></label><select id="rate_carrier" data-page-node-id="SuQMqB0tTHPvUTzPtoFF92"></select></div>
-        <div class="field" data-page-node-id="et0GpfnF16ZDtBIOuVtcFD"><label data-page-node-id="DpkJQeCoyXvlFb2MMn52L4">柜型 <span style="color:#C00" data-page-node-id="YHUnp08p9WW90OqCahg0R4">*</span></label><select id="rate_ct" data-page-node-id="Wf7YeUMdFHzlEfP3DV9JxU"></select></div>
+      <div class="formrow">
+        <div class="field"><label>船公司 <span style="color:#C00">*</span></label><select id="rate_carrier"></select></div>
+        <div class="field"><label>柜型 <span style="color:#C00">*</span></label><select id="rate_ct"></select></div>
       </div>
-      <div class="formrow" data-page-node-id="ussaMYkDSZJUYtM31ivJwU">
-        <div class="field" data-page-node-id="HgDgEBklVjC9kVcnhkPEH1"><label data-page-node-id="fabErY5og4w3SgoiZqFekz">费用分类</label><select id="rate_cat" data-page-node-id="gGmsIoSz9FscEcr4AeWxWW"></select></div>
-        <div class="field" data-page-node-id="fCEyP6cIrcDEDNXIDJSco3"><label data-page-node-id="mQ1WKQpuX0jv1CBiymmBy1">费用项目 <span style="color:#C00" data-page-node-id="LMCJsikZjIUYccDst2Hq42">*</span></label><select id="rate_item" data-page-node-id="0nU9zO3ABxC2LgeRSCIVhz"></select></div>
+      <div class="formrow">
+        <div class="field"><label>费用分类</label><select id="rate_cat"></select></div>
+        <div class="field"><label>费用项目 <span style="color:#C00">*</span></label><select id="rate_item"></select></div>
       </div>
-      <div class="formrow" data-page-node-id="6VGtScJ9oXtAMqHvQNBVVF">
-        <div class="field" data-page-node-id="ZICfpRl7wypeVstIEjRSGN"><label data-page-node-id="rs58Nzu7odvEqwmLLI9N7l">金额</label><input id="rate_amount" type="number" placeholder="如 6900" data-page-node-id="SLJpMEVLgVaNbnfJxWpwL5"></div>
-        <div class="field" data-page-node-id="ZmSsVqWQRW05sgTsFUFaTG"><label data-page-node-id="KKbB6ZbQ6G06LVeaGZZrOP">币种</label><select id="rate_curr" data-page-node-id="MRRrRJG7kmwwYXbncXYGSG"></select></div>
+      <div class="formrow">
+        <div class="field"><label>金额</label><input id="rate_amount" type="number" placeholder="如 6900"></div>
+        <div class="field"><label>币种</label><select id="rate_curr"></select></div>
       </div>
-      <div class="formrow" data-page-node-id="YuvDCLMohISw2l0ADkHkBG">
-        <div class="field" data-page-node-id="7tphZ9VlvvFXsymY9SMGM9"><label data-page-node-id="pluPGHZ64J0VoqyWGm5TfH">管理费率(%)</label><input id="rate_mgt" type="number" step="0.5" placeholder="如 8" data-page-node-id="rPpWshcjqx1CouLWZA65Bz"></div>
-        <div class="field" data-page-node-id="Cpdx2JBOiVEnuesqnWYIva"><label data-page-node-id="1Q7VB13KSV5QfacHnG2HAc">&nbsp;</label><span class="note" style="font-size:12px;color:#7A3E9D" data-page-node-id="ZoriJUbEDqCmlMAyk1Lmsx">卖价 = 买价 ×(1 + 管理费率)；按费用分类预填，可逐行改写</span></div>
+      <div class="formrow">
+        <div class="field"><label>管理费率(%)</label><input id="rate_mgt" type="number" step="0.5" placeholder="如 8"></div>
+        <div class="field"><label>&nbsp;</label><span class="note" style="font-size:12px;color:#7A3E9D">卖价 = 买价 ×(1 + 管理费率)；按费用分类预填，可逐行改写</span></div>
       </div>
-      <div class="formrow" data-page-node-id="UQ2jHPZkYIdvliNMXRDxrG">
-        <div class="field" data-page-node-id="1HbZiBpuYumBAO4FG7kNot"><label data-page-node-id="WX16EFO1vLRBdaDDES9SUN">计费方式</label><select id="rate_method" data-page-node-id="eDhEBySAIAGmRSMYaHL9vI"></select></div>
-        <div class="field" data-page-node-id="UpO3D26D1HIjIfwJwQJRFj"><label data-page-node-id="DoQyF1w2DfyK6ClPuvOapz">有效期</label><input id="rate_eff" placeholder="2026-08-18~2026-08-31" data-page-node-id="g2G7r2iY7TGLF1Q1qHekEd"></div>
+      <div class="formrow">
+        <div class="field"><label>计费方式</label><select id="rate_method"></select></div>
+        <div class="field"><label>有效期</label><input id="rate_eff" placeholder="2026-08-18~2026-08-31"></div>
       </div>
-      <p class="note" style="margin:6px 2px 0;" data-page-node-id="b3jhfByWr77ZwaoTvrH2Un">提示：保存后写入 freight_data.txt，并在「运费明细配置 / 报价单生成」即时生效（演示回退规则：起运港标"待补充"的记录对所有起运港均可见）。</p>
+      <p class="note" style="margin:6px 2px 0;">提示：保存后写入 freight_data.txt，并在「运费明细配置 / 报价单生成」即时生效（演示回退规则：起运港标"待补充"的记录对所有起运港均可见）。</p>
     </div>
-    <div class="modal-f" data-page-node-id="TM7PBEU2iqL22Psd8tBb4A">
-      <button class="ghost" onclick="closeModal('maskRate')" data-page-node-id="PC8cscnTU11eFUyrMwfx2C">取消</button>
-      <button onclick="saveRateModal()" data-page-node-id="0flJrgmX3HgcAhFckqKeP7">保存并落盘</button>
+    <div class="modal-f">
+      <button class="ghost" onclick="closeModal('maskRate')">取消</button>
+      <button onclick="saveRateModal()">保存并落盘</button>
     </div>
   </div>
 </div>
@@ -1423,7 +1422,7 @@ function renderPreview(){
   html+=`<tr style="background:#DDEBF7"><td colspan="5" style="font-weight:700">海运段 小计（卖价）${q.seaFbNote||''}</td><td style="text-align:right;font-weight:700">${q.seaSell.toLocaleString()} USD</td><td></td></tr>`;
   html+=`</tbody></table>
     <div class="quote-total">合计（卖价）：海运 <b>${q.seaSell.toLocaleString()} USD</b> ＋ 国内段 <b>${q.domesticSell.toLocaleString()} CNY</b></div>
-    <p class="note" style="margin-top:14px;">注：本报价为<b>事前估价（卖价 = 买价 ×(1+管理费率)，逐行）</b>，不含报关费、关税、目的港仓储/滞箱/滞港费等；这些在实际发生后的「<b>⑮ 费用汇总与分摊</b>」中据派车单/供应商账单归集（买价侧，不叠加管理费），并<b>经送货单分摊到客户PO/料号</b>。国内段运费按所选厂址与起运港计。${q.seaFbNote?' '+q.seaFbNote:''}</p>`;
+    <p class="note" style="margin-top:14px;">注：本报价为<b>事前估价（卖价 = 买价 ×(1+管理费率)，逐行）</b>，报关费已归入「起运港费用」一类；不含关税、目的港仓储/滞箱/滞港费等（关税为代垫）。这些在实际发生后的「<b>⑮ 费用汇总与分摊</b>」中据派车单/供应商账单归集（买价侧，不叠加管理费），并<b>经送货单分摊到客户PO/料号</b>。国内段运费按所选厂址与起运港计。${q.seaFbNote?' '+q.seaFbNote:''}</p>`;
   document.getElementById('previewBox').innerHTML=html;
   document.querySelector('.navitem[data-page="p_preview"]').click();
 }
@@ -1475,7 +1474,7 @@ let SETTLE_COSTS = [];
 function seedSettleDemo(){
   SETTLE_COSTS=[
     {cat:'国内段(厂址→起运港)', item:'国内拖车费', amt:39019, curr:'CNY', stage:'A', src:'物流对账单 LB-2026-0826-01 (派车单)'},
-    {cat:'报关费用', item:'出口报关费', amt:450, curr:'CNY', stage:'A', src:'物流对账单 LB-2026-0826-01 (报关行)'},
+    {cat:'起运港费用', item:'出口报关费', amt:450, curr:'CNY', stage:'A', src:'物流对账单 LB-2026-0826-01 (报关行)'},
     {cat:'起运港费用', item:'THC(码头操作费)', amt:110, curr:'USD', stage:'B', src:'海运对账单 SB-2026-0826-01 (货代)'},
     {cat:'起运港费用', item:'订舱费', amt:50, curr:'USD', stage:'B', src:'海运对账单 SB-2026-0826-01 (货代)'},
     {cat:'海运费', item:'海运费(20GP)', amt:1850, curr:'USD', stage:'B', src:'海运对账单 SB-2026-0826-01 (货代)'},
@@ -1552,8 +1551,9 @@ function renderSettle(){
   let estSea=0; RECORDS.filter(r=>(r.origin===o||r.origin==='（待补充）')&&r.port===p&&r.company===c&&r.ct===ct).forEach(r=>estSea+=r.amount*(1+(r.mgt!=null?r.mgt:0)/100));
   let estDom=0; FACTORY_RATES.filter(r=>r.factory===fac&&r.origin===o&&r.ct===ct).forEach(r=>estDom+=Number(r.amount)*(1+(r.mgt!=null?r.mgt:MGT_DOMESTIC)/100));
   const estSeaCny=estSea*fx, estDomCny=estDom;
-  const actSeaCny=(subtot['海运费']||0)+(subtot['起运港费用']||0)+(subtot['目的港费用']||0)+(subtot['附加费']||0);
-  const actDomCny=(subtot['国内段(厂址→起运港)']||0)+(subtot['报关费用']||0);
+  // 估实差异按 stage + 币种聚合（避免报关费 CNY 混入起运港费用 USD 海运段小计）
+  const actSeaCny=SETTLE_COSTS.filter(c=>stages.includes(c.stage)&&['B','C'].includes(c.stage)&&c.curr==='USD').reduce((s,c)=>s+c.amt*fx,0);
+  const actDomCny=SETTLE_COSTS.filter(c=>stages.includes(c.stage)&&c.stage==='A'&&c.curr==='CNY').reduce((s,c)=>s+c.amt,0);
   const rows=[
     {k:'海运段(海运费+港杂+目的港)', e:estSeaCny, a:actSeaCny},
     {k:'国内段(拖车+报关)', e:estDomCny, a:actDomCny},
@@ -1871,6 +1871,6 @@ function init(){
 }
 loadData();
 </script>
-<div id="toast" class="toast" data-page-node-id="9Hz5niu5dygwcvIR4lJRgR"></div>
+<div id="toast" class="toast"></div>
 </body>
 </html>
