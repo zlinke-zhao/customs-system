@@ -385,6 +385,10 @@
           </tbody>
         </table>
       </div>
+      <div class="card" style="margin-top:14px;background:#FDECEC;border:1px solid #E8B4B4">
+        <h3 class="sec">⚠ 货物保险费（其他费用类 · 货值计 · 不在此路由费率表）</h3>
+        <p class="note" style="margin:0">保险费 = 货值 ×(1+10%加成)× 费率(默认 0.3%)，归「<b>其他费用</b>」类、<b>管理费率 0（代垫不赚）</b>，随贸易条款过滤：<b>CIF / DAP / DDP 自动计入</b>，FOB / CFR 不含。它按货值（非航线/柜型）计算，故不入本路由费率表，而是在「⑥ 报价单生成」「⑮ 费用汇总与分摊」填货值后自动算出。目的港进口关税同理归「关税」类、0 管理费、仅 DDP 计入。</p>
+      </div>
     </section>
 
     <!-- ============ ⑤ 运费明细配置 ============ -->
@@ -421,6 +425,9 @@
         <div class="field"><label>费用范围</label>
           <select id="q_scope" onchange="renderQuote()"><option value="all">全部费用</option><option value="mand">仅必选</option></select>
         </div>
+        <div class="field"><label>运输条款</label>
+          <select id="q_term" onchange="renderQuote()"><option value="FOB">FOB</option><option value="CFR">CFR</option><option value="CIF" selected>CIF</option><option value="DAP">DAP</option><option value="DDP">DDP</option></select></div>
+        <div class="field"><label>货值(USD)</label><input id="q_val" type="number" min="0" step="1000" value="50000" style="width:100px" onchange="renderQuote()"></div>
         <div class="field"><label>货量(CBM)</label><input id="q_cbm" type="number" min="0" step="0.5" placeholder="如 12" style="width:80px" oninput="renderRecommend()"></div>
         <div class="field"><label>重量(KG)</label><input id="q_kg" type="number" min="0" step="100" placeholder="如 8000" style="width:90px" oninput="renderRecommend()"></div>
         <div class="field" style="min-width:auto;align-self:flex-end"><label style="font-size:11px">&nbsp;</label><label style="font-size:12px;color:#666;display:flex;align-items:center;gap:4px"><input id="q_lcl" type="checkbox" checked onchange="renderRecommend()"> 含散货(LCL)对比</label></div>
@@ -442,7 +449,7 @@
           <tfoot></tfoot>
         </table>
       </div>
-      <p class="note" style="margin-top:10px;">本报价为<b>事前估价（卖价）</b> = 「⑤ 成本费率表(买价)」中<b>每个费用项目自身的管理费率逐行计算</b>：卖价 = 买价 ×(1 + 管理费率)；分类默认管理费率见「④ 默认管理费率」，可逐行改写，粒度比"按分类一刀切"更细。不含报关费/关税/目的港费的项目是否报出由运输条款决定；这些费用的<b>实际发生</b>在「⑯ 海运对账单」「⑭ 派车单→物流对账单」归集后，于「⑮ 费用汇总与分摊」结算。国内段运费按所选厂址与起运港计。</p>
+      <p class="note" style="margin-top:10px;">本报价为<b>事前估价（卖价）</b> = 「⑤ 成本费率表(买价)」中<b>每个费用项目自身的管理费率逐行计算</b>：卖价 = 买价 ×(1 + 管理费率)；分类默认管理费率见「④ 默认管理费率」，可逐行改写，粒度比"按分类一刀切"更细。<b>货物保险费</b>（其他费用类·0管理费）按「货值×1.1×0.3%」随运输条款自动计入：CIF/DAP/DDP 含、FOB/CFR 不含；进口关税仅 DDP 含。报关费已归入起运港费用。这些费用的<b>实际发生</b>在「⑯ 海运对账单」「⑭ 派车单→物流对账单」归集后，于「⑮ 费用汇总与分摊」结算。国内段运费按所选厂址与起运港计。</p>
     </section>
 
     <!-- ============ ⑦ 报价单预览 ============ -->
@@ -694,10 +701,11 @@
         <div class="field"><label>柜号</label><input id="st_ct" value="MSKU-771234-5"></div>
         <div class="field"><label>运输条款</label>
           <select id="st_term" onchange="renderSettle()">
-            <option value="FOB">FOB（仅国内拖车）</option>
-            <option value="CIF" selected>CIF（拖车+海运费+起运港）</option>
-            <option value="CFR">CFR（拖车+海运费+起运港）</option>
-            <option value="DAP">DAP（再加目的港到仓拖车）</option>
+            <option value="FOB">FOB（仅A·国内拖车）</option>
+            <option value="CFR">CFR（A+B·不含保险）</option>
+            <option value="CIF" selected>CIF（A+B+保险）</option>
+            <option value="DAP">DAP（A+B+C+保险）</option>
+            <option value="DDP">DDP（A+B+C+保险+进口税）</option>
           </select></div>
         <div class="field"><label>分摊权重</label>
           <select id="st_weight" onchange="renderSettle()">
@@ -706,7 +714,22 @@
             <option value="val">货值优先(金额)</option>
           </select></div>
         <div class="field"><label>汇率(USD→CNY)</label><input id="st_fx" type="number" step="0.01" value="7.2" style="width:90px" onchange="renderSettle()"></div>
+        <div class="field"><label>货值(USD)</label><input id="st_cargo" type="number" min="0" step="1000" value="50000" style="width:100px" onchange="renderSettle()"></div>
         <button class="ghost" onclick="seedSettleDemo()">载入示例</button>
+      </div>
+      <div class="card" style="margin-top:12px;background:#EFF4FB;border:1px solid #B9CCE8">
+        <h3 class="sec">运输条款 → 计入阶段与费用项（本屏自动过滤）</h3>
+        <table style="font-size:13px;width:100%">
+          <thead><tr><th>运输条款</th><th>阶段A<br>国内拖车</th><th>阶段B<br>海运费+起运港</th><th>阶段C<br>目的港费+到门拖车</th><th>保险费<br>(其他费用·0管理费)</th><th>进口关税/税</th></tr></thead>
+          <tbody>
+            <tr><td>FOB</td><td>✅我们</td><td>❌买方</td><td>❌买方</td><td>❌买方</td><td>❌买方</td></tr>
+            <tr><td>CFR</td><td>✅我们</td><td>✅我们</td><td>❌买方</td><td>❌买方</td><td>❌买方</td></tr>
+            <tr><td>CIF</td><td>✅我们</td><td>✅我们</td><td>❌买方</td><td>✅我们(强制)</td><td>❌买方</td></tr>
+            <tr><td>DAP</td><td>✅我们</td><td>✅我们</td><td>✅我们</td><td>✅我们(通常)</td><td>❌买方</td></tr>
+            <tr><td>DDP</td><td>✅我们</td><td>✅我们</td><td>✅我们</td><td>✅我们</td><td>✅我们(包税)</td></tr>
+          </tbody>
+        </table>
+        <p class="note" style="margin:8px 0 0">说明：① 目的港费用(换单/THC/拆箱)与目的港→门拖车同属<b>阶段C</b>，仅 DAP/DDP 计入；② <b>进口关税/税仅 DDP 计入</b>——DAP 管到门、但不包进口税（那是买方清关付）；③ 保险费=货值×(1+10%)×费率(默认0.3%)，归「其他费用」类、管理费率0（代垫不赚），随 CIF/DAP/DDP 自动计入；④ 散货(LCL)各项均<b>按 CBM 计费</b>，数据层须<b>逐项相加</b>（见下方说明），打包价仅作报价快捷录入、无法精确拆分阶段。</p>
       </div>
       <div class="card" style="margin-top:12px;background:#FFF7E6;border:1px solid #E0C089">
         <h3 class="sec">一、费用明细·实际发生（引用：物流对账单 + 海运对账单）</h3>
@@ -749,7 +772,7 @@
     <!-- ============ ⑯ 海运对账单（生成 + 批核） ============ -->
     <section class="page" id="p_seafreight">
       <h1 class="doc">⑯ 海运对账单（生成 + 批核）</h1>
-      <p class="doc-lead">类比「⑥ 报价单生成」：选<b>出口装箱单号</b> → 系统按「⑤ 成本费率表(买价)」自动列出 <b>海运费 + 起运港费用 + 目的港费用</b>。费用分<b>必选</b>（自动勾）与<b>可选</b>（待勾选）；开单人勾选本次适用项 → 提交 → 批核人<b>批核锁定</b>。生成的是<b>买价（我们付给货代的成本）</b>，不叠加 markup（markup 只在报价单卖价侧）。</p>
+      <p class="doc-lead">类比「⑥ 报价单生成」：选<b>出口装箱单号</b> → 系统按「⑤ 成本费率表(买价)」自动列出 <b>海运费 + 起运港费用 + 目的港费用</b>。费用分<b>必选</b>（自动勾）与<b>可选</b>（待勾选）；开单人勾选本次适用项 → 提交 → 批核人<b>批核锁定</b>。生成的是<b>买价（我们付给货代的成本）</b>，不叠加 markup（markup 只在报价单卖价侧）。<b>货物保险费</b>（其他费用类·货值计·0管理费）与<b>进口关税</b>（仅 DDP）不在此按路由生成，而在「⑮ 费用汇总与分摊」按运输条款与货值自动归口。</p>
       <div class="toolbar" style="align-items:flex-end">
         <div class="field"><label>出口装箱单号</label><select id="sf_pl" onchange="genSeaFreight()"></select></div>
         <div class="field"><label>柜型</label><input id="sf_ct" value="20GP" style="width:80px" readonly></div>
@@ -1318,6 +1341,24 @@ function renderQuote(){
       tb.appendChild(tr);
     });
   }
+  // 货物保险费（其他费用类·0管理费）：随运输条款过滤，CIF/DAP/DDP 计入，按货值×1.1×0.3%
+  const qTerm=document.getElementById('q_term')?document.getElementById('q_term').value:'CIF';
+  const qVal=parseFloat(document.getElementById('q_val')?document.getElementById('q_val').value:0)||0;
+  const insIncl=['CIF','DAP','DDP'].includes(qTerm);
+  let insBuy=0;
+  if(insIncl && qVal>0){
+    insBuy=insUsdOf(qVal); const insMgt=0, insFee=0;
+    subtot['其他费用']=(subtot['其他费用']||0)+insBuy;
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="background:${CAT_COLORS['其他费用']}">其他费用</td>
+      <td>货物保险费(货值×1.1×0.3%)</td>
+      <td style="text-align:right">${insBuy.toLocaleString()} USD</td>
+      <td style="text-align:right;color:#7A3E9D;font-weight:700">${insMgt}%</td>
+      <td style="text-align:right;color:#7A3E9D">${Math.round(insFee).toLocaleString()} USD</td>
+      <td style="text-align:right;font-weight:700">${insBuy.toLocaleString()} USD</td>
+      <td><span class="tag n">其他费用</span></td><td>按货值比例(%)</td><td>保险单/货代代买·代垫不赚</td>`;
+    tb.appendChild(tr);
+  }
   CATS.forEach(cat=>{ if(subtot[cat]){
     const tr=document.createElement('tr');
     tr.innerHTML=`<td colspan="5" style="background:${CAT_COLORS[cat]};font-weight:700">${cat} 小计（卖价）</td>
@@ -1344,7 +1385,7 @@ function renderQuote(){
     <td style="text-align:right;background:#2F5496;color:#fff;font-weight:700;font-size:16px">海运 ${seaSell.toLocaleString()} USD ＋ 国内段 ${domesticSell.toLocaleString()} CNY</td>
     <td colspan="3" style="background:#2F5496;color:#fff;text-align:center">卖价</td>`;
   tf.appendChild(tr);
-  lastQuote={fac,o,p,c,t,scope,rows,domesticRows,grand:seaSell+domesticSell,seaBuy,seaSell,domesticBuy:domestic,domesticSell,subtot,subtotBuy,seaFbNote};
+  lastQuote={fac,o,p,c,t,scope,rows,domesticRows,grand:seaSell+domesticSell,seaBuy,seaSell,domesticBuy:domestic,domesticSell,subtot,subtotBuy,seaFbNote,insIncl,insBuy,qTerm,qVal};
   renderRecommend();
 }
 
@@ -1417,11 +1458,12 @@ function renderPreview(){
     <table><thead><tr><th>费用分类</th><th>费用项目</th><th>买价</th><th>管理费率</th><th>管理费额</th><th>卖价(含管理费)</th><th>说明</th></tr></thead><tbody>`;
   q.rows.forEach(r=>{const mgt=r.mgt!=null?r.mgt:0,buy=r.amount,fee=buy*mgt/100,sell=buy+fee;html+=`<tr><td>${r.cat}</td><td>${r.item}${r.fallback?'（默认档·参考'+r.fallbackCt+'）':''}${r.source==='demo'?'（示例数据）':''}</td><td style="text-align:right">${buy.toLocaleString()} USD</td><td style="text-align:right;color:#7A3E9D">${mgt}%</td><td style="text-align:right;color:#7A3E9D">${Math.round(fee).toLocaleString()} USD</td><td style="text-align:right;font-weight:700">${sell.toLocaleString()} USD</td><td>${r.origin==='（待补充）'?'起运港待补充':''}${r.fallback?' / 柜型默认参考'+r.fallbackCt:''}</td></tr>`;});
   q.domesticRows.forEach(r=>{const mgt=r.mgt!=null?r.mgt:MGT_DOMESTIC,buy=Number(r.amount),fee=buy*mgt/100,sell=buy+fee;html+=`<tr><td>国内段</td><td>${facMap[r.factory]||r.factory} → ${r.origin}${r.fallback?'（默认档）':''}</td><td style="text-align:right">${buy.toLocaleString()} ${r.curr}</td><td style="text-align:right;color:#7A3E9D">${mgt}%</td><td style="text-align:right;color:#7A3E9D">${Math.round(fee).toLocaleString()} ${r.curr}</td><td style="text-align:right;font-weight:700">${sell.toLocaleString()} ${r.curr}</td><td>拖车/国内段</td></tr>`;});
+  if(q.insIncl && q.insBuy>0){const mgt=0,buy=q.insBuy,fee=0,sell=buy;html+=`<tr><td>其他费用</td><td>货物保险费(货值×1.1×0.3%)</td><td style="text-align:right">${buy.toLocaleString()} USD</td><td style="text-align:right;color:#7A3E9D">${mgt}%</td><td style="text-align:right;color:#7A3E9D">${Math.round(fee).toLocaleString()} USD</td><td style="text-align:right;font-weight:700">${sell.toLocaleString()} USD</td><td>保险单/货代代买·代垫不赚</td></tr>`;}
   CATS.forEach(cat=>{ if(q.subtot[cat]){html+=`<tr style="background:${CAT_COLORS[cat]}"><td colspan="5" style="font-weight:700">${cat} 小计（卖价）</td><td style="text-align:right;font-weight:700">${q.subtot[cat].toLocaleString()} USD</td><td></td></tr>`;}});
   if(q.subtot['国内段']){html+=`<tr style="background:#EAF4EA"><td colspan="5" style="font-weight:700">国内段 小计（卖价）</td><td style="text-align:right;font-weight:700">${q.domesticSell.toLocaleString()} CNY</td><td></td></tr>`;}
   html+=`<tr style="background:#DDEBF7"><td colspan="5" style="font-weight:700">海运段 小计（卖价）${q.seaFbNote||''}</td><td style="text-align:right;font-weight:700">${q.seaSell.toLocaleString()} USD</td><td></td></tr>`;
   html+=`</tbody></table>
-    <div class="quote-total">合计（卖价）：海运 <b>${q.seaSell.toLocaleString()} USD</b> ＋ 国内段 <b>${q.domesticSell.toLocaleString()} CNY</b></div>
+    <div class="quote-total">合计（卖价）：海运 <b>${q.seaSell.toLocaleString()} USD</b> ＋ 国内段 <b>${q.domesticSell.toLocaleString()} CNY</b>${q.insIncl&&q.insBuy>0?` ＋ 保险费 <b>${q.insBuy.toLocaleString()} USD</b>`:''}</div>
     <p class="note" style="margin-top:14px;">注：本报价为<b>事前估价（卖价 = 买价 ×(1+管理费率)，逐行）</b>，报关费已归入「起运港费用」一类；不含关税、目的港仓储/滞箱/滞港费等（关税为代垫）。这些在实际发生后的「<b>⑮ 费用汇总与分摊</b>」中据派车单/供应商账单归集（买价侧，不叠加管理费），并<b>经送货单分摊到客户PO/料号</b>。国内段运费按所选厂址与起运港计。${q.seaFbNote?' '+q.seaFbNote:''}</p>`;
   document.getElementById('previewBox').innerHTML=html;
   document.querySelector('.navitem[data-page="p_preview"]').click();
@@ -1470,7 +1512,8 @@ function seedDeliveryDemo(){
 
 // ---- ⑮ 费用汇总与分摊（实际结算）：汇实际 + 按送货单分摊 + 估实差异 ----
 let SETTLE_COSTS = [];
-// stage: A=国内拖车(物流对账单) B=海运费+起运港(海运对账单) C=目的港+关税(海运对账单)
+// stage: A=国内拖车(物流对账单) B=海运费+起运港(海运对账单) C=目的港费用+目的港→门拖车(海运对账单)
+//        INS=货物保险费(其他费用类,货值计,仅CIF/DAP/DDP含)  DUTY=进口关税(仅DDP含)
 function seedSettleDemo(){
   SETTLE_COSTS=[
     {cat:'国内段(厂址→起运港)', item:'国内拖车费', amt:39019, curr:'CNY', stage:'A', src:'物流对账单 LB-2026-0826-01 (派车单)'},
@@ -1479,14 +1522,19 @@ function seedSettleDemo(){
     {cat:'起运港费用', item:'订舱费', amt:50, curr:'USD', stage:'B', src:'海运对账单 SB-2026-0826-01 (货代)'},
     {cat:'海运费', item:'海运费(20GP)', amt:1850, curr:'USD', stage:'B', src:'海运对账单 SB-2026-0826-01 (货代)'},
     {cat:'目的港费用', item:'目的港换单/手续费', amt:80, curr:'USD', stage:'C', src:'海运对账单 SB-2026-0826-01 (目的港代理)'},
-    {cat:'关税', item:'目的港进口关税', amt:120, curr:'USD', stage:'C', src:'海运对账单 SB-2026-0826-01 (目的国税单)'},
+    {cat:'关税', item:'目的港进口关税', amt:120, curr:'USD', stage:'DUTY', src:'海运对账单 SB-2026-0826-01 (目的国税单)'},
   ];
   renderSettle();
 }
+// 货物保险费：货值 × (1+10%加成) × 费率(默认0.3%)，属「其他费用」类、管理费率0(代垫不赚)
+const INS_RATE=0.003, INS_LOADING=1.1;
+function insUsdOf(val){return val>0? Math.round(val*INS_LOADING*INS_RATE*100)/100 : 0;}
 function termStages(t){
   if(t==='FOB') return ['A'];
-  if(t==='CIF'||t==='CFR') return ['A','B'];
-  if(t==='DAP') return ['A','B','C'];
+  if(t==='CFR') return ['A','B'];
+  if(t==='CIF') return ['A','B','INS'];
+  if(t==='DAP') return ['A','B','C','INS'];
+  if(t==='DDP') return ['A','B','C','INS','DUTY'];
   return ['A','B','C'];
 }
 function renderSettle(){
@@ -1494,9 +1542,15 @@ function renderSettle(){
   const wt=document.getElementById('st_weight').value;
   const term=document.getElementById('st_term').value;
   const stages=termStages(term);
+  const cargoVal=parseFloat(document.getElementById('st_cargo').value)||0;
+  const costs=SETTLE_COSTS.slice();
+  if(stages.includes('INS')){
+    const insUsd=insUsdOf(cargoVal);
+    costs.push({cat:'其他费用', item:'货物保险费(货值×1.1×0.3%)', amt:insUsd, curr:'USD', stage:'INS', src:'保险单/货代代买(其他费用类·0管理费)'});
+  }
   const tb=document.querySelector('#tblCost tbody'); tb.innerHTML='';
   let cnyTotal=0;
-  SETTLE_COSTS.forEach(c=>{
+  costs.forEach(c=>{
     if(!stages.includes(c.stage)) return;
     const cny=c.curr==='CNY'?c.amt:c.amt*fx; cnyTotal+=cny;
     const color=CAT_COLORS[c.cat]||'#fff';
@@ -1507,7 +1561,7 @@ function renderSettle(){
   });
   document.getElementById('stCostSum').innerHTML=`<p style="margin:8px 0 0;font-weight:700;color:#2E5E1E">实际费用合计（CNY 折算 @${fx}）：<span style="font-size:18px">${Math.round(cnyTotal).toLocaleString()} CNY</span>（USD 部分按汇率折算）</p>`;
   const subtot={};
-  SETTLE_COSTS.forEach(c=>{if(!stages.includes(c.stage)) return; const cny=c.curr==='CNY'?c.amt:c.amt*fx; subtot[c.cat]=(subtot[c.cat]||0)+cny;});
+  costs.forEach(c=>{if(!stages.includes(c.stage)) return; const cny=c.curr==='CNY'?c.amt:c.amt*fx; subtot[c.cat]=(subtot[c.cat]||0)+cny;});
   let shipHtml='<table style="font-size:13px"><thead><tr><th>费用分类</th><th style="text-align:right">折合 CNY</th></tr></thead><tbody>';
   Object.keys(subtot).forEach(k=>{shipHtml+=`<tr style="background:${CAT_COLORS[k]||'#f4f4f4'}"><td>${k}</td><td style="text-align:right;font-weight:700">${Math.round(subtot[k]).toLocaleString()}</td></tr>`;});
   shipHtml+=`<tr style="background:#2F5496;color:#fff"><td style="font-weight:700">出货通知单合计(SH-2026-0812)</td><td style="text-align:right;font-weight:700">${Math.round(cnyTotal).toLocaleString()} CNY</td></tr></tbody></table>`;
